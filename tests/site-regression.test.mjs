@@ -1,9 +1,9 @@
 import { readFileSync, existsSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
-const index = readFileSync('index.html', 'utf8');
-const vocabulary = readFileSync('vocabulary.html', 'utf8');
-const events = readFileSync('events.html', 'utf8');
+const index = readFileSync('dist/index.html', 'utf8');
+const vocabulary = readFileSync('dist/vocabulary.html', 'utf8');
+const events = readFileSync('dist/events.html', 'utf8');
 
 function cssBlock(source, selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -17,11 +17,11 @@ function navHrefs(source) {
 }
 
 assert.ok(
-  existsSync('assets/fonts/iansui/Iansui-Regular.ttf'),
+  existsSync('public/fonts/iansui/Iansui-Regular.ttf'),
   'Iansui font file should be bundled locally so POJ/Tai-lo glyphs do not depend on Google Fonts subsetting',
 );
 assert.ok(
-  existsSync('assets/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf'),
+  existsSync('public/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf'),
   'GochiHandPOJ font file should be bundled locally for English language text',
 );
 
