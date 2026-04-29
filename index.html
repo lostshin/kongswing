@@ -15,7 +15,7 @@
 <link rel="icon" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@400;600;700&family=Shadows+Into+Light&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -429,11 +429,11 @@
   .lang-sw button.on:hover{color:var(--paper)}
 
   /* ===== mobile menu toggle ===== */
-  .nav-toggle{
-    display:none; appearance:none; border:1.5px solid var(--ink); background:var(--paper);
-    width:40px; height:40px; border-radius:50%; cursor:pointer;
-    align-items:center; justify-content:center; padding:0;
-  }
+	  .nav-toggle{
+	    display:none; appearance:none; border:1.5px solid var(--ink); background:var(--paper);
+	    width:44px; height:44px; border-radius:50%; cursor:pointer;
+	    align-items:center; justify-content:center; padding:0;
+	  }
   .nav-toggle .bars{display:block; width:18px; height:14px; position:relative}
   .nav-toggle .bars::before,.nav-toggle .bars::after,.nav-toggle .bars span{
     content:""; position:absolute; left:0; right:0; height:2px; background:var(--ink); border-radius:1px;
@@ -545,12 +545,13 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">跳到主要內容</a>
 
 <!-- ===== NAV ===== -->
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="#top">
-      <span class="brand-mark"><img src="assets/logo.png" alt="logo"></span>
+      <span class="brand-mark"><img src="assets/logo.png" alt="Kóng台語 跳Swing logo" width="370" height="370"></span>
       <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
     </a>
     <div class="nav-links">
@@ -573,6 +574,7 @@
 </nav>
 
 <a id="top"></a>
+<main id="main" tabindex="-1">
 
 <!-- ===== HERO ===== -->
 <section class="hero">
@@ -604,7 +606,7 @@
       <div class="hero-art">
         <div class="blob"></div>
         <div class="rabbit-frame">
-          <img src="assets/logo.png" alt="rabbit">
+          <img src="assets/logo.png" alt="Kóng台語 跳Swing 兔仔插畫" width="370" height="370">
         </div>
         <div class="stamp">
           <div class="big">搖擺</div>
@@ -667,7 +669,7 @@
         <div class="polaroid">
           <div class="washi"></div>
           <div class="img-area">
-            <img src="assets/logo.png" alt="">
+            <img src="assets/logo.png" alt="" width="370" height="370">
           </div>
           <div class="cap">our tiny three-piece band ✦</div>
           <div class="sticky-note">
@@ -692,7 +694,7 @@
 
     <div class="vocab-grid">
       <div class="card-stage">
-        <div class="card" id="card">
+        <div class="card" id="card" role="button" tabindex="0" aria-pressed="false" aria-label="翻面查看今仔日詞的解釋">
           <div class="card-face card-front">
             <div class="card-left">
               <div class="word-tag">
@@ -710,7 +712,7 @@
             </div>
             <div class="card-right">
               <div class="blue"></div>
-              <img src="assets/logo.png" alt="" class="bunny">
+              <img src="assets/logo.png" alt="" class="bunny" width="370" height="370">
             </div>
           </div>
 
@@ -873,14 +875,14 @@
           填底下 ê 表單，抑是寄一張 e-mail 來嘛會使。
         </p>
 
-        <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='送出囉 ✦ 多謝!'">
+        <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='送出囉 ✦ 多謝!'; this.querySelector('.form-status').textContent='表單已送出，阮會盡快回覆。'">
           <div class="row2">
-            <div class="field"><label for="n">名 · Name</label><input id="n" placeholder="Lí ê miâ"></div>
-            <div class="field"><label for="e">Email</label><input id="e" type="email" placeholder="hello@..."></div>
+            <div class="field"><label for="n">名 · Name</label><input id="n" name="name" autocomplete="name" required placeholder="Lí ê miâ"></div>
+            <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
           </div>
           <div class="field">
             <label for="t">主題 · Topic</label>
-            <select id="t">
+            <select id="t" name="topic">
               <option>合作 · Collaboration</option>
               <option>贊助 · Sponsorship</option>
               <option>邀請工作坊 · Workshop invite</option>
@@ -888,8 +890,9 @@
               <option>其他 · Other</option>
             </select>
           </div>
-          <div class="field"><label for="m">訊息 · Message</label><textarea id="m" placeholder="講予阮聽..."></textarea></div>
+          <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" placeholder="講予阮聽..."></textarea></div>
           <button class="submit" type="submit">送出 · Send →</button>
+          <p class="form-status" role="status" aria-live="polite" style="margin:0;color:var(--ink-soft);font-size:13px"></p>
         </form>
       </div>
 
@@ -901,21 +904,21 @@
             <div class="meta">逐禮拜更新 / weekly posts · 6.4k</div>
           </div>
         </a>
-        <a class="ch" href="#">
+        <a class="ch" href="mailto:hello@kongswing.tw">
           <span class="ic" style="background:var(--navy);color:var(--mustard)">@</span>
           <div>
             <div class="name">hello@kongswing.tw</div>
             <div class="meta">合作 · 媒體 · 工作坊邀請</div>
           </div>
         </a>
-        <a class="ch" href="#">
+        <a class="ch" href="https://www.facebook.com/search/top?q=K%C3%B3ng%E5%8F%B0%E8%AA%9E%20%E8%B7%B3Swing" target="_blank" rel="noreferrer">
           <span class="ic">FB</span>
           <div>
             <div class="name">Kóng台語 跳Swing</div>
             <div class="meta">活動公告 / event announcements</div>
           </div>
         </a>
-        <a class="ch" href="#">
+        <a class="ch" href="mailto:hello@kongswing.tw?subject=%E8%B4%8A%E5%8A%A9%E5%90%88%E4%BD%9C%20Sponsor">
           <span class="ic" style="background:var(--rust);color:#fff">★</span>
           <div>
             <div class="name">贊助 · Sponsor</div>
@@ -926,6 +929,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <!-- ===== Footer ===== -->
 <footer>
@@ -946,7 +950,7 @@
 <!-- ===== Scrolling rabbit ===== -->
 <div class="scroll-rabbit" id="srab" style="opacity:0">
   <div class="speech" id="srab-say">咱來跳舞！</div>
-  <img src="assets/logo.png" alt="">
+  <img src="assets/logo.png" alt="" width="370" height="370">
 </div>
 
 <script>
@@ -1022,13 +1026,26 @@
     renderDots();
   }
 
-  document.getElementById('btn-flip').addEventListener('click', ()=>card.classList.toggle('flipped'));
-  card.addEventListener('click', (e)=>{
-    if(e.target.closest('.pad-btn')) return;
-    card.classList.toggle('flipped');
-  });
-  document.getElementById('next').addEventListener('click', ()=>{ card.classList.remove('flipped'); setWord(idx+1) });
-  document.getElementById('prev').addEventListener('click', ()=>{ card.classList.remove('flipped'); setWord(idx-1) });
+	  function setCardFlipped(flipped){
+	    card.classList.toggle('flipped', flipped);
+	    card.setAttribute('aria-pressed', String(flipped));
+	    card.setAttribute('aria-label', flipped ? '翻回今仔日詞卡正面' : '翻面查看今仔日詞的解釋');
+	  }
+	  function toggleCard(){
+	    setCardFlipped(!card.classList.contains('flipped'));
+	  }
+	  document.getElementById('btn-flip').addEventListener('click', toggleCard);
+	  card.addEventListener('click', (e)=>{
+	    if(e.target.closest('.pad-btn')) return;
+	    toggleCard();
+	  });
+	  card.addEventListener('keydown', (e)=>{
+	    if(e.key !== 'Enter' && e.key !== ' ') return;
+	    e.preventDefault();
+	    toggleCard();
+	  });
+	  document.getElementById('next').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx+1) });
+	  document.getElementById('prev').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx-1) });
 
   // Save bookmark
   document.getElementById('btn-save').addEventListener('click', (e)=>{
@@ -1077,14 +1094,23 @@
     { q:'兔仔有名字無？',
       a:'伊號做「sūn-sòa」（順續）。意思是「順紲」做一寡代誌──佇路頂順紲跳一下舞。' }
   ];
-  document.getElementById('faqlist').innerHTML = faqs.map((f,i)=>`
-    <div class="qa${i===0?' open':''}">
-      <div class="qa-q"><span>${f.q}</span><span class="toggle">+</span></div>
-      <div class="qa-a">${f.a}</div>
-    </div>`).join('');
-  document.querySelectorAll('.qa').forEach(el=>{
-    el.addEventListener('click',()=>el.classList.toggle('open'));
-  });
+	  document.getElementById('faqlist').innerHTML = faqs.map((f,i)=>`
+	    <article class="qa${i===0?' open':''}">
+	      <button class="qa-q" type="button" aria-expanded="${i===0?'true':'false'}" aria-controls="faq-a-${i}">
+	        <span>${f.q}</span><span class="toggle" aria-hidden="true">+</span>
+	      </button>
+	      <div class="qa-a" id="faq-a-${i}" role="region" aria-hidden="${i===0?'false':'true'}">${f.a}</div>
+	    </article>`).join('');
+	  document.querySelectorAll('.qa').forEach(el=>{
+	    const btn = el.querySelector('.qa-q');
+	    const panel = el.querySelector('.qa-a');
+	    btn.addEventListener('click',()=>{
+	      const open = !el.classList.contains('open');
+	      el.classList.toggle('open', open);
+	      btn.setAttribute('aria-expanded', String(open));
+	      panel.setAttribute('aria-hidden', String(!open));
+	    });
+	  });
 
   // ---- Scrolling rabbit ----
   const sr = document.getElementById('srab');
@@ -1125,11 +1151,13 @@
   // ====== language switcher ======
   (function(){
     const root = document.documentElement;
-    let saved = localStorage.getItem('kts-lang') || 'zh';
-    if (saved === 'all') saved = 'zh';
-    function setLang(l){
-      root.setAttribute('data-lang', l);
-      document.querySelectorAll('#lang-sw button').forEach(b=>{
+	    let saved = localStorage.getItem('kts-lang') || 'zh';
+	    if (saved === 'all') saved = 'zh';
+	    const langMap = { zh:'zh-Hant', tw:'nan-Hant-TW', poj:'nan-Latn', en:'en' };
+	    function setLang(l){
+	      root.setAttribute('data-lang', l);
+	      root.setAttribute('lang', langMap[l] || 'zh-Hant');
+	      document.querySelectorAll('#lang-sw button').forEach(b=>{
         b.classList.toggle('on', b.dataset.lang === l);
       });
       try{ localStorage.setItem('kts-lang', l); }catch(e){}

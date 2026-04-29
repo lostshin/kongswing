@@ -3,10 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Kóng台語 跳Swing 詞彙庫，收錄搖擺舞、社交舞會與 Jazz 文化常用台語詞句。" />
+<meta property="og:title" content="詞彙庫 · Kóng台語 跳Swing" />
+<meta property="og:description" content="搖擺舞 ê 台語 word library：台語詞彙、POJ、例句與英文翻譯。" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/logo.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="詞彙庫 · Kóng台語 跳Swing" />
+<meta name="twitter:description" content="搖擺舞 ê 台語 word library：台語詞彙、POJ、例句與英文翻譯。" />
 <title>詞彙庫 · Kóng台語 跳Swing</title>
+<link rel="icon" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#f1ebda; --paper-2:#e8e0c9;
@@ -20,8 +29,10 @@
   html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}
   body{background:radial-gradient(900px 600px at 100% 0,rgba(244,200,75,.18),transparent 60%),var(--paper);background-attachment:fixed}
   body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.06  0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");mix-blend-mode:multiply;opacity:.55}
-  a{color:inherit}
-  .wrap{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+	  a{color:inherit}
+	  .skip-link{position:absolute;left:16px;top:10px;z-index:1000;transform:translateY(-160%);background:var(--navy);color:var(--paper);padding:12px 16px;border-radius:999px;text-decoration:none;font-weight:700}
+	  .skip-link:focus{transform:translateY(0);outline:3px solid var(--mustard);outline-offset:3px}
+	  .wrap{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
 
   .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(241,235,218,.72);border-bottom:.5px solid var(--line)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1280px;margin:0 auto}
@@ -44,21 +55,22 @@
   .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:#fdfaf1;border:1px solid var(--line);padding:10px 14px}
   .search input{border:0;background:transparent;font:inherit;font-size:15px;width:100%;outline:none}
   .filt{display:flex;gap:6px;flex-wrap:wrap}
-  .chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:default}
+	  .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation}
   .chip:hover{border-color:var(--navy);color:var(--navy)}
   .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
   .count{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.06em}
 
   /* table-ish grid of vocab */
   .voc-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:18px;padding:32px 0 80px}
-  .voc{background:#fdfaf1;padding:22px;border:1px solid var(--line);position:relative;cursor:default;transition:transform .15s ease, box-shadow .15s ease}
+	  .voc{background:#fdfaf1;padding:22px;border:1px solid var(--line);position:relative;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
+	  .voc:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
   .voc:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,42,107,.12);border-color:var(--navy)}
   .voc .num{position:absolute;right:14px;top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.08em}
   .voc .han{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--navy);line-height:1.1}
   .voc .poj{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:16px;margin-top:4px}
   .voc .en{font-size:14px;color:var(--ink);margin-top:14px}
-  .voc .cat{margin-top:14px;display:inline-block;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase}
-  .voc .play{position:absolute;right:14px;bottom:14px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--paper);border:0;display:grid;place-items:center;cursor:default}
+	  .voc .cat{margin-top:14px;display:inline-block;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase}
+	  .voc .play{position:absolute;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--paper);border:0;display:grid;place-items:center;cursor:pointer}
   .voc .play:hover{background:var(--navy-deep)}
 
   footer{padding:32px 0 64px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
@@ -67,11 +79,12 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">跳到主要內容</a>
 
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="index.html">
-      <span class="brand-mark"><img src="assets/logo.png" alt="logo"></span>
+      <span class="brand-mark"><img src="assets/logo.png" alt="Kóng台語 跳Swing logo" width="370" height="370"></span>
       <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
     </a>
     <div class="nav-links">
@@ -83,6 +96,7 @@
   </div>
 </nav>
 
+<main id="main" tabindex="-1">
 <section class="hd">
   <div class="wrap">
     <div class="kicker">Vocabulary · 完整詞彙庫</div>
@@ -108,6 +122,7 @@
     <div class="voc-grid" id="grid"></div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap ftr">
@@ -154,21 +169,27 @@
     });
     document.getElementById('count').textContent = list.length + ' / ' + data.length + ' words';
     document.getElementById('grid').innerHTML = list.map(d=>`
-      <article class="voc" data-han="${d.han}" data-sen="${d.sen}">
+      <article class="voc" role="button" tabindex="0" aria-label="播放 ${d.han} 的例句" data-han="${d.han}" data-sen="${d.sen}">
         <div class="num">№ ${String(d.n).padStart(3,'0')}</div>
         <div class="han">${d.han}</div>
         <div class="poj">${d.poj}</div>
         <div class="en">${d.en}<br><span style="color:var(--ink-soft);font-style:italic">${d.sen}</span></div>
         <div class="cat">${d.cat}</div>
-        <button class="play" aria-label="play"><svg viewBox="0 0 14 14" width="12" height="12"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg></button>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 14 14" width="12" height="12"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg></span>
       </article>`).join('');
     document.querySelectorAll('.voc').forEach(el=>{
-      el.addEventListener('click',()=>{
+      const speak = ()=>{
         try{
           const u = new SpeechSynthesisUtterance(el.dataset.sen);
           u.lang='zh-TW';u.rate=.9;
           speechSynthesis.speak(u);
         }catch(e){}
+      };
+      el.addEventListener('click', speak);
+      el.addEventListener('keydown',e=>{
+        if(e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        speak();
       });
     });
   }
