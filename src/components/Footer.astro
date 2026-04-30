@@ -1,0 +1,39 @@
+---
+interface Props {
+  variant: 'home' | 'sub';
+}
+const { variant } = Astro.props;
+---
+{variant === 'home' ? (
+  <footer>
+    <div class="wrap ftr">
+      <div>
+        <div class="lg">Kóng台語 跳Swing<small>佇轉厝 ê 路頂面跳舞 ₍ᐢ..ᐢ₎</small></div>
+      </div>
+      <div class="lks">
+        <a href="vocabulary.html">詞彙庫</a>
+        <a href="events.html">課程</a>
+        <a href="https://www.instagram.com/kongswing/">IG</a>
+        <a href="#contact">聯絡</a>
+      </div>
+      <div class="crd">© 2026 Kóng台語 跳Swing · Made w/ 🐇 in TW</div>
+    </div>
+  </footer>
+) : (
+  <footer>
+    <div class="wrap ftr">
+      <div class="lg">Kóng台語 跳Swing</div>
+      <div>© 2026 · <a href="index.html" style="text-decoration:none;color:var(--navy)">回首頁</a></div>
+    </div>
+  </footer>
+)}
+
+{variant === 'home' && (
+  <style is:inline set:html={`
+    footer .lg small{display:block;font-family:var(--hand);font-weight:600;color:var(--ink-soft);font-size:14px;margin-top:4px}
+    footer .lks{display:flex;gap:18px;flex-wrap:wrap}
+    footer .lks a{color:var(--navy);text-decoration:none;font-weight:500}
+    footer .lks a:hover{text-decoration:underline}
+    footer .crd{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  `}></style>
+)}

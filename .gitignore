@@ -8,6 +8,9 @@ dist/
 # Cloudflare
 .wrangler/
 
+# Local agent settings
+.claude/
+
 # Worktrees
 .worktrees/
 

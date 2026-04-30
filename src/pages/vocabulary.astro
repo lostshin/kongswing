@@ -1,274 +1,135 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="description" content="Kóng台語 跳Swing 詞彙庫，收錄搖擺舞、社交舞會與 Jazz 文化常用台語詞句。" />
-<meta property="og:title" content="詞彙庫 · Kóng台語 跳Swing" />
-<meta property="og:description" content="搖擺舞 ê 台語 word library：台語詞彙、POJ、例句與英文翻譯。" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="詞彙庫 · Kóng台語 跳Swing" />
-<meta name="twitter:description" content="搖擺舞 ê 台語 word library：台語詞彙、POJ、例句與英文翻譯。" />
-<title>詞彙庫 · Kóng台語 跳Swing</title>
-<link rel="icon" href="/logo.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="prefetch" href="index.html" />
-<link rel="prefetch" href="events.html" />
-<style is:inline>
-	  @font-face{
-	    font-family:'IansuiLocal';
-	    src:url('/fonts/iansui/Iansui-Regular.ttf') format('truetype');
-	    font-weight:400;
-	    font-style:normal;
-	    font-display:swap;
-	  }
-	  @font-face{
-	    font-family:'GochiHandPOJ';
-	    src:url('/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf') format('truetype');
-	    font-weight:400;
-	    font-style:normal;
-	    font-display:swap;
-	  }
-	  @view-transition{navigation:auto}
-	  :root{
-	    --content-max:1280px;
-	    --paper:#f1ebda; --paper-2:#e8e0c9;
-    --ink:#1a1612; --ink-soft:#3a342a;
-    --navy:#1c3a8e; --navy-deep:#142a6b;
-    --mustard:#f4c84b; --line: rgba(26,22,18,.18);
-	    --serif:'Noto Serif TC','IansuiLocal',serif; --sans:'Noto Sans TC','IansuiLocal',sans-serif;
-	    --hand:'Caveat',cursive; --mono:'DM Mono',monospace;
-	    --tai:'IansuiLocal','Noto Serif TC',serif; --poj:'IansuiLocal','Noto Serif TC',serif;
-	    --en:'GochiHandPOJ','Noto Sans TC',sans-serif;
-	  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}
-  body{background:radial-gradient(900px 600px at 100% 0,rgba(244,200,75,.18),transparent 60%),var(--paper);background-attachment:fixed}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.06  0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");mix-blend-mode:multiply;opacity:.55}
-	  a{color:inherit}
-	  .skip-link{position:absolute;left:16px;top:10px;z-index:1000;transform:translateY(-160%);background:var(--navy);color:var(--paper);padding:12px 16px;border-radius:999px;text-decoration:none;font-weight:700}
-	  .skip-link:focus{transform:translateY(0);outline:3px solid var(--mustard);outline-offset:3px}
-	  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 32px;position:relative;z-index:2}
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="詞彙庫 · Kóng台語 跳Swing"
+  description="Kóng台語 跳Swing 詞彙庫，收錄搖擺舞、社交舞會與 Jazz 文化常用台語詞句。"
+  ogTitle="詞彙庫 · Kóng台語 跳Swing"
+  ogDescription="搖擺舞 ê 台語 word library：台語詞彙、POJ、例句與英文翻譯。"
+  twitterTitle="詞彙庫 · Kóng台語 跳Swing"
+  twitterDescription="搖擺舞 ê 台語 word library：台語詞彙、POJ、例句與英文翻譯。"
+  prefetch={["index.html", "events.html"]}
+  variant="sub"
+  activeNav="vocabulary"
+>
+  <style is:inline slot="head" set:html={`
+    body{background:radial-gradient(900px 600px at 100% 0,rgba(244,200,75,.18),transparent 60%),var(--paper);background-attachment:fixed}
+    .hd{padding:64px 0 32px}
+    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+    h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
+    h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
+    .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
 
-  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(241,235,218,.72);border-bottom:.5px solid var(--line)}
-	  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 32px;max-width:var(--content-max);margin:0 auto}
-	  .brand{display:flex;align-items:center;gap:12px;min-width:0;text-decoration:none;color:var(--ink)}
-  .brand-mark{width:42px;height:42px;border-radius:50%;border:1.5px solid #b3a98a;display:grid;place-items:center;overflow:hidden;background:var(--paper)}
-  .brand-mark img{width:120%}
-  .brand-name{font-family:var(--serif);font-weight:700;font-size:18px;line-height:1}
-  .brand-name small{display:block;font-family:var(--hand);color:var(--navy);font-size:14px;margin-top:2px}
-	  .nav-menu{display:flex;gap:28px;align-items:center}
-	  .nav-links{display:flex;gap:28px;align-items:center}
-	  .nav-links a{font-size:14px;text-decoration:none;color:var(--ink-soft)}
-	  .nav-links a.active{color:var(--navy);font-weight:500}
-	  .nav-links a.nav-cta{background:var(--navy);color:var(--paper);padding:9px 16px;border-radius:999px;font-size:13px;letter-spacing:.04em}
-	  .nav-links a.nav-cta:hover{background:var(--navy-deep);color:var(--paper)}
-	  .lang-en{font-family:var(--en)}
-	  .nav-toggle{display:none;appearance:none;border:1.5px solid var(--ink);background:var(--paper);width:44px;height:44px;border-radius:50%;cursor:pointer;position:relative;z-index:120;flex:0 0 44px;margin-left:auto;align-items:center;justify-content:center;padding:0}
-	  .nav-toggle .bars{display:block;width:18px;height:14px;position:relative}
-	  .nav-toggle .bars::before,.nav-toggle .bars::after,.nav-toggle .bars span{content:"";position:absolute;left:0;right:0;height:2px;background:var(--ink);border-radius:1px;transition:transform .25s ease,opacity .2s ease,top .25s ease}
-	  .nav-toggle .bars::before{top:0}
-	  .nav-toggle .bars span{top:6px;display:block}
-	  .nav-toggle .bars::after{top:12px}
-	  body.nav-open .nav-toggle .bars::before{top:6px;transform:rotate(45deg)}
-	  body.nav-open .nav-toggle .bars span{opacity:0}
-	  body.nav-open .nav-toggle .bars::after{top:6px;transform:rotate(-45deg)}
+    .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px}
+    .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:#fdfaf1;border:1px solid var(--line);padding:10px 14px}
+    .search input{border:0;background:transparent;font:inherit;font-size:15px;width:100%;outline:none}
+    .filt{display:flex;gap:6px;flex-wrap:wrap}
+    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation}
+    .chip:hover{border-color:var(--navy);color:var(--navy)}
+    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+    .count{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.06em}
 
-  .hd{padding:64px 0 32px}
-  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
-  h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
-  h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
-  .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
+    .voc-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:18px;padding:32px 0 80px}
+    .voc{background:#fdfaf1;padding:22px;border:1px solid var(--line);position:relative;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
+    .voc:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
+    .voc:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,42,107,.12);border-color:var(--navy)}
+    .voc .num{position:absolute;right:14px;top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.08em}
+    .voc .han{font-family:var(--tai);font-size:38px;font-weight:700;color:var(--navy);line-height:1.1}
+    .voc .poj{font-family:var(--poj);font-style:italic;color:var(--ink-soft);font-size:16px;margin-top:4px}
+    .voc .en{font-size:14px;color:var(--ink);margin-top:14px}
+    .voc .cat{margin-top:14px;display:inline-block;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase}
+    .voc .play{position:absolute;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--paper);border:0;display:grid;place-items:center;cursor:pointer}
+    .voc .play:hover{background:var(--navy-deep)}
+  `}></style>
 
-  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px}
-  .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:#fdfaf1;border:1px solid var(--line);padding:10px 14px}
-  .search input{border:0;background:transparent;font:inherit;font-size:15px;width:100%;outline:none}
-  .filt{display:flex;gap:6px;flex-wrap:wrap}
-	  .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation}
-  .chip:hover{border-color:var(--navy);color:var(--navy)}
-  .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
-  .count{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.06em}
+  <section class="hd">
+    <div class="wrap">
+      <div class="kicker">Vocabulary · 完整詞彙庫</div>
+      <h1>搖擺舞 ê 台語<span class="hand"> word library</span></h1>
+      <p class="lede">
+        逐一字攏配一句例句、英文翻譯佮笑詼小註。本頁列出 12 字示範；完整 128 字 ê 詞庫
+        會逐禮拜更新。提示：點任何一張卡片會聽 e 著發音，點 ★ 會收藏。
+      </p>
 
-  /* table-ish grid of vocab */
-  .voc-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:18px;padding:32px 0 80px}
-	  .voc{background:#fdfaf1;padding:22px;border:1px solid var(--line);position:relative;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
-	  .voc:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
-  .voc:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,42,107,.12);border-color:var(--navy)}
-  .voc .num{position:absolute;right:14px;top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.08em}
-	  .voc .han{font-family:var(--tai);font-size:38px;font-weight:700;color:var(--navy);line-height:1.1}
-	  .voc .poj{font-family:var(--poj);font-style:italic;color:var(--ink-soft);font-size:16px;margin-top:4px}
-  .voc .en{font-size:14px;color:var(--ink);margin-top:14px}
-	  .voc .cat{margin-top:14px;display:inline-block;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase}
-	  .voc .play{position:absolute;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--paper);border:0;display:grid;place-items:center;cursor:pointer}
-  .voc .play:hover{background:var(--navy-deep)}
-
-	  footer{padding:32px 0 64px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
-	  .ftr{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-	  .lg{font-family:var(--serif);font-size:18px;color:var(--navy);font-weight:700}
-	  @media (max-width:820px){
-	    .wrap{padding:0 20px}
-	    .nav-inner{padding:10px 20px}
-	    .nav-toggle{display:inline-flex}
-	    .nav-menu{position:absolute;left:0;right:0;top:100%;background:var(--paper);flex-direction:column;align-items:flex-start;gap:0;padding:18px 24px 28px;z-index:90;transform:translateY(-12px);opacity:0;visibility:hidden;pointer-events:none;transition:transform .22s ease,opacity .18s ease,visibility .18s ease;border-bottom:1px solid var(--line);box-shadow:0 24px 40px -20px rgba(20,42,107,.18);max-height:calc(100dvh - 64px);overflow-y:auto}
-	    body.nav-open .nav-menu{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
-	    body.nav-open{overflow:hidden}
-	    .nav-links{width:100%;flex-direction:column;align-items:flex-start;gap:0}
-	    .nav-links > a{width:100%;padding:18px 4px;border-bottom:1px dashed var(--line);font-family:var(--serif);font-size:22px;color:var(--ink)}
-	    .nav-links > a.active{color:var(--navy);background:linear-gradient(transparent 60%, var(--mustard) 60%);padding-left:8px}
-	    .nav-links > a.nav-cta{align-self:stretch;text-align:center;margin-top:18px;padding:14px 22px;border-bottom:0;border-radius:999px;font-family:var(--sans);font-size:15px;color:var(--paper)}
-	  }
-	  @media (prefers-reduced-motion: reduce){
-	    html{scroll-behavior:auto}
-	  }
-</style>
-</head>
-<body>
-<a class="skip-link" href="#main">跳到主要內容</a>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-mark"><img src="/logo.png" alt="Kóng台語 跳Swing logo" width="370" height="370"></span>
-      <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
-    </a>
-	    <div class="nav-menu" id="nav-menu">
-	      <div class="nav-links">
-	        <a href="index.html#about">關於</a>
-	        <a href="index.html#vocab">每日台語</a>
-	        <a href="vocabulary.html" class="active">詞彙庫</a>
-	        <a href="index.html#events">活動</a>
-	        <a href="events.html">課程</a>
-	        <a href="index.html#faq">FAQ</a>
-	        <a class="nav-cta" href="index.html#contact">聯絡我們 →</a>
-	      </div>
-	    </div>
-	    <button class="nav-toggle" id="nav-toggle" aria-label="menu" aria-expanded="false" aria-controls="nav-menu"><span class="bars"><span></span></span></button>
-	  </div>
-	</nav>
-
-<main id="main" tabindex="-1">
-<section class="hd">
-  <div class="wrap">
-    <div class="kicker">Vocabulary · 完整詞彙庫</div>
-    <h1>搖擺舞 ê 台語<span class="hand"> word library</span></h1>
-    <p class="lede">
-      逐一字攏配一句例句、英文翻譯佮笑詼小註。本頁列出 12 字示範；完整 128 字 ê 詞庫
-      會逐禮拜更新。提示：點任何一張卡片會聽 e 著發音，點 ★ 會收藏。
-    </p>
-
-    <div class="toolbar">
-      <div class="search">
-        <span style="color:var(--ink-soft);font-family:var(--mono);font-size:12px">⌕</span>
-        <input id="q" placeholder="揣字 / search hàn-jī, POJ, English...">
+      <div class="toolbar">
+        <div class="search">
+          <span style="color:var(--ink-soft);font-family:var(--mono);font-size:12px">⌕</span>
+          <input id="q" placeholder="揣字 / search hàn-jī, POJ, English...">
+        </div>
+        <div class="filt" id="filters"></div>
+        <div class="count" id="count"></div>
       </div>
-      <div class="filt" id="filters"></div>
-      <div class="count" id="count"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="voc-grid" id="grid"></div>
-  </div>
-</section>
-</main>
+  <section>
+    <div class="wrap">
+      <div class="voc-grid" id="grid"></div>
+    </div>
+  </section>
 
-<footer>
-  <div class="wrap ftr">
-    <div class="lg">Kóng台語 跳Swing</div>
-    <div>© 2026 · <a href="index.html" style="text-decoration:none;color:var(--navy)">回首頁</a></div>
-  </div>
-</footer>
+  <script is:inline slot="afterBody">
+    const cats = ['全部','動作','社交','禮數','音樂','形容','身體'];
+    const data = [
+      {n:1,han:'跳舞',poj:'thiàu-bú',cat:'動作',en:'to dance',sen:'咱來開始跳舞。'},
+      {n:2,han:'搖擺',poj:'iô-pái',cat:'形容',en:'swingy, swinging',sen:'這條歌真搖擺！'},
+      {n:3,han:'邀舞',poj:'iau-bú',cat:'社交',en:'to ask for a dance',sen:'我會使邀你跳一條無？'},
+      {n:4,han:'多謝',poj:'to-siā',cat:'禮數',en:'thank you',sen:'多謝你 ê 舞！'},
+      {n:5,han:'做伙',poj:'chò-hóe',cat:'社交',en:'together',sen:'咱做伙來跳！'},
+      {n:6,han:'音樂',poj:'im-ga̍k',cat:'音樂',en:'music',sen:'這暝 ê 音樂真好聽。'},
+      {n:7,han:'樂隊',poj:'ga̍k-tūi',cat:'音樂',en:'band',sen:'今暗樂隊真會搖擺。'},
+      {n:8,han:'節拍',poj:'chiat-phek',cat:'音樂',en:'beat, rhythm',sen:'聽節拍才袂踏毋著。'},
+      {n:9,han:'歹勢',poj:'pháiⁿ-sè',cat:'禮數',en:'sorry / pardon',sen:'歹勢，我這條無摸去。'},
+      {n:10,han:'手骨',poj:'chhiú-kut',cat:'身體',en:'arm',sen:'手骨愛放輕鬆。'},
+      {n:11,han:'踏步',poj:'ta̍h-pō͘',cat:'動作',en:'to step',sen:'踏步愛聽節拍。'},
+      {n:12,han:'笑詼',poj:'chhiò-khoe',cat:'形容',en:'funny, playful',sen:'伊跳舞真笑詼。'}
+    ];
 
-<script is:inline>
-  const cats = ['全部','動作','社交','禮數','音樂','形容','身體'];
-  const data = [
-    {n:1,han:'跳舞',poj:'thiàu-bú',cat:'動作',en:'to dance',sen:'咱來開始跳舞。'},
-    {n:2,han:'搖擺',poj:'iô-pái',cat:'形容',en:'swingy, swinging',sen:'這條歌真搖擺！'},
-    {n:3,han:'邀舞',poj:'iau-bú',cat:'社交',en:'to ask for a dance',sen:'我會使邀你跳一條無？'},
-    {n:4,han:'多謝',poj:'to-siā',cat:'禮數',en:'thank you',sen:'多謝你 ê 舞！'},
-    {n:5,han:'做伙',poj:'chò-hóe',cat:'社交',en:'together',sen:'咱做伙來跳！'},
-    {n:6,han:'音樂',poj:'im-ga̍k',cat:'音樂',en:'music',sen:'這暝 ê 音樂真好聽。'},
-    {n:7,han:'樂隊',poj:'ga̍k-tūi',cat:'音樂',en:'band',sen:'今暗樂隊真會搖擺。'},
-    {n:8,han:'節拍',poj:'chiat-phek',cat:'音樂',en:'beat, rhythm',sen:'聽節拍才袂踏毋著。'},
-    {n:9,han:'歹勢',poj:'pháiⁿ-sè',cat:'禮數',en:'sorry / pardon',sen:'歹勢，我這條無摸去。'},
-    {n:10,han:'手骨',poj:'chhiú-kut',cat:'身體',en:'arm',sen:'手骨愛放輕鬆。'},
-    {n:11,han:'踏步',poj:'ta̍h-pō͘',cat:'動作',en:'to step',sen:'踏步愛聽節拍。'},
-    {n:12,han:'笑詼',poj:'chhiò-khoe',cat:'形容',en:'funny, playful',sen:'伊跳舞真笑詼。'}
-  ];
+    const filtersEl = document.getElementById('filters');
+    filtersEl.innerHTML = cats.map((c,i)=>`<button class="chip${i===0?' on':''}" data-cat="${c}">${c}</button>`).join('');
+    filtersEl.addEventListener('click',e=>{
+      const b = e.target.closest('.chip'); if(!b) return;
+      document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+      render();
+    });
 
-  const filtersEl = document.getElementById('filters');
-  filtersEl.innerHTML = cats.map((c,i)=>`<button class="chip${i===0?' on':''}" data-cat="${c}">${c}</button>`).join('');
-  filtersEl.addEventListener('click',e=>{
-    const b = e.target.closest('.chip'); if(!b) return;
-    document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+    const q = document.getElementById('q');
+    q.addEventListener('input', render);
+
+    function render(){
+      const cat = document.querySelector('.chip.on').dataset.cat;
+      const term = q.value.trim().toLowerCase();
+      const list = data.filter(d=>{
+        const okCat = cat==='全部' || d.cat===cat;
+        const okQ = !term || (d.han+d.poj+d.en+d.sen).toLowerCase().includes(term);
+        return okCat && okQ;
+      });
+      document.getElementById('count').textContent = list.length + ' / ' + data.length + ' words';
+      document.getElementById('grid').innerHTML = list.map(d=>`
+        <article class="voc" role="button" tabindex="0" aria-label="播放 ${d.han} 的例句" data-han="${d.han}" data-sen="${d.sen}">
+          <div class="num">№ ${String(d.n).padStart(3,'0')}</div>
+          <div class="han">${d.han}</div>
+          <div class="poj">${d.poj}</div>
+          <div class="en">${d.en}<br><span style="color:var(--ink-soft);font-style:italic">${d.sen}</span></div>
+          <div class="cat">${d.cat}</div>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 14 14" width="12" height="12"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg></span>
+        </article>`).join('');
+      document.querySelectorAll('.voc').forEach(el=>{
+        const speak = ()=>{
+          try{
+            const u = new SpeechSynthesisUtterance(el.dataset.sen);
+            u.lang='zh-TW';u.rate=.9;
+            speechSynthesis.speak(u);
+          }catch(e){}
+        };
+        el.addEventListener('click', speak);
+        el.addEventListener('keydown',e=>{
+          if(e.key !== 'Enter' && e.key !== ' ') return;
+          e.preventDefault();
+          speak();
+        });
+      });
+    }
     render();
-  });
-
-  const q = document.getElementById('q');
-  q.addEventListener('input', render);
-
-  (function(){
-    const tog = document.getElementById('nav-toggle');
-    const body = document.body;
-    if (!tog) return;
-    function close(){ body.classList.remove('nav-open'); tog.setAttribute('aria-expanded','false') }
-    function open(){ body.classList.add('nav-open'); tog.setAttribute('aria-expanded','true') }
-    tog.addEventListener('click', ()=>{ body.classList.contains('nav-open') ? close() : open(); });
-    document.querySelectorAll('.nav-links > a').forEach(a=>a.addEventListener('click', close));
-    document.querySelectorAll('a[href="index.html#contact"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-        e.preventDefault();
-        sessionStorage.setItem('kts-smooth-target', 'contact');
-        window.location.href = 'index.html';
-      });
-    });
-    window.addEventListener('resize', ()=>{ if (window.innerWidth > 820) close(); });
-    window.addEventListener('keydown', e=>{ if (e.key === 'Escape') close(); });
-  })();
-
-  function render(){
-    const cat = document.querySelector('.chip.on').dataset.cat;
-    const term = q.value.trim().toLowerCase();
-    const list = data.filter(d=>{
-      const okCat = cat==='全部' || d.cat===cat;
-      const okQ = !term || (d.han+d.poj+d.en+d.sen).toLowerCase().includes(term);
-      return okCat && okQ;
-    });
-    document.getElementById('count').textContent = list.length + ' / ' + data.length + ' words';
-    document.getElementById('grid').innerHTML = list.map(d=>`
-      <article class="voc" role="button" tabindex="0" aria-label="播放 ${d.han} 的例句" data-han="${d.han}" data-sen="${d.sen}">
-        <div class="num">№ ${String(d.n).padStart(3,'0')}</div>
-        <div class="han">${d.han}</div>
-        <div class="poj">${d.poj}</div>
-        <div class="en">${d.en}<br><span style="color:var(--ink-soft);font-style:italic">${d.sen}</span></div>
-        <div class="cat">${d.cat}</div>
-        <span class="play" aria-hidden="true"><svg viewBox="0 0 14 14" width="12" height="12"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg></span>
-      </article>`).join('');
-    document.querySelectorAll('.voc').forEach(el=>{
-      const speak = ()=>{
-        try{
-          const u = new SpeechSynthesisUtterance(el.dataset.sen);
-          u.lang='zh-TW';u.rate=.9;
-          speechSynthesis.speak(u);
-        }catch(e){}
-      };
-      el.addEventListener('click', speak);
-      el.addEventListener('keydown',e=>{
-        if(e.key !== 'Enter' && e.key !== ' ') return;
-        e.preventDefault();
-        speak();
-      });
-    });
-  }
-  render();
-</script>
-</body>
-</html>
+  </script>
+</BaseLayout>

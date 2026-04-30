@@ -1,1258 +1,860 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="description" content="Kóng台語 跳Swing 是結合台語、Swing dance 與 Jazz 文化的台灣工作室，分享每日台語詞彙、課程與活動。" />
-<meta property="og:title" content="Kóng台語 跳Swing — 講台語、跳搖擺" />
-<meta property="og:description" content="講台語、跳 Swing。每日台語詞彙、Lindy Hop 課程與台語社交舞會。" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Kóng台語 跳Swing" />
-<meta name="twitter:description" content="講台語、跳 Swing。每日台語詞彙、課程與活動。" />
-<title>Kóng台語 跳Swing — 講台語、跳搖擺</title>
-<link rel="icon" href="/logo.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="prefetch" href="vocabulary.html" />
-<link rel="prefetch" href="events.html" />
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Kóng台語 跳Swing — 講台語、跳搖擺"
+  description="Kóng台語 跳Swing 是結合台語、Swing dance 與 Jazz 文化的台灣工作室，分享每日台語詞彙、課程與活動。"
+  ogTitle="Kóng台語 跳Swing — 講台語、跳搖擺"
+  ogDescription="講台語、跳 Swing。每日台語詞彙、Lindy Hop 課程與台語社交舞會。"
+  twitterTitle="Kóng台語 跳Swing"
+  twitterDescription="講台語、跳 Swing。每日台語詞彙、課程與活動。"
+  prefetch={["vocabulary.html", "events.html"]}
+  variant="home"
+>
+  <style is:inline slot="head" set:html={`
+    body{
+      background:
+        radial-gradient(1200px 800px at 12% -10%, rgba(244,200,75,.18), transparent 60%),
+        radial-gradient(900px 700px at 110% 30%, rgba(28,58,142,.10), transparent 60%),
+        var(--paper);
+      background-attachment:fixed;
+    }
 
-<style is:inline>
-	  @font-face{
-	    font-family:'IansuiLocal';
-	    src:url('/fonts/iansui/Iansui-Regular.ttf') format('truetype');
-	    font-weight:400;
-	    font-style:normal;
-	    font-display:swap;
-	  }
-	  @font-face{
-	    font-family:'GochiHandPOJ';
-	    src:url('/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf') format('truetype');
-	    font-weight:400;
-	    font-style:normal;
-	    font-display:swap;
-	  }
-	  @view-transition{navigation:auto}
-	  :root{
-	    --content-max:1280px;
-	    --paper:#f1ebda;
-    --paper-2:#e8e0c9;
-    --ink:#1a1612;
-    --ink-soft:#3a342a;
-    --navy:#1c3a8e;          /* 藏藍 */
-    --navy-deep:#142a6b;
-    --mustard:#f4c84b;       /* 芥末黃 */
-    --mustard-soft:#f7d978;
-    --rust:#b8553a;
-    --moss:#5a6f3a;
-    --line: rgba(26,22,18,.18);
+    section{position:relative;z-index:2;scroll-margin-top:92px}
 
-	    --serif:'Noto Serif TC','IansuiLocal','Fraunces',serif;
-	    --sans:'Noto Sans TC','IansuiLocal',ui-sans-serif,system-ui,sans-serif;
-    --hand:'Caveat',cursive;
-	    --mono:'DM Mono',ui-monospace,monospace;
-	    --tai:'IansuiLocal','Iansui','Noto Serif TC',serif;
-	    --poj:'IansuiLocal','Iansui','Noto Serif TC',serif;
-	    --en:'GochiHandPOJ','Noto Sans TC',ui-sans-serif,system-ui,sans-serif;
-	  }
+    /* ====== Hero ====== */
+    .hero{padding:48px 0 80px;position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy)}
+    .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--mustard);box-shadow:0 0 0 4px rgba(244,200,75,.25)}
 
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:var(--sans);}
-  body{
-    background:
-      radial-gradient(1200px 800px at 12% -10%, rgba(244,200,75,.18), transparent 60%),
-      radial-gradient(900px 700px at 110% 30%, rgba(28,58,142,.10), transparent 60%),
-      var(--paper);
-    background-attachment: fixed;
-  }
+    .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,6.4vw,92px);line-height:.98;letter-spacing:-.01em;margin:18px 0 8px;color:var(--ink)}
+    .hero h1 .navy{color:var(--navy)}
+    .hero h1 .hl{background:linear-gradient(180deg,transparent 55%,var(--mustard) 55%,var(--mustard) 92%,transparent 92%);padding:0 .15em}
+    .hero h1 .title-line{white-space:nowrap}
+    .hero h1 .hand{font-family:'Shadows Into Light',var(--hand);font-weight:400;color:var(--navy);font-style:normal;display:inline-block;transform:rotate(-3deg) translateY(-4px)}
 
-  /* paper grain texture overlay */
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.06  0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");
-    mix-blend-mode:multiply;opacity:.55;
-  }
+    .lede{max-width:520px;margin-top:18px;font-size:17px;line-height:1.7;color:var(--ink-soft)}
+    .lede .poj{font-family:var(--serif);font-style:italic;color:var(--navy)}
 
-	  a{color:inherit}
-	  img{max-width:100%;display:block}
-	  button{font-family:inherit}
-	  .skip-link{
-	    position:absolute;left:16px;top:10px;z-index:1000;
-	    transform:translateY(-160%);
-	    background:var(--navy);color:var(--paper);
-	    padding:12px 16px;border-radius:999px;text-decoration:none;font-weight:700;
-	  }
-	  .skip-link:focus{transform:translateY(0);outline:3px solid var(--mustard);outline-offset:3px}
+    .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:14px 22px;border-radius:999px;text-decoration:none;font-size:15px;letter-spacing:.02em;font-weight:500;border:1.5px solid transparent;transition:transform .15s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:var(--navy);color:var(--paper)}
+    .btn.ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
+    .btn .arr{display:inline-block;transition:transform .2s ease}
+    .btn:hover .arr{transform:translateX(4px)}
 
-  /* ====== Layout ====== */
-  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 32px;position:relative;z-index:2}
-  section{position:relative;z-index:2;scroll-margin-top:92px}
+    .hero-art{position:relative;aspect-ratio:1/1}
+    .hero-art .blob{position:absolute;inset:0;background:var(--navy);clip-path:polygon(18% 6%,78% 0%,96% 22%,92% 56%,100% 78%,80% 96%,44% 100%,18% 92%,6% 70%,2% 38%,12% 18%);transform:rotate(-3deg)}
+    .hero-art .stamp{position:absolute;left:-30px;top:6%;background:var(--mustard);padding:14px 20px;border-radius:4px;transform:rotate(-6deg);box-shadow:4px 4px 0 rgba(26,22,18,.12);z-index:3}
+    .hero-art .stamp .big{font-family:var(--serif);font-weight:900;font-size:42px;color:var(--navy);line-height:1}
+    .hero-art .stamp .poj{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--navy);font-size:15px;letter-spacing:.02em;margin-top:4px}
+    .hero-art .rabbit-frame{position:absolute;inset:0;display:grid;place-items:center}
+    .hero-art .rabbit-frame img{width:88%;height:auto;filter:grayscale(.4) contrast(1.05);transform:translateY(2%)}
+    .hero-art .tag{position:absolute;right:-14px;bottom:14%;background:var(--paper);padding:10px 14px;border:1px solid var(--ink);font-family:var(--hand);font-size:24px;color:var(--navy);transform:rotate(4deg);box-shadow:3px 3px 0 var(--ink)}
 
-  /* ====== Top nav ====== */
-  .nav{
-    position:sticky;top:0;z-index:50;
-    backdrop-filter: blur(10px);
-    background: rgba(241,235,218,.72);
-    border-bottom: .5px solid var(--line);
-  }
-	  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 32px;max-width:var(--content-max);margin:0 auto}
-	  .brand{display:flex;align-items:center;gap:12px;min-width:0;text-decoration:none;color:var(--ink)}
-  .brand-mark{width:48px;height:48px;display:grid;place-items:center}
-  .brand-mark img{width:100%;height:auto;display:block}
-  .brand-name{font-family:var(--serif);font-weight:700;letter-spacing:.02em;font-size:18px;line-height:1}
-  .brand-name small{display:block;font-family:var(--hand);font-weight:600;color:var(--navy);font-size:14px;margin-top:2px}
-	  .nav-menu{display:flex;gap:28px;align-items:center}
-	  .nav-links{display:flex;gap:28px;align-items:center}
-  .nav-links a{font-size:14px;text-decoration:none;color:var(--ink-soft);position:relative}
-  .nav-links a:hover{color:var(--navy)}
-  .nav-links a.active::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:6px;background:var(--mustard);z-index:-1;border-radius:2px}
-	  .nav-cta{background:var(--navy);color:var(--paper);padding:9px 16px;border-radius:999px;font-size:13px;text-decoration:none;letter-spacing:.04em}
-  .nav-cta:hover{background:var(--navy-deep)}
+    .ticker{margin-top:64px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:48px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+    .ticker-track{display:flex;gap:48px;animation:tickerMove 40s linear infinite;flex-shrink:0;padding-right:48px}
+    .ticker span{white-space:nowrap;font-family:var(--serif);font-size:18px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:14px}
+    .ticker span::after{content:"✦";color:var(--mustard);margin-left:14px}
+    @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ===== language switch ===== */
-  .lang-sw{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;padding:3px;background:var(--paper);gap:2px;margin-right:8px}
-  .lang-sw button{
-    appearance:none;border:0;background:transparent;cursor:pointer;
-    font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.05em;
-    color:var(--ink-soft);padding:5px 9px;border-radius:999px;line-height:1;
-    transition:all .18s ease;
-  }
-  .lang-sw button:hover{color:var(--navy)}
-  .lang-sw button.on{background:var(--navy);color:var(--paper)}
-  /* lang visibility — JS toggles data-lang on <html> */
-  html[data-lang="zh"] .lang-tw,html[data-lang="zh"] .lang-poj,html[data-lang="zh"] .lang-en{display:none}
-  html[data-lang="tw"] .lang-zh,html[data-lang="tw"] .lang-poj,html[data-lang="tw"] .lang-en{display:none}
-  html[data-lang="poj"] .lang-zh,html[data-lang="poj"] .lang-tw,html[data-lang="poj"] .lang-en{display:none}
-  html[data-lang="en"] .lang-zh,html[data-lang="en"] .lang-tw,html[data-lang="en"] .lang-poj{display:none}
-  /* helper class for block-stacking content */
-  .bk{display:block}
+    /* ====== About ====== */
+    .about{padding:96px 0}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px;flex-wrap:wrap}
+    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+    h2.title{font-family:var(--serif);font-size:clamp(34px,4vw,56px);font-weight:700;margin:6px 0 0;line-height:1.05;letter-spacing:-.005em}
+    h2.title .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.6em;display:inline-block;transform:rotate(-2deg);margin-left:.2em}
 
-  /* ====== Hero ====== */
-  .hero{padding:48px 0 80px;position:relative;overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns: 1.1fr .9fr; gap:32px;align-items:center}
-  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);}
-  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--mustard);box-shadow:0 0 0 4px rgba(244,200,75,.25)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .about-text p{font-size:17px;line-height:1.85;margin:0 0 18px}
+    .about-text p .poj{font-family:var(--serif);font-style:italic;color:var(--navy)}
+    .about-text .pull{font-family:var(--serif);font-size:24px;line-height:1.5;color:var(--navy);border-left:4px solid var(--mustard);padding:6px 0 6px 18px;margin:24px 0}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+    .stat{border-top:1px solid var(--line);padding-top:14px}
+    .stat .num{font-family:var(--serif);font-size:42px;font-weight:700;color:var(--navy);line-height:1}
+    .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:6px}
 
-  .hero h1{
-    font-family:var(--serif);font-weight:700;
-    font-size: clamp(40px, 6.4vw, 92px);
-    line-height: .98; letter-spacing:-.01em;
-    margin: 18px 0 8px; color:var(--ink);
-  }
-  .hero h1 .navy{color:var(--navy)}
-  .hero h1 .hl{
-    background: linear-gradient(180deg, transparent 55%, var(--mustard) 55%, var(--mustard) 92%, transparent 92%);
-    padding: 0 .15em;
-  }
-  .hero h1 .title-line{white-space:nowrap}
-  .hero h1 .hand{font-family:'Shadows Into Light',var(--hand);font-weight:400;color:var(--navy);font-style:normal;display:inline-block;transform:rotate(-3deg) translateY(-4px)}
+    .about-art{position:sticky;top:120px}
+    .polaroid{background:#fdfaf1;padding:14px 14px 56px;box-shadow:0 14px 40px rgba(20,42,107,.15),0 2px 0 rgba(26,22,18,.04);transform:rotate(-2deg);position:relative}
+    .polaroid .img-area{aspect-ratio:4/5;background:var(--navy);clip-path:polygon(8% 4%,88% 0%,96% 28%,100% 60%,90% 88%,60% 100%,22% 96%,4% 76%,0% 40%,6% 16%);display:grid;place-items:center;position:relative}
+    .polaroid .img-area img{width:80%;height:auto;filter:grayscale(.5) contrast(1.05)}
+    .polaroid .cap{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--hand);font-size:24px;color:var(--navy)}
+    .sticky-note{position:absolute;right:-30px;top:-24px;background:var(--mustard);padding:14px 16px;transform:rotate(6deg);box-shadow:4px 4px 0 rgba(26,22,18,.12);font-family:var(--hand);font-size:18px;color:var(--navy);max-width:200px;line-height:1.3;z-index:3}
+    .washi{position:absolute;left:50%;top:-14px;transform:translateX(-50%) rotate(-3deg);width:120px;height:24px;background:repeating-linear-gradient(45deg,var(--mustard) 0 6px,#e3b53d 6px 12px);opacity:.85}
 
-  .lede{max-width:520px;margin-top:18px;font-size:17px;line-height:1.7;color:var(--ink-soft)}
-  .lede .poj{font-family:var(--serif);font-style:italic;color:var(--navy)}
+    /* ====== Vocab ====== */
+    .vocab{padding:96px 0;background:linear-gradient(180deg,transparent,rgba(28,58,142,.04) 30%,rgba(28,58,142,.04) 70%,transparent);position:relative}
+    .vocab-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
 
-  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
-	  .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:14px 22px;border-radius:999px;text-decoration:none;font-size:15px;letter-spacing:.02em;font-weight:500;border:1.5px solid transparent;transition:transform .15s ease}
-  .btn:hover{transform:translateY(-1px)}
-  .btn.primary{background:var(--navy);color:var(--paper)}
-  .btn.ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
-  .btn .arr{display:inline-block;transition:transform .2s ease}
-  .btn:hover .arr{transform:translateX(4px)}
+    .card-stage{perspective:1600px}
+    .card{position:relative;aspect-ratio:1/1;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.6,.0,.25,1);cursor:pointer}
+    .card:focus-visible{outline:3px solid var(--mustard);outline-offset:6px}
+    .card.flipped{transform:rotateY(180deg)}
+    .card-face{position:absolute;inset:0;backface-visibility:hidden;background:#fbf5e3;border:1px solid rgba(26,22,18,.12);box-shadow:0 30px 70px rgba(20,42,107,.18),0 1px 0 rgba(26,22,18,.04);overflow:hidden}
+    .card-back{transform:rotateY(180deg)}
 
-  /* hero rabbit */
-  .hero-art{position:relative;aspect-ratio:1/1;}
-  .hero-art .blob{
-    position:absolute;inset:0;
-    background:var(--navy);
-    clip-path: polygon(18% 6%, 78% 0%, 96% 22%, 92% 56%, 100% 78%, 80% 96%, 44% 100%, 18% 92%, 6% 70%, 2% 38%, 12% 18%);
-    transform: rotate(-3deg);
-  }
-  .hero-art .stamp{
-    position:absolute;left:-30px;top:6%;
-    background:var(--mustard);padding:14px 20px;border-radius:4px;
-    transform:rotate(-6deg);
-    box-shadow: 4px 4px 0 rgba(26,22,18,.12);
-    z-index:3;
-  }
-  .hero-art .stamp .big{font-family:var(--serif);font-weight:900;font-size:42px;color:var(--navy);line-height:1}
-  .hero-art .stamp .poj{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--navy);font-size:15px;letter-spacing:.02em;margin-top:4px}
-  .hero-art .rabbit-frame{position:absolute;inset:0;display:grid;place-items:center;}
-  .hero-art .rabbit-frame img{width:88%;height:auto;filter:grayscale(.4) contrast(1.05);transform:translateY(2%)}
-  .hero-art .tag{position:absolute;right:-14px;bottom:14%;background:var(--paper);padding:10px 14px;border:1px solid var(--ink);font-family:var(--hand);font-size:24px;color:var(--navy);transform:rotate(4deg);box-shadow:3px 3px 0 var(--ink)}
+    .card-front{display:grid;grid-template-columns:1fr 1fr;gap:0;background:radial-gradient(circle at 20% 90%,rgba(244,200,75,.2),transparent 50%),#faf3e0}
+    .card-left{padding:48px 32px;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .word-tag{background:var(--mustard);padding:14px 18px;align-self:flex-start;box-shadow:4px 4px 0 rgba(26,22,18,.1);margin-bottom:18px}
+    .word-tag .han{font-family:var(--serif);font-size:48px;font-weight:900;color:var(--navy);line-height:1}
+    .word-tag .poj{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--navy);font-size:18px;margin-top:6px;letter-spacing:.02em}
+    .word-sentence .han{font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.6;margin-bottom:6px}
+    .word-sentence .poj{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--navy);line-height:1.6}
+    .card-foot{position:absolute;left:32px;right:32px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase}
+    .card-foot .logo-mini{font-family:var(--serif);font-style:normal;color:var(--navy);font-size:12px;letter-spacing:0;text-transform:none;text-align:right;line-height:1.2}
 
-  .ticker{
-    margin-top: 64px;
-    padding: 14px 0;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    display:flex;gap:48px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)
-  }
-  .ticker-track{display:flex;gap:48px;animation:tickerMove 40s linear infinite;flex-shrink:0;padding-right:48px}
-  .ticker span{white-space:nowrap;font-family:var(--serif);font-size:18px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:14px}
-  .ticker span::after{content:"✦";color:var(--mustard);margin-left:14px}
-  @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .card-right{position:relative;background:transparent;display:grid;place-items:center;overflow:hidden}
+    .card-right .blue{position:absolute;inset:8% 6% 8% 0%;background:var(--navy);clip-path:polygon(20% 4%,80% 0%,96% 26%,92% 50%,100% 74%,78% 96%,44% 100%,16% 88%,4% 60%,0% 28%,10% 14%)}
+    .card-right .bunny{position:relative;z-index:2;width:74%;height:auto;filter:grayscale(.55) contrast(1.05)}
 
-  /* ====== About ====== */
-  .about{padding:96px 0;}
-  .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px;flex-wrap:wrap}
-  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
-  h2.title{font-family:var(--serif);font-size:clamp(34px,4vw,56px);font-weight:700;margin:6px 0 0;line-height:1.05;letter-spacing:-.005em}
-  h2.title .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.6em;display:inline-block;transform:rotate(-2deg);margin-left:.2em}
+    .card-back{padding:36px;display:flex;flex-direction:column;background:var(--paper)}
+    .back-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+    .back-head .han{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--navy)}
+    .back-head .poj{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:16px}
+    .back-row{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px;align-items:start}
+    .back-row .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);padding-top:3px}
+    .back-row .val{color:var(--ink)}
+    .back-row .val em{font-family:var(--serif);font-style:italic;color:var(--navy);font-weight:500}
 
-  .about-grid{display:grid;grid-template-columns: 1fr 1fr; gap:64px;align-items:start}
-  .about-text p{font-size:17px;line-height:1.85;margin:0 0 18px}
-  .about-text p .poj{font-family:var(--serif);font-style:italic;color:var(--navy)}
-  .about-text .pull{
-    font-family:var(--serif);font-size:24px;line-height:1.5;color:var(--navy);
-    border-left:4px solid var(--mustard);padding:6px 0 6px 18px;margin:24px 0;
-  }
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
-  .stat{border-top:1px solid var(--line);padding-top:14px}
-  .stat .num{font-family:var(--serif);font-size:42px;font-weight:700;color:var(--navy);line-height:1}
-  .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:6px}
+    .vocab-side h3{font-family:var(--serif);font-size:32px;font-weight:700;line-height:1.2;margin:0 0 12px}
+    .vocab-side p{font-size:16px;line-height:1.7;color:var(--ink-soft);margin:0 0 20px}
+    .pad-controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .pad-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line);min-height:44px;font-size:14px;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+    .pad-btn:hover{background:var(--paper);border-color:var(--navy);color:var(--navy)}
+    .pad-btn.play{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+    .pad-btn.play:hover{background:var(--navy-deep)}
+    .pad-btn.flip{background:var(--mustard);border-color:var(--mustard);color:var(--navy)}
+    .pad-btn .ico{width:14px;height:14px;display:inline-block}
+    .pager{display:flex;align-items:center;gap:14px;margin-top:24px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink-soft)}
+    .pager .pgbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center;cursor:pointer}
+    .pager .pgbtn:hover{background:var(--paper-2);border-color:var(--navy);color:var(--navy)}
 
-  .about-art{position:sticky;top:120px}
-  .polaroid{
-    background:#fdfaf1;padding:14px 14px 56px;
-    box-shadow: 0 14px 40px rgba(20,42,107,.15), 0 2px 0 rgba(26,22,18,.04);
-    transform:rotate(-2deg);
-    position:relative;
-  }
-  .polaroid .img-area{
-    aspect-ratio: 4/5; background:var(--navy);
-    clip-path: polygon(8% 4%, 88% 0%, 96% 28%, 100% 60%, 90% 88%, 60% 100%, 22% 96%, 4% 76%, 0% 40%, 6% 16%);
-    display:grid;place-items:center; position:relative;
-  }
-  .polaroid .img-area img{width:80%;height:auto;filter:grayscale(.5) contrast(1.05)}
-  .polaroid .cap{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--hand);font-size:24px;color:var(--navy)}
-  .sticky-note{
-    position:absolute;right:-30px;top:-24px;background:var(--mustard);padding:14px 16px;
-    transform:rotate(6deg);box-shadow:4px 4px 0 rgba(26,22,18,.12);
-    font-family:var(--hand);font-size:18px;color:var(--navy);max-width:200px;line-height:1.3;z-index:3;
-  }
-  .washi{
-    position:absolute;left:50%;top:-14px;transform:translateX(-50%) rotate(-3deg);
-    width:120px;height:24px;background:repeating-linear-gradient(45deg,var(--mustard) 0 6px,#e3b53d 6px 12px);
-    opacity:.85;
-  }
+    .dots{display:flex;gap:6px;margin-top:14px}
+    .dots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
+    .dots span.on{background:var(--navy);transform:scale(1.4)}
 
-  /* ====== Vocab ====== */
-  .vocab{padding:96px 0;background:linear-gradient(180deg,transparent, rgba(28,58,142,.04) 30%, rgba(28,58,142,.04) 70%, transparent);position:relative}
-  .vocab-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
+    /* ====== Events ====== */
+    .events{padding:96px 0}
+    .events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .ev{background:#fdfaf1;padding:28px;border:1px solid var(--line);position:relative;transition:transform .2s ease,box-shadow .2s ease}
+    .ev:hover{transform:translateY(-3px);box-shadow:0 18px 30px rgba(20,42,107,.12)}
+    .ev .date{display:flex;align-items:baseline;gap:6px;font-family:var(--serif);color:var(--navy);font-weight:700}
+    .ev .date .d{font-size:54px;line-height:1}
+    .ev .date .m{font-size:18px;letter-spacing:.04em}
+    .ev h3{font-family:var(--serif);font-size:22px;font-weight:700;margin:14px 0 6px;line-height:1.3}
+    .ev .meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+    .ev .meta span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft);background:var(--paper-2);padding:4px 8px;border-radius:999px;text-transform:uppercase}
+    .ev p{font-size:14px;line-height:1.6;color:var(--ink-soft);margin:0 0 16px}
+    .ev .ev-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--navy);text-decoration:none;font-weight:500;border-bottom:1px solid var(--navy);padding-bottom:1px}
+    .ev .badge{position:absolute;top:-12px;right:18px;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 10px;text-transform:uppercase;font-weight:600}
+    .ev .badge.full{background:var(--ink);color:var(--paper)}
 
-  /* The card itself */
-  .card-stage{perspective:1600px}
-	  .card{
-	    position:relative;aspect-ratio: 1/1;
-	    transform-style: preserve-3d;
-	    transition: transform .9s cubic-bezier(.6,.0,.25,1);
-	    cursor:pointer;
-	  }
-	  .card:focus-visible{outline:3px solid var(--mustard);outline-offset:6px}
-  .card.flipped{transform:rotateY(180deg)}
-  .card-face{
-    position:absolute;inset:0;backface-visibility:hidden;
-    background:#fbf5e3;border:1px solid rgba(26,22,18,.12);
-    box-shadow: 0 30px 70px rgba(20,42,107,.18), 0 1px 0 rgba(26,22,18,.04);
-    overflow:hidden;
-  }
-  .card-back{transform:rotateY(180deg)}
+    /* ====== FAQ ====== */
+    .faq{padding:96px 0;background:var(--navy);color:var(--paper);position:relative;overflow:hidden}
+    .faq::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .25 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");opacity:.4;pointer-events:none}
+    .faq .wrap{position:relative;z-index:2}
+    .faq h2.title{color:var(--paper)}
+    .faq h2.title .hand{color:var(--mustard)}
+    .faq .kicker{color:var(--mustard)}
+    .faq-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px}
+    .faq-list{display:flex;flex-direction:column;gap:8px}
+    .qa{border-bottom:1px solid rgba(255,255,255,.18);padding:0}
+    .qa-q{appearance:none;width:100%;min-height:56px;border:0;background:transparent;color:inherit;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:18px 0;text-align:left;cursor:pointer;font-family:var(--serif);font-size:20px;font-weight:500}
+    .qa-q:focus-visible{outline:3px solid var(--mustard);outline-offset:3px}
+    .qa-q .toggle{width:28px;height:28px;border-radius:50%;background:var(--mustard);color:var(--navy);display:grid;place-items:center;font-weight:700;flex-shrink:0;transition:transform .25s ease}
+    .qa.open .qa-q .toggle{transform:rotate(45deg)}
+    .qa-a{max-height:0;overflow:hidden;transition:max-height .35s ease,margin-top .35s ease;color:rgba(255,255,255,.78);font-size:15px;line-height:1.7}
+    .qa.open .qa-a{max-height:240px;margin-top:14px}
 
-  .card-front{
-    display:grid;grid-template-columns:1fr 1fr;gap:0;
-    background:
-      radial-gradient(circle at 20% 90%, rgba(244,200,75,.2), transparent 50%),
-      #faf3e0;
-  }
-  .card-left{padding:48px 32px;display:flex;flex-direction:column;justify-content:center;position:relative}
-  .word-tag{
-    background:var(--mustard);padding:14px 18px;align-self:flex-start;
-    box-shadow:4px 4px 0 rgba(26,22,18,.1);
-    margin-bottom:18px;
-  }
-  .word-tag .han{font-family:var(--serif);font-size:48px;font-weight:900;color:var(--navy);line-height:1;}
-  .word-tag .poj{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--navy);font-size:18px;margin-top:6px;letter-spacing:.02em}
-  .word-sentence .han{font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.6;margin-bottom:6px}
-  .word-sentence .poj{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--navy);line-height:1.6}
-  .card-foot{position:absolute;left:32px;right:32px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase}
-  .card-foot .logo-mini{font-family:var(--serif);font-style:normal;color:var(--navy);font-size:12px;letter-spacing:0;text-transform:none;text-align:right;line-height:1.2}
+    .faq-side{position:sticky;top:120px;align-self:start}
+    .faq-side .blockquote{font-family:var(--serif);font-size:30px;line-height:1.4;font-weight:500;color:var(--paper);border-left:4px solid var(--mustard);padding-left:18px}
+    .faq-side .blockquote .poj{font-style:italic;color:var(--mustard-soft)}
+    .faq-side .att{font-family:var(--hand);font-size:22px;color:var(--mustard);margin-top:14px}
 
-  .card-right{position:relative;background:transparent;display:grid;place-items:center;overflow:hidden}
-  .card-right .blue{
-    position:absolute;inset:8% 6% 8% 0%;
-    background:var(--navy);
-    clip-path: polygon(20% 4%, 80% 0%, 96% 26%, 92% 50%, 100% 74%, 78% 96%, 44% 100%, 16% 88%, 4% 60%, 0% 28%, 10% 14%);
-  }
-  .card-right .bunny{position:relative;z-index:2;width:74%;height:auto;filter:grayscale(.55) contrast(1.05)}
+    /* ====== Contact ====== */
+    .contact{padding:96px 0 40px}
+    .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
+    .contact h2.title{margin-bottom:18px}
+    .contact .lede{font-size:18px;color:var(--ink-soft);max-width:520px;margin-bottom:32px;line-height:1.7}
+    .contact-form{display:grid;gap:14px;background:#fdfaf1;padding:32px;border:1px solid var(--line)}
+    .field{display:grid;gap:6px}
+    .field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
+    .field input,.field select,.field textarea{padding:12px 14px;border:1px solid var(--line);background:var(--paper);font:inherit;font-size:15px;color:var(--ink);outline:none;border-radius:0}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy);background:#fff}
+    .field textarea{resize:vertical;min-height:110px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .submit{margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;background:var(--navy);color:var(--paper);border:0;padding:14px 22px;border-radius:999px;font-size:15px;font-family:inherit;letter-spacing:.04em;cursor:pointer}
+    .submit:hover{background:var(--navy-deep)}
 
-  /* Card Back */
-  .card-back{padding:36px;display:flex;flex-direction:column;background:var(--paper)}
-  .back-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
-  .back-head .han{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--navy)}
-  .back-head .poj{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:16px}
-  .back-row{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px;align-items:start}
-  .back-row .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);padding-top:3px}
-  .back-row .val{color:var(--ink)}
-  .back-row .val em{font-family:var(--serif);font-style:italic;color:var(--navy);font-weight:500}
+    .channels{display:grid;gap:14px}
+    .ch{display:flex;align-items:center;gap:18px;padding:18px;background:#fdfaf1;border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .15s ease,border-color .15s ease}
+    .ch:hover{transform:translateY(-2px);border-color:var(--navy)}
+    .ch .ic{width:42px;height:42px;border-radius:50%;background:var(--mustard);display:grid;place-items:center;color:var(--navy);font-family:var(--serif);font-weight:900}
+    .ch .name{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1}
+    .ch .meta{font-size:13px;color:var(--ink-soft);margin-top:4px}
 
-  .vocab-side h3{font-family:var(--serif);font-size:32px;font-weight:700;line-height:1.2;margin:0 0 12px}
-  .vocab-side p{font-size:16px;line-height:1.7;color:var(--ink-soft);margin:0 0 20px}
-  .pad-controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-  .pad-btn{
-    display:inline-flex;align-items:center;gap:8px;padding:10px 14px;
-    border-radius:999px;background:var(--paper-2);border:1px solid var(--line);
-	    min-height:44px;font-size:14px;cursor:pointer;font-family:var(--sans);color:var(--ink);
-	  }
-  .pad-btn:hover{background:var(--paper);border-color:var(--navy);color:var(--navy)}
-  .pad-btn.play{background:var(--navy);color:var(--paper);border-color:var(--navy)}
-  .pad-btn.play:hover{background:var(--navy-deep)}
-  .pad-btn.flip{background:var(--mustard);border-color:var(--mustard);color:var(--navy)}
-  .pad-btn .ico{width:14px;height:14px;display:inline-block}
-  .pager{display:flex;align-items:center;gap:14px;margin-top:24px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink-soft)}
-	  .pager .pgbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center;cursor:pointer}
-  .pager .pgbtn:hover{background:var(--paper-2);border-color:var(--navy);color:var(--navy)}
+    /* scroll rabbit */
+    .scroll-rabbit{position:fixed;pointer-events:none;z-index:30;width:120px;transition:opacity .3s ease}
+    .scroll-rabbit img{width:100%;height:auto;filter:grayscale(.4) contrast(1.05) drop-shadow(0 12px 24px rgba(20,42,107,.25))}
+    .scroll-rabbit .speech{position:absolute;left:-110px;top:8px;background:var(--mustard);padding:8px 12px;font-family:var(--hand);font-size:18px;color:var(--navy);border-radius:14px;white-space:nowrap;box-shadow:3px 3px 0 rgba(26,22,18,.12);transform-origin:right center}
+    .scroll-rabbit .speech::after{content:"";position:absolute;right:-8px;top:14px;border:8px solid transparent;border-left-color:var(--mustard)}
 
-  /* dotted index */
-  .dots{display:flex;gap:6px;margin-top:14px}
-  .dots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
-  .dots span.on{background:var(--navy);transform:scale(1.4)}
+    /* Language switcher visibility */
+    .lang-zh,.lang-poj,.lang-en,.lang-tw{display:inline}
+    html.lang-zh-only .lang-poj,html.lang-zh-only .lang-en,html.lang-zh-only .lang-tw{display:none !important}
+    html.lang-poj-only .lang-zh,html.lang-poj-only .lang-en,html.lang-poj-only .lang-tw{display:none !important}
+    html.lang-en-only .lang-zh,html.lang-en-only .lang-poj,html.lang-en-only .lang-tw{display:none !important}
+    html.lang-tw-only .lang-zh,html.lang-tw-only .lang-poj,html.lang-tw-only .lang-en{display:none !important}
+    .lang-zh.bk,.lang-poj.bk,.lang-en.bk,.lang-tw.bk{display:block}
+    html.lang-zh-only .lang-poj.bk,html.lang-zh-only .lang-en.bk,html.lang-zh-only .lang-tw.bk,
+    html.lang-poj-only .lang-zh.bk,html.lang-poj-only .lang-en.bk,html.lang-poj-only .lang-tw.bk,
+    html.lang-en-only .lang-zh.bk,html.lang-en-only .lang-poj.bk,html.lang-en-only .lang-tw.bk,
+    html.lang-tw-only .lang-zh.bk,html.lang-tw-only .lang-poj.bk,html.lang-tw-only .lang-en.bk{display:none !important}
+    html[data-lang="zh"] .lang-tw,html[data-lang="zh"] .lang-poj,html[data-lang="zh"] .lang-en{display:none}
+    html[data-lang="tw"] .lang-zh,html[data-lang="tw"] .lang-poj,html[data-lang="tw"] .lang-en{display:none}
+    html[data-lang="poj"] .lang-zh,html[data-lang="poj"] .lang-tw,html[data-lang="poj"] .lang-en{display:none}
+    html[data-lang="en"] .lang-zh,html[data-lang="en"] .lang-tw,html[data-lang="en"] .lang-poj{display:none}
+    .lang-tw,.lang-poj,.word-tag .han,.back-head .han,
+    #w-han,#b-han,#w-sen-han,#b-ex-han,#b-note{font-family:var(--tai)}
+    .bk{display:block}
 
-  /* ====== Events ====== */
-  .events{padding:96px 0}
-  .events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .ev{
-    background: #fdfaf1;
-    padding:28px;border:1px solid var(--line);
-    position:relative;transition: transform .2s ease, box-shadow .2s ease;
-  }
-  .ev:hover{transform:translateY(-3px);box-shadow:0 18px 30px rgba(20,42,107,.12)}
-  .ev .date{display:flex;align-items:baseline;gap:6px;font-family:var(--serif);color:var(--navy);font-weight:700}
-  .ev .date .d{font-size:54px;line-height:1}
-  .ev .date .m{font-size:18px;letter-spacing:.04em}
-  .ev h3{font-family:var(--serif);font-size:22px;font-weight:700;margin:14px 0 6px;line-height:1.3}
-  .ev .meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
-  .ev .meta span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft);background:var(--paper-2);padding:4px 8px;border-radius:999px;text-transform:uppercase}
-  .ev p{font-size:14px;line-height:1.6;color:var(--ink-soft);margin:0 0 16px}
-  .ev .ev-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--navy);text-decoration:none;font-weight:500;border-bottom:1px solid var(--navy);padding-bottom:1px}
-  .ev .badge{position:absolute;top:-12px;right:18px;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 10px;text-transform:uppercase;font-weight:600}
-  .ev .badge.full{background:var(--ink);color:var(--paper)}
+    /* responsive */
+    @media (max-width:1080px){
+      .about-grid{gap:48px}
+      .vocab-grid{grid-template-columns:1fr 1fr;gap:32px}
+      .events-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:820px){
+      .hero{padding:24px 0 56px}
+      .hero-grid{grid-template-columns:1fr;gap:36px}
+      .hero h1{font-size:clamp(44px,11vw,72px)}
+      .hero-art{order:-1;max-width:340px;margin:0 auto}
+      .lede{font-size:16px}
 
-  /* ====== FAQ ====== */
-  .faq{padding:96px 0;background:var(--navy);color:var(--paper);position:relative;overflow:hidden}
-  .faq::before{
-    content:"";position:absolute;inset:0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .25 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    opacity:.4;pointer-events:none;
-  }
-  .faq .wrap{position:relative;z-index:2}
-  .faq h2.title{color:var(--paper)}
-  .faq h2.title .hand{color:var(--mustard)}
-  .faq .kicker{color:var(--mustard)}
-  .faq-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px}
-  .faq-list{display:flex;flex-direction:column;gap:8px}
-	  .qa{border-bottom:1px solid rgba(255,255,255,.18);padding:0}
-	  .qa-q{appearance:none;width:100%;min-height:56px;border:0;background:transparent;color:inherit;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:18px 0;text-align:left;cursor:pointer;font-family:var(--serif);font-size:20px;font-weight:500}
-	  .qa-q:focus-visible{outline:3px solid var(--mustard);outline-offset:3px}
-  .qa-q .toggle{width:28px;height:28px;border-radius:50%;background:var(--mustard);color:var(--navy);display:grid;place-items:center;font-weight:700;flex-shrink:0;transition: transform .25s ease}
-  .qa.open .qa-q .toggle{transform:rotate(45deg)}
-  .qa-a{
-    max-height:0;overflow:hidden;transition: max-height .35s ease, margin-top .35s ease;
-    color: rgba(255,255,255,.78); font-size:15px; line-height:1.7;
-  }
-  .qa.open .qa-a{max-height:240px;margin-top:14px}
+      .about{padding:64px 0}
+      .about-grid{grid-template-columns:1fr;gap:40px}
+      .about-art{position:static;max-width:380px;margin:0 auto}
+      .stats{grid-template-columns:repeat(3,1fr);gap:14px}
+      .stat .num{font-size:32px}
+      .stat .lbl{font-size:11px}
+      .sticky-note{right:-10px;top:-12px;font-size:14px;padding:10px 12px;max-width:160px}
 
-  .faq-side{position:sticky;top:120px;align-self:start}
-  .faq-side .blockquote{
-    font-family:var(--serif);font-size:30px;line-height:1.4;font-weight:500;color:var(--paper);
-    border-left:4px solid var(--mustard);padding-left:18px;
-  }
-  .faq-side .blockquote .poj{font-style:italic;color:var(--mustard-soft)}
-  .faq-side .att{font-family:var(--hand);font-size:22px;color:var(--mustard);margin-top:14px}
+      .vocab{padding:64px 0}
+      .vocab-grid{grid-template-columns:1fr;gap:24px}
+      .word-tag .han{font-size:38px}
+      .card-front,.card-back{padding:24px}
+      .card-foot{left:24px;right:24px;bottom:18px}
 
-  /* ====== Contact ====== */
-  .contact{padding:96px 0 40px}
-  .contact-grid{display:grid;grid-template-columns: 1.2fr 1fr;gap:48px;align-items:start}
-  .contact h2.title{margin-bottom:18px}
-  .contact .lede{font-size:18px;color:var(--ink-soft);max-width:520px;margin-bottom:32px;line-height:1.7}
-  .contact-form{display:grid;gap:14px;background:#fdfaf1;padding:32px;border:1px solid var(--line)}
-  .field{display:grid;gap:6px}
-  .field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
-  .field input,.field select,.field textarea{
-    padding:12px 14px;border:1px solid var(--line);background:var(--paper);
-    font:inherit;font-size:15px;color:var(--ink);outline:none;border-radius:0;
-  }
-  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy);background:#fff}
-  .field textarea{resize:vertical;min-height:110px}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-	  .submit{margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;background:var(--navy);color:var(--paper);border:0;padding:14px 22px;border-radius:999px;font-size:15px;font-family:inherit;letter-spacing:.04em;cursor:pointer}
-  .submit:hover{background:var(--navy-deep)}
+      .events{padding:64px 0}
+      .events-grid{grid-template-columns:1fr;gap:18px}
+      .ev .date .d{font-size:42px}
 
-  .channels{display:grid;gap:14px}
-  .ch{display:flex;align-items:center;gap:18px;padding:18px;background:#fdfaf1;border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .15s ease, border-color .15s ease}
-  .ch:hover{transform:translateY(-2px);border-color:var(--navy)}
-  .ch .ic{width:42px;height:42px;border-radius:50%;background:var(--mustard);display:grid;place-items:center;color:var(--navy);font-family:var(--serif);font-weight:900}
-  .ch .name{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1}
-  .ch .meta{font-size:13px;color:var(--ink-soft);margin-top:4px}
+      .faq{padding:64px 0}
+      .faq-grid{grid-template-columns:1fr;gap:24px}
 
-  /* ====== Footer ====== */
-  footer{padding:48px 0 64px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
-  .ftr{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-  .ftr .lg{font-family:var(--serif);font-size:24px;color:var(--navy);font-weight:700}
-  .ftr .lg small{display:block;font-family:var(--hand);font-size:18px;color:var(--ink-soft);margin-top:2px}
-  .ftr .crd{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
-  .ftr .lks{display:flex;gap:18px}
-  .ftr .lks a{text-decoration:none;color:var(--ink-soft)}
-  .ftr .lks a:hover{color:var(--navy)}
+      .contact{padding:64px 0}
+      .contact-grid{grid-template-columns:1fr;gap:32px}
+      .contact-form{padding:24px}
 
-  /* scroll rabbit */
-  .scroll-rabbit{
-    position:fixed;
-    pointer-events:none;
-    z-index:30;
-    width:120px;
-    transition:opacity .3s ease;
-  }
-  .scroll-rabbit img{width:100%;height:auto;filter:grayscale(.4) contrast(1.05) drop-shadow(0 12px 24px rgba(20,42,107,.25))}
-  .scroll-rabbit .speech{
-    position:absolute;left:-110px;top:8px;
-    background:var(--mustard);padding:8px 12px;
-    font-family:var(--hand);font-size:18px;color:var(--navy);
-    border-radius:14px;white-space:nowrap;
-    box-shadow:3px 3px 0 rgba(26,22,18,.12);
-    transform-origin: right center;
-  }
-  .scroll-rabbit .speech::after{
-    content:"";position:absolute;right:-8px;top:14px;
-    border:8px solid transparent;border-left-color:var(--mustard);
-  }
+      .section-head{margin-bottom:32px}
+      h2.title{font-size:clamp(30px,8vw,44px)}
 
-  /* ===== Language switcher visibility ===== */
-  .lang-zh, .lang-poj, .lang-en, .lang-tw { display: inline; }
-  .lang-en{font-family:var(--en)}
-  html.lang-zh-only .lang-poj, html.lang-zh-only .lang-en, html.lang-zh-only .lang-tw { display:none !important }
-  html.lang-poj-only .lang-zh, html.lang-poj-only .lang-en, html.lang-poj-only .lang-tw { display:none !important }
-  html.lang-en-only .lang-zh, html.lang-en-only .lang-poj, html.lang-en-only .lang-tw { display:none !important }
-  html.lang-tw-only .lang-zh, html.lang-tw-only .lang-poj, html.lang-tw-only .lang-en { display:none !important }
-  .lang-zh.bk, .lang-poj.bk, .lang-en.bk, .lang-tw.bk { display:block }
-  html.lang-zh-only .lang-poj.bk, html.lang-zh-only .lang-en.bk, html.lang-zh-only .lang-tw.bk,
-  html.lang-poj-only .lang-zh.bk, html.lang-poj-only .lang-en.bk, html.lang-poj-only .lang-tw.bk,
-  html.lang-en-only .lang-zh.bk, html.lang-en-only .lang-poj.bk, html.lang-en-only .lang-tw.bk,
-  html.lang-tw-only .lang-zh.bk, html.lang-tw-only .lang-poj.bk, html.lang-tw-only .lang-en.bk { display:none !important }
+      .scroll-rabbit{display:none}
+      .ticker span{font-size:15px}
+      .ticker-track{gap:28px;padding-right:28px}
 
-  /* Iansui for Tâi-gí hàn-jī and POJ */
-  .lang-tw, .lang-poj, .word-tag .han, .back-head .han,
-  #w-han, #b-han, #w-sen-han, #b-ex-han, #b-note { font-family: var(--tai) }
+      .nav-links > a.active::after{display:none}
+    }
+    @media (max-width:420px){
+      .hero h1{font-size:44px;line-height:1.05}
+      .hero-cta{flex-direction:column;align-items:stretch}
+      .hero-cta .btn{justify-content:center}
+      .stats{grid-template-columns:1fr 1fr}
+      .stats .stat:last-child{grid-column:1 / -1}
+    }
+  `}></style>
 
-  .lang-sw{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fdfaf1;margin-right:14px}
-	  .lang-sw button{appearance:none;border:0;background:transparent;font:inherit;font-size:12px;min-width:44px;min-height:44px;padding:12px 11px;color:var(--ink-soft);cursor:pointer;font-family:var(--mono);letter-spacing:.04em;touch-action:manipulation}
-  .lang-sw button.on{background:var(--navy);color:var(--paper)}
-  .lang-sw button:hover{color:var(--navy)}
-  .lang-sw button.on:hover{color:var(--paper)}
-
-  /* ===== mobile menu toggle ===== */
-		  .nav-toggle{
-		    display:none; appearance:none; border:1.5px solid var(--ink); background:var(--paper);
-		    width:44px; height:44px; border-radius:50%; cursor:pointer;
-		    position:relative; z-index:120; flex:0 0 44px; margin-left:auto;
-		    align-items:center; justify-content:center; padding:0;
-		  }
-  .nav-toggle .bars{display:block; width:18px; height:14px; position:relative}
-  .nav-toggle .bars::before,.nav-toggle .bars::after,.nav-toggle .bars span{
-    content:""; position:absolute; left:0; right:0; height:2px; background:var(--ink); border-radius:1px;
-    transition:transform .25s ease, opacity .2s ease, top .25s ease;
-  }
-  .nav-toggle .bars::before{top:0}
-  .nav-toggle .bars span{top:6px; display:block}
-  .nav-toggle .bars::after{top:12px}
-  body.nav-open .nav-toggle .bars::before{top:6px; transform:rotate(45deg)}
-  body.nav-open .nav-toggle .bars span{opacity:0}
-  body.nav-open .nav-toggle .bars::after{top:6px; transform:rotate(-45deg)}
-
-  /* ===== responsive ===== */
-  /* tablet */
-  @media (max-width: 1080px){
-    .wrap{padding:0 24px}
-    .nav-inner{padding:12px 24px}
-	    .nav-menu{gap:18px}
-	    .nav-links{gap:18px}
-    .nav-links a{font-size:13px}
-    .about-grid{gap:48px}
-    .vocab-grid{grid-template-columns:1fr 1fr;gap:32px}
-    .events-grid{grid-template-columns:1fr 1fr}
-  }
-  /* mobile (<=820px) — collapse nav into a sheet */
-  @media (max-width: 820px){
-    .wrap{padding:0 20px}
-    .nav-inner{padding:10px 20px}
-    .nav-toggle{display:inline-flex}
-    .brand-name{font-size:16px}
-    .brand-name small{font-size:12px}
-
-	    /* the sheet */
-	    .nav-menu{
-	      position:absolute; left:0; right:0; top:100%; background:var(--paper);
-	      flex-direction:column; align-items:flex-start; gap:0;
-	      padding:18px 24px 28px; z-index:90;
-	      transform:translateY(-12px); opacity:0; visibility:hidden; pointer-events:none;
-	      transition:transform .22s ease, opacity .18s ease, visibility .18s ease;
-	      border-bottom:1px solid var(--line); box-shadow:0 24px 40px -20px rgba(20,42,107,.18);
-	      max-height:calc(100dvh - 64px); overflow-y:auto;
-	    }
-	    body.nav-open .nav-menu{transform:translateY(0); opacity:1; visibility:visible; pointer-events:auto}
-	    body.nav-open{overflow:hidden}
-	    .nav-links{width:100%;flex-direction:column;align-items:flex-start;gap:0}
-
-	    .nav-links > a{
-	      width:100%; padding:18px 4px; border-bottom:1px dashed var(--line);
-	      font-family:var(--serif); font-size:22px; color:var(--ink);
-	    }
-    .nav-links > a.active::after{display:none}
-    .nav-links > a.active{color:var(--navy); background:linear-gradient(transparent 60%, var(--mustard) 60%); padding-left:8px}
-	    .nav-cta{
-	      align-self:stretch; text-align:center; margin-top:18px;color:var(--paper) !important;
-	      padding:14px 22px !important; font-size:15px !important; border-radius:999px;
-	      border-bottom:0 !important; font-family:var(--sans) !important;
-	    }
-    .lang-sw{margin:4px 0 18px;align-self:flex-start}
-
-    /* hero & layout */
-    .hero{padding:24px 0 56px}
-    .hero-grid{grid-template-columns:1fr;gap:36px}
-    .hero h1{font-size:clamp(44px, 11vw, 72px)}
-    .hero-art{order:-1;max-width:340px;margin:0 auto}
-    .lede{font-size:16px}
-
-    .about{padding:64px 0}
-    .about-grid{grid-template-columns:1fr;gap:40px}
-    .about-art{position:static;max-width:380px;margin:0 auto}
-    .stats{grid-template-columns:repeat(3,1fr);gap:14px}
-    .stat .num{font-size:32px}
-    .stat .lbl{font-size:11px}
-    .sticky-note{right:-10px;top:-12px;font-size:14px;padding:10px 12px;max-width:160px}
-
-    .vocab{padding:64px 0}
-    .vocab-grid{grid-template-columns:1fr;gap:24px}
-    .word-tag .han{font-size:38px}
-    .card-front,.card-back{padding:24px}
-    .card-foot{left:24px;right:24px;bottom:18px}
-
-    .events{padding:64px 0}
-    .events-grid{grid-template-columns:1fr;gap:18px}
-    .ev .date .d{font-size:42px}
-
-    .faq{padding:64px 0}
-    .faq-grid{grid-template-columns:1fr;gap:24px}
-
-    .contact{padding:64px 0}
-    .contact-grid{grid-template-columns:1fr;gap:32px}
-    .contact-form{padding:24px}
-
-    .section-head{margin-bottom:32px}
-    h2.title{font-size:clamp(30px, 8vw, 44px)}
-
-    .scroll-rabbit{display:none}
-    .ticker span{font-size:15px}
-    .ticker-track{gap:28px;padding-right:28px}
-  }
-  /* small phones */
-	  @media (max-width: 420px){
-	    .wrap{padding:0 16px}
-    .nav-inner{padding:10px 16px}
-    .brand-mark{width:40px;height:40px}
-    .brand-name{font-size:15px}
-    .brand-name small{font-size:11px}
-    .hero h1{font-size:44px;line-height:1.05}
-    .hero-cta{flex-direction:column;align-items:stretch}
-    .hero-cta .btn{justify-content:center}
-    .stats{grid-template-columns:1fr 1fr}
-	    .stats .stat:last-child{grid-column:1 / -1}
-	  }
-	  @media (prefers-reduced-motion: reduce){
-	    html{scroll-behavior:auto}
-	  }
-</style>
-</head>
-<body>
-<a class="skip-link" href="#main">跳到主要內容</a>
-
-<!-- ===== NAV ===== -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark"><img src="/logo.png" alt="Kóng台語 跳Swing logo" width="370" height="370"></span>
-      <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
-    </a>
-	    <div class="nav-menu" id="nav-menu">
-	      <div class="lang-sw" id="lang-sw">
-	        <button data-lang="zh" class="on">華</button>
-	        <button data-lang="tw">台</button>
-	        <button data-lang="poj">POJ</button>
-	        <button data-lang="en">EN</button>
-	      </div>
-	      <div class="nav-links">
-	        <a href="#about" class="active"><span class="lang-zh">關於</span><span class="lang-tw">關於</span><span class="lang-poj">Lán</span><span class="lang-en">About</span></a>
-	        <a href="#vocab"><span class="lang-zh">每日台語</span><span class="lang-tw">今仔日詞</span><span class="lang-poj">Kin-á-ji̍t</span><span class="lang-en">Word</span></a>
-	        <a href="vocabulary.html"><span class="lang-zh">詞彙庫</span><span class="lang-tw">詞彙庫</span><span class="lang-poj">Sú-iû</span><span class="lang-en">Library</span></a>
-	        <a href="#events"><span class="lang-zh">活動</span><span class="lang-tw">活動</span><span class="lang-poj">O̍h-tōng</span><span class="lang-en">Events</span></a>
-	        <a href="events.html"><span class="lang-zh">課程</span><span class="lang-tw">課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">Classes</span></a>
-	        <a href="#faq">FAQ</a>
-	        <a class="nav-cta" href="#contact"><span class="lang-zh" style="color: rgb(241, 235, 218)">聯絡我們 →</span><span class="lang-tw" style="color: rgb(241, 235, 218)">講予阮聽 →</span><span class="lang-poj" style="color: rgb(241, 235, 218)">Kóng hō góan thiaⁿ →</span><span class="lang-en" style="color: rgb(241, 235, 218)">Say hi →</span></a>
-	      </div>
-	    </div>
-	    <button class="nav-toggle" id="nav-toggle" aria-label="menu" aria-expanded="false" aria-controls="nav-menu"><span class="bars"><span></span></span></button>
-  </div>
-</nav>
-
-<a id="top"></a>
-<main id="main" tabindex="-1">
-
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow"><span class="dot"></span><span class="lang-zh">成立於 2023 · 台灣 · 一家 Swing 與台語工作室</span><span class="lang-tw">EST. 2023 · Tâi-oân · Swing &amp; Tâi-gí</span><span class="lang-poj">EST. 2023 · Tâi-oân · Swing &amp; Tâi-gí</span><span class="lang-en">EST. 2023 · TAIWAN · A Swing &amp; Tâi-gí studio</span></div>
-        <h1>
-          <span class="hl">Kóng</span> <span class="navy">台語</span><br/>
-          <span class="title-line"><span class="hand">hop &amp;</span> <span class="navy">跳</span> <span class="hl">Swing</span></span>
-        </h1>
-        <p class="lede">
-          <span class="lang-zh bk">兩人一兔，一起走在回家的路上。</span>
-          <span class="lang-tw bk">兩人一兔，行揣轉厝 ê 路。</span>
-          <span class="lang-poj bk">Nn̄g lâng chi̍t thò͘, kiâⁿ-chhōe tńg-chhù ê lō͘.</span>
-          <span class="lang-en bk">Two of us &amp; one rabbit, finding our way home.</span>
-          <br/>
-          <span class="lang-zh">我們想用台語分享 Swing dance 與 Jazz 文化裡的熱情、自由與溫柔，邀請大家一起講台語、跳 Swing 🥳</span>
-          <span class="lang-tw">阮想欲用台語分享 Swing dance 佮 Jazz 文化內底 ê 熱情、自由、美麗，招逐家做伙講台語、跳 Swing 🥳</span>
-          <span class="lang-poj">Góan siūⁿ-beh ēng Tâi-gí pun-hióng Swing dance kap Jazz bûn-hòa lāi-té ê jia̍t-chêng, chū-iû, bí-lē — chio ta̍k-ke chò-hóe kóng Tâi-gí, thiàu Swing 🥳</span>
-          <span class="lang-en">We share the heat, freedom and tenderness of Swing dance &amp; Jazz culture — in Tâi-gí. Come join us — Kóng Tâi-gí, jump Swing 🥳</span>
-        </p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#vocab"><span class="lang-zh">每日學一句</span><span class="lang-tw">今仔日學一句</span><span class="lang-poj">O̍h chi̍t kù</span><span class="lang-en">Today's word</span> <span class="arr">→</span></a>
-          <a class="btn ghost" href="events.html"><span class="lang-zh">查看課程</span><span class="lang-tw">看課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">See classes</span></a>
-        </div>
-      </div>
-
-      <div class="hero-art">
-        <div class="blob"></div>
-        <div class="rabbit-frame">
-          <img src="/logo.png" alt="Kóng台語 跳Swing 兔仔插畫" width="370" height="370">
-        </div>
-        <div class="stamp">
-          <div class="big">搖擺</div>
-          <div class="poj">iô-pái · swing</div>
-        </div>
-        <div class="tag">in tāi-gí we trust ✦</div>
-      </div>
-    </div>
-
-    <div class="ticker">
-      <div class="ticker-track" id="ticker">
-        <!-- filled by JS -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ABOUT ===== -->
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="kicker">01 / 關於阮 · About us</div>
-        <h2 class="title">兩个人 + 一隻兔仔 <span class="hand">that's it.</span></h2>
-      </div>
-      <div style="font-family:var(--mono);font-size:12px;color:var(--ink-soft);max-width:280px;letter-spacing:.06em">
-        ↓ scroll to meet the<br/>tiny three-piece band.
-      </div>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          <span class="lang-zh"><strong>Kóng台語 跳Swing</strong> 是一個將搖擺舞 (swing dance) 與台語帶進生活裡的計畫。我們想用台語分享 Jazz 音樂裡的熱情、自由與溫柔，邀大家一起跳舞、一起講話。</span>
-          <span class="lang-tw"><strong>Kóng台語 跳Swing</strong> 是一个搖擺舞 (swing dance) 佮台語做伙生活 ê 計畫。阮想欲用台語分享 Jazz 音樂內底 ê 熱情、自由佮溫柔，招逐家做伙跳舞、做伙講話。</span>
-          <span class="lang-poj"><strong>Kóng-Tâi-gí Thiàu-Swing</strong> sī chi̍t ê iô-pái-bú kap Tâi-gí chò-hóe seng-oa̍h ê kè-o̍h. Góan siūⁿ-beh ēng Tâi-gí pun-hióng Jazz im-ga̍k lāi-té ê jia̍t-chêng, chū-iû, un-jiû — chio ta̍k-ke chò-hóe thiàu-bú, kóng-ōe.</span>
-          <span class="lang-en"><strong>Kóng-Tâi-gí Thiàu-Swing</strong> is a project that brings swing dance and the Taiwanese language into everyday life. We use Tâi-gí to share the heat, freedom and tenderness inside Jazz — inviting everyone to dance and chat together.</span>
-        </p>
-        <div class="pull">
-          <span class="lang-zh bk">在回家的路上跳舞 ₍ᐢ..ᐢ₎</span>
-          <span class="lang-tw bk">佇轉厝 ê 路頂面跳舞 ₍ᐢ..ᐢ₎</span>
-          <span class="lang-poj bk">Tī tńg-chhù ê lō͘ téng-bīn thiàu-bú ₍ᐢ..ᐢ₎</span>
-          <span class="lang-en bk" style="font-style:italic">Dancing on the way home ₍ᐢ..ᐢ₎</span>
-        </div>
-        <p>
-          <span class="lang-zh">我們住在台北，每週固定教初級 Lindy Hop、辦小型社交舞會，每週也會貼一張「搖擺舞中常用的詞語」──一句台語、一隻兔子、一段找詞的路。</span>
-          <span class="lang-tw">阮蹛佇台北，逐禮拜固定教初級 Lindy Hop、辦小規模 ê 社交舞會 (social)，mā 固定每禮拜貼一張「搖擺舞中定定用 ê 言詞」── 一句台語、一隻兔仔、一段揣詞 ê 路。</span>
-          <span class="lang-poj">Góan tòa tī Tâi-pak, ta̍k lé-pài kò͘-tēng kà chho͘-kip Lindy Hop, pān sió-kui-bô͘ ê siā-kau bú-hōe; mā ta̍k lé-pài tah chi̍t tiu" "Iô-pái-bú tiong tiāⁿ-tiāⁿ ēng ê giân-sû".</span>
-          <span class="lang-en">We're based in Taipei. Every week we teach beginner Lindy Hop, throw small socials, and post one "word commonly used while swinging" — one Tâi-gí phrase, one rabbit, one tiny journey looking for words.</span>
-        </p>
-
-        <div class="stats">
-          <div class="stat"><div class="num">128</div><div class="lbl">每週貼一字 · weekly words</div></div>
-          <div class="stat"><div class="num">36</div><div class="lbl">期 Lindy Hop 課程</div></div>
-          <div class="stat"><div class="num">6.4k</div><div class="lbl">IG @kongswing 跟綴者</div></div>
-        </div>
-      </div>
-
-      <div class="about-art">
-        <div class="polaroid">
-          <div class="washi"></div>
-          <div class="img-area">
-            <img src="/logo.png" alt="" width="370" height="370">
-          </div>
-          <div class="cap">our tiny three-piece band ✦</div>
-          <div class="sticky-note">
-            阮 ê 第三个團員 — 一隻油彩畫 ê 兔仔 🐇
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span><span class="lang-zh">成立於 2023 · 台灣 · 一家 Swing 與台語工作室</span><span class="lang-tw">EST. 2023 · Tâi-oân · Swing &amp; Tâi-gí</span><span class="lang-poj">EST. 2023 · Tâi-oân · Swing &amp; Tâi-gí</span><span class="lang-en">EST. 2023 · TAIWAN · A Swing &amp; Tâi-gí studio</span></div>
+          <h1>
+            <span class="hl">Kóng</span> <span class="navy">台語</span><br/>
+            <span class="title-line"><span class="hand">hop &amp;</span> <span class="navy">跳</span> <span class="hl">Swing</span></span>
+          </h1>
+          <p class="lede">
+            <span class="lang-zh bk">兩人一兔，一起走在回家的路上。</span>
+            <span class="lang-tw bk">兩人一兔，行揣轉厝 ê 路。</span>
+            <span class="lang-poj bk">Nn̄g lâng chi̍t thò͘, kiâⁿ-chhōe tńg-chhù ê lō͘.</span>
+            <span class="lang-en bk">Two of us &amp; one rabbit, finding our way home.</span>
+            <br/>
+            <span class="lang-zh">我們想用台語分享 Swing dance 與 Jazz 文化裡的熱情、自由與溫柔，邀請大家一起講台語、跳 Swing 🥳</span>
+            <span class="lang-tw">阮想欲用台語分享 Swing dance 佮 Jazz 文化內底 ê 熱情、自由、美麗，招逐家做伙講台語、跳 Swing 🥳</span>
+            <span class="lang-poj">Góan siūⁿ-beh ēng Tâi-gí pun-hióng Swing dance kap Jazz bûn-hòa lāi-té ê jia̍t-chêng, chū-iû, bí-lē — chio ta̍k-ke chò-hóe kóng Tâi-gí, thiàu Swing 🥳</span>
+            <span class="lang-en">We share the heat, freedom and tenderness of Swing dance &amp; Jazz culture — in Tâi-gí. Come join us — Kóng Tâi-gí, jump Swing 🥳</span>
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#vocab"><span class="lang-zh">每日學一句</span><span class="lang-tw">今仔日學一句</span><span class="lang-poj">O̍h chi̍t kù</span><span class="lang-en">Today's word</span> <span class="arr">→</span></a>
+            <a class="btn ghost" href="events.html"><span class="lang-zh">查看課程</span><span class="lang-tw">看課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">See classes</span></a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== VOCAB ===== -->
-<section class="vocab" id="vocab">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="kicker">02 / 今仔日 ê 詞 · word of the day</div>
-        <h2 class="title">搖擺舞中定定用 ê 言詞 <span class="hand">flip me!</span></h2>
-      </div>
-      <a href="vocabulary.html" class="btn ghost" style="padding:10px 18px;font-size:13px">看完整詞彙庫 &nbsp;→</a>
-    </div>
-
-    <div class="vocab-grid">
-      <div class="card-stage">
-        <div class="card" id="card" role="button" tabindex="0" aria-pressed="false" aria-label="翻面查看今仔日詞的解釋">
-          <div class="card-face card-front">
-            <div class="card-left">
-              <div class="word-tag">
-                <div class="han" id="w-han">跳舞</div>
-                <div class="poj" id="w-poj">thiàu-bú</div>
-              </div>
-              <div class="word-sentence">
-                <div class="han" id="w-sen-han">咱來開始跳舞。</div>
-                <div class="poj" id="w-sen-poj">Lán lâi khai-sí thiàu-bú.</div>
-              </div>
-              <div class="card-foot">
-                <div>搖擺舞中定定用 ê 言詞</div>
-                <div class="logo-mini">Kóng台語<br/>跳Swing</div>
-              </div>
-            </div>
-            <div class="card-right">
-              <div class="blue"></div>
-              <img src="/logo.png" alt="" class="bunny" width="370" height="370">
-            </div>
+        <div class="hero-art">
+          <div class="blob"></div>
+          <div class="rabbit-frame">
+            <img src="/logo.png" alt="Kóng台語 跳Swing 兔仔插畫" width="370" height="370">
           </div>
+          <div class="stamp">
+            <div class="big">搖擺</div>
+            <div class="poj">iô-pái · swing</div>
+          </div>
+          <div class="tag">in tāi-gí we trust ✦</div>
+        </div>
+      </div>
 
-          <div class="card-face card-back">
-            <div class="back-head">
-              <div>
-                <div class="han" id="b-han">跳舞</div>
-                <div class="poj" id="b-poj">thiàu-bú · v.</div>
-              </div>
-              <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase" id="b-num">№ 001 / 128</div>
+      <div class="ticker">
+        <div class="ticker-track" id="ticker"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">01 / 關於阮 · About us</div>
+          <h2 class="title">兩个人 + 一隻兔仔 <span class="hand">that's it.</span></h2>
+        </div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--ink-soft);max-width:280px;letter-spacing:.06em">
+          ↓ scroll to meet the<br/>tiny three-piece band.
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            <span class="lang-zh"><strong>Kóng台語 跳Swing</strong> 是一個將搖擺舞 (swing dance) 與台語帶進生活裡的計畫。我們想用台語分享 Jazz 音樂裡的熱情、自由與溫柔，邀大家一起跳舞、一起講話。</span>
+            <span class="lang-tw"><strong>Kóng台語 跳Swing</strong> 是一个搖擺舞 (swing dance) 佮台語做伙生活 ê 計畫。阮想欲用台語分享 Jazz 音樂內底 ê 熱情、自由佮溫柔，招逐家做伙跳舞、做伙講話。</span>
+            <span class="lang-poj"><strong>Kóng-Tâi-gí Thiàu-Swing</strong> sī chi̍t ê iô-pái-bú kap Tâi-gí chò-hóe seng-oa̍h ê kè-o̍h. Góan siūⁿ-beh ēng Tâi-gí pun-hióng Jazz im-ga̍k lāi-té ê jia̍t-chêng, chū-iû, un-jiû — chio ta̍k-ke chò-hóe thiàu-bú, kóng-ōe.</span>
+            <span class="lang-en"><strong>Kóng-Tâi-gí Thiàu-Swing</strong> is a project that brings swing dance and the Taiwanese language into everyday life. We use Tâi-gí to share the heat, freedom and tenderness inside Jazz — inviting everyone to dance and chat together.</span>
+          </p>
+          <div class="pull">
+            <span class="lang-zh bk">在回家的路上跳舞 ₍ᐢ..ᐢ₎</span>
+            <span class="lang-tw bk">佇轉厝 ê 路頂面跳舞 ₍ᐢ..ᐢ₎</span>
+            <span class="lang-poj bk">Tī tńg-chhù ê lō͘ téng-bīn thiàu-bú ₍ᐢ..ᐢ₎</span>
+            <span class="lang-en bk" style="font-style:italic">Dancing on the way home ₍ᐢ..ᐢ₎</span>
+          </div>
+          <p>
+            <span class="lang-zh">我們住在台北，每週固定教初級 Lindy Hop、辦小型社交舞會，每週也會貼一張「搖擺舞中常用的詞語」──一句台語、一隻兔子、一段找詞的路。</span>
+            <span class="lang-tw">阮蹛佇台北，逐禮拜固定教初級 Lindy Hop、辦小規模 ê 社交舞會 (social)，mā 固定每禮拜貼一張「搖擺舞中定定用 ê 言詞」── 一句台語、一隻兔仔、一段揣詞 ê 路。</span>
+            <span class="lang-poj">Góan tòa tī Tâi-pak, ta̍k lé-pài kò͘-tēng kà chho͘-kip Lindy Hop, pān sió-kui-bô͘ ê siā-kau bú-hōe; mā ta̍k lé-pài tah chi̍t tiu" "Iô-pái-bú tiong tiāⁿ-tiāⁿ ēng ê giân-sû".</span>
+            <span class="lang-en">We're based in Taipei. Every week we teach beginner Lindy Hop, throw small socials, and post one "word commonly used while swinging" — one Tâi-gí phrase, one rabbit, one tiny journey looking for words.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat"><div class="num">128</div><div class="lbl">每週貼一字 · weekly words</div></div>
+            <div class="stat"><div class="num">36</div><div class="lbl">期 Lindy Hop 課程</div></div>
+            <div class="stat"><div class="num">6.4k</div><div class="lbl">IG @kongswing 跟綴者</div></div>
+          </div>
+        </div>
+
+        <div class="about-art">
+          <div class="polaroid">
+            <div class="washi"></div>
+            <div class="img-area">
+              <img src="/logo.png" alt="" width="370" height="370">
             </div>
-            <div class="back-row"><div class="lbl">English</div><div class="val" id="b-en">to dance</div></div>
-            <div class="back-row"><div class="lbl">華語</div><div class="val" id="b-zh">跳舞</div></div>
-            <div class="back-row"><div class="lbl">類別</div><div class="val" id="b-cat">基本動作 · basic move</div></div>
-            <div class="back-row"><div class="lbl">例句</div><div class="val">
-              <em id="b-ex-poj">Lán lâi khai-sí thiàu-bú.</em><br/>
-              <span id="b-ex-han">咱來開始跳舞。</span><br/>
-              <small style="color:var(--ink-soft)" id="b-ex-en">Let's start dancing.</small>
-            </div></div>
-            <div class="back-row"><div class="lbl">Note</div><div class="val" id="b-note">
-              「跳舞」(thiàu-bú) 嘛會使講做「跳舞蹈」(thiàu bú-tō)。佇 Swing 內底，定定講「kā 我跳一條 (kā góa thiàu chi̍t tiâu)」── 跟我跳一首。
-            </div></div>
-            <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase">
-              <div>tap card to flip back</div>
-              <div style="color:var(--navy);font-family:var(--serif);text-transform:none;font-size:13px;letter-spacing:0">Kóng台語 跳Swing</div>
+            <div class="cap">our tiny three-piece band ✦</div>
+            <div class="sticky-note">
+              阮 ê 第三个團員 — 一隻油彩畫 ê 兔仔 🐇
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="vocab-side">
-        <h3>逐禮拜一字台語<br/>一隻兔仔陪你練 ê.</h3>
-        <p>
-          每禮拜阮會揀一句搖擺舞中定定用 ê 台語，配一張兔仔 ê 紙片。
-          試看覓 ── 點 <strong>Play</strong> 聽發音、點 <strong>Flip</strong> 看詳細解說。
-        </p>
+  <section class="vocab" id="vocab">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">02 / 今仔日 ê 詞 · word of the day</div>
+          <h2 class="title">搖擺舞中定定用 ê 言詞 <span class="hand">flip me!</span></h2>
+        </div>
+        <a href="vocabulary.html" class="btn ghost" style="padding:10px 18px;font-size:13px">看完整詞彙庫 &nbsp;→</a>
+      </div>
 
-        <div class="pad-controls">
-          <button class="pad-btn play" id="btn-play">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 14 14" width="14" height="14"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg>
-            </span>
-            播音 · Play
-          </button>
-          <button class="pad-btn flip" id="btn-flip">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M2 5a5 5 0 0 1 9-2M12 9a5 5 0 0 1-9 2M11 1v3.4H7.6M3 13V9.6h3.4"/></svg>
-            </span>
-            翻面 · Flip
-          </button>
-          <button class="pad-btn" id="btn-save">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg>
-            </span>
-            收藏
-          </button>
+      <div class="vocab-grid">
+        <div class="card-stage">
+          <div class="card" id="card" role="button" tabindex="0" aria-pressed="false" aria-label="翻面查看今仔日詞的解釋">
+            <div class="card-face card-front">
+              <div class="card-left">
+                <div class="word-tag">
+                  <div class="han" id="w-han">跳舞</div>
+                  <div class="poj" id="w-poj">thiàu-bú</div>
+                </div>
+                <div class="word-sentence">
+                  <div class="han" id="w-sen-han">咱來開始跳舞。</div>
+                  <div class="poj" id="w-sen-poj">Lán lâi khai-sí thiàu-bú.</div>
+                </div>
+                <div class="card-foot">
+                  <div>搖擺舞中定定用 ê 言詞</div>
+                  <div class="logo-mini">Kóng台語<br/>跳Swing</div>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="blue"></div>
+                <img src="/logo.png" alt="" class="bunny" width="370" height="370">
+              </div>
+            </div>
+
+            <div class="card-face card-back">
+              <div class="back-head">
+                <div>
+                  <div class="han" id="b-han">跳舞</div>
+                  <div class="poj" id="b-poj">thiàu-bú · v.</div>
+                </div>
+                <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase" id="b-num">№ 001 / 128</div>
+              </div>
+              <div class="back-row"><div class="lbl">English</div><div class="val" id="b-en">to dance</div></div>
+              <div class="back-row"><div class="lbl">華語</div><div class="val" id="b-zh">跳舞</div></div>
+              <div class="back-row"><div class="lbl">類別</div><div class="val" id="b-cat">基本動作 · basic move</div></div>
+              <div class="back-row"><div class="lbl">例句</div><div class="val">
+                <em id="b-ex-poj">Lán lâi khai-sí thiàu-bú.</em><br/>
+                <span id="b-ex-han">咱來開始跳舞。</span><br/>
+                <small style="color:var(--ink-soft)" id="b-ex-en">Let's start dancing.</small>
+              </div></div>
+              <div class="back-row"><div class="lbl">Note</div><div class="val" id="b-note">
+                「跳舞」(thiàu-bú) 嘛會使講做「跳舞蹈」(thiàu bú-tō)。佇 Swing 內底，定定講「kā 我跳一條 (kā góa thiàu chi̍t tiâu)」── 跟我跳一首。
+              </div></div>
+              <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase">
+                <div>tap card to flip back</div>
+                <div style="color:var(--navy);font-family:var(--serif);text-transform:none;font-size:13px;letter-spacing:0">Kóng台語 跳Swing</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="pager">
-          <button class="pgbtn" id="prev" aria-label="prev">‹</button>
-          <span id="counter">001 / 005</span>
-          <button class="pgbtn" id="next" aria-label="next">›</button>
-        </div>
-        <div class="dots" id="dots"></div>
+        <div class="vocab-side">
+          <h3>逐禮拜一字台語<br/>一隻兔仔陪你練 ê.</h3>
+          <p>
+            每禮拜阮會揀一句搖擺舞中定定用 ê 台語，配一張兔仔 ê 紙片。
+            試看覓 ── 點 <strong>Play</strong> 聽發音、點 <strong>Flip</strong> 看詳細解說。
+          </p>
 
-        <p style="margin-top:24px;font-size:13px;color:var(--ink-soft)">
-          ※ 發音以白話字 (POJ) 表記。完整 128 字 ê 詞彙庫
-          佇 <a href="vocabulary.html" style="color:var(--navy);border-bottom:1px solid var(--navy)">詞彙庫頁面</a>。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="pad-controls">
+            <button class="pad-btn play" id="btn-play">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg>
+              </span>
+              播音 · Play
+            </button>
+            <button class="pad-btn flip" id="btn-flip">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M2 5a5 5 0 0 1 9-2M12 9a5 5 0 0 1-9 2M11 1v3.4H7.6M3 13V9.6h3.4"/></svg>
+              </span>
+              翻面 · Flip
+            </button>
+            <button class="pad-btn" id="btn-save">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg>
+              </span>
+              收藏
+            </button>
+          </div>
 
-<!-- ===== EVENTS ===== -->
-<section class="events" id="events">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="kicker">03 / 近期活動 · Upcoming</div>
-        <h2 class="title">逐禮拜佮你做伙<span class="hand">pái-lā~</span></h2>
-      </div>
-      <a class="btn ghost" href="events.html" style="padding:10px 18px;font-size:13px">所有課程&amp;活動 →</a>
-    </div>
+          <div class="pager">
+            <button class="pgbtn" id="prev" aria-label="prev">‹</button>
+            <span id="counter">001 / 005</span>
+            <button class="pgbtn" id="next" aria-label="next">›</button>
+          </div>
+          <div class="dots" id="dots"></div>
 
-    <div class="events-grid">
-      <article class="ev">
-        <span class="badge">招生中</span>
-        <div class="date"><span class="d">05</span><span class="m">/ 04 · MON</span></div>
-        <h3>初級 Lindy Hop · 第 36 期</h3>
-        <div class="meta"><span>8 weeks</span><span>NT$ 4,800</span><span>大同大學旁</span></div>
-        <p>
-          無基礎嘛會使。逐禮拜一暗時 7:30，八週學完 swingout、charleston、social
-          ê 基本，課程中阮會用台語教步法。
-        </p>
-        <a class="ev-link" href="events.html">看詳細 / Sign up →</a>
-      </article>
-
-      <article class="ev">
-        <span class="badge">本月</span>
-        <div class="date"><span class="d">17</span><span class="m">/ 05 · SAT</span></div>
-        <h3>Tâi-gí Social · 講台語社交舞會</h3>
-        <div class="meta"><span>19:30 – 23:00</span><span>NT$ 350</span><span>嘉義老屋</span></div>
-        <p>
-          一暗時間，阮鼓勵逐家用台語邀舞、講話、交朋友。
-          現場樂隊：<em>The Sūn-sòa Trio</em>，附 ìn 台羅小卡。
-        </p>
-        <a class="ev-link" href="events.html">看詳細 / RSVP →</a>
-      </article>
-
-      <article class="ev">
-        <span class="badge full">已額滿</span>
-        <div class="date"><span class="d">25</span><span class="m">/ 05 · SUN</span></div>
-        <h3>兔仔工作坊：跳舞 ê 台語 50 句</h3>
-        <div class="meta"><span>3 hrs</span><span>NT$ 800</span><span>線上 Zoom</span></div>
-        <p>
-          一場為非台語 native ê 舞者設計 ê 工作坊，三點鐘學完現場用會著
-          ê 50 句台語：邀舞、感謝、稱呼、笑詼。
-        </p>
-        <a class="ev-link" href="events.html">候補登記 →</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FAQ ===== -->
-<section class="faq" id="faq">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="kicker">04 / 大家定定問 · FAQ</div>
-        <h2 class="title">想欲問淡薄仔代誌<span class="hand">ask us!</span></h2>
-      </div>
-    </div>
-
-    <div class="faq-grid">
-      <div class="faq-side">
-        <div class="blockquote">
-          “想欲用台語分享 Swing dance 佮 Jazz 文化內底 ê 熱情、自由、美麗。”
-          <div class="att">— 阮 ê 第一條筆記，2023</div>
+          <p style="margin-top:24px;font-size:13px;color:var(--ink-soft)">
+            ※ 發音以白話字 (POJ) 表記。完整 128 字 ê 詞彙庫
+            佇 <a href="vocabulary.html" style="color:var(--navy);border-bottom:1px solid var(--navy)">詞彙庫頁面</a>。
+          </p>
         </div>
       </div>
-      <div class="faq-list" id="faqlist">
-        <!-- filled in JS -->
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== CONTACT ===== -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div>
-        <div class="kicker">05 / 講予阮聽 · Say hi</div>
-        <h2 class="title">合作、贊助、招舞、講閒仔話<span class="hand">攏歡迎</span></h2>
-        <p class="lede">
-          欲招阮去你 ê 學校、咖啡廳、書店辦小型工作坊？
-          抑是想欲贊助阮做更多免費內容？
-          填底下 ê 表單，抑是寄一張 e-mail 來嘛會使。
-        </p>
-
-        <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='送出囉 ✦ 多謝!'; this.querySelector('.form-status').textContent='表單已送出，阮會盡快回覆。'">
-          <div class="row2">
-            <div class="field"><label for="n">名 · Name</label><input id="n" name="name" autocomplete="name" required placeholder="Lí ê miâ"></div>
-            <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
-          </div>
-          <div class="field">
-            <label for="t">主題 · Topic</label>
-            <select id="t" name="topic">
-              <option>合作 · Collaboration</option>
-              <option>贊助 · Sponsorship</option>
-              <option>邀請工作坊 · Workshop invite</option>
-              <option>媒體訪問 · Press</option>
-              <option>其他 · Other</option>
-            </select>
-          </div>
-          <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" placeholder="講予阮聽..."></textarea></div>
-          <button class="submit" type="submit">送出 · Send →</button>
-          <p class="form-status" role="status" aria-live="polite" style="margin:0;color:var(--ink-soft);font-size:13px"></p>
-        </form>
+  <section class="events" id="events">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">03 / 近期活動 · Upcoming</div>
+          <h2 class="title">逐禮拜佮你做伙<span class="hand">pái-lā~</span></h2>
+        </div>
+        <a class="btn ghost" href="events.html" style="padding:10px 18px;font-size:13px">所有課程&amp;活動 →</a>
       </div>
 
-      <div class="channels">
-        <a class="ch" href="https://www.instagram.com/kongswing/" target="_blank" rel="noreferrer">
-          <span class="ic">IG</span>
-          <div>
-            <div class="name">@kongswing</div>
-            <div class="meta">逐禮拜更新 / weekly posts · 6.4k</div>
-          </div>
-        </a>
-        <a class="ch" href="mailto:hello@kongswing.tw">
-          <span class="ic" style="background:var(--navy);color:var(--mustard)">@</span>
-          <div>
-            <div class="name">hello@kongswing.tw</div>
-            <div class="meta">合作 · 媒體 · 工作坊邀請</div>
-          </div>
-        </a>
-        <a class="ch" href="https://www.facebook.com/search/top?q=K%C3%B3ng%E5%8F%B0%E8%AA%9E%20%E8%B7%B3Swing" target="_blank" rel="noreferrer">
-          <span class="ic">FB</span>
-          <div>
-            <div class="name">Kóng台語 跳Swing</div>
-            <div class="meta">活動公告 / event announcements</div>
-          </div>
-        </a>
-        <a class="ch" href="mailto:hello@kongswing.tw?subject=%E8%B4%8A%E5%8A%A9%E5%90%88%E4%BD%9C%20Sponsor">
-          <span class="ic" style="background:var(--rust);color:#fff">★</span>
-          <div>
-            <div class="name">贊助 · Sponsor</div>
-            <div class="meta">買一杯珍奶請阮 / buy us bubble tea</div>
-          </div>
-        </a>
+      <div class="events-grid">
+        <article class="ev">
+          <span class="badge">招生中</span>
+          <div class="date"><span class="d">05</span><span class="m">/ 04 · MON</span></div>
+          <h3>初級 Lindy Hop · 第 36 期</h3>
+          <div class="meta"><span>8 weeks</span><span>NT$ 4,800</span><span>大同大學旁</span></div>
+          <p>
+            無基礎嘛會使。逐禮拜一暗時 7:30，八週學完 swingout、charleston、social
+            ê 基本，課程中阮會用台語教步法。
+          </p>
+          <a class="ev-link" href="events.html">看詳細 / Sign up →</a>
+        </article>
+
+        <article class="ev">
+          <span class="badge">本月</span>
+          <div class="date"><span class="d">17</span><span class="m">/ 05 · SAT</span></div>
+          <h3>Tâi-gí Social · 講台語社交舞會</h3>
+          <div class="meta"><span>19:30 – 23:00</span><span>NT$ 350</span><span>嘉義老屋</span></div>
+          <p>
+            一暗時間，阮鼓勵逐家用台語邀舞、講話、交朋友。
+            現場樂隊：<em>The Sūn-sòa Trio</em>，附 ìn 台羅小卡。
+          </p>
+          <a class="ev-link" href="events.html">看詳細 / RSVP →</a>
+        </article>
+
+        <article class="ev">
+          <span class="badge full">已額滿</span>
+          <div class="date"><span class="d">25</span><span class="m">/ 05 · SUN</span></div>
+          <h3>兔仔工作坊：跳舞 ê 台語 50 句</h3>
+          <div class="meta"><span>3 hrs</span><span>NT$ 800</span><span>線上 Zoom</span></div>
+          <p>
+            一場為非台語 native ê 舞者設計 ê 工作坊，三點鐘學完現場用會著
+            ê 50 句台語：邀舞、感謝、稱呼、笑詼。
+          </p>
+          <a class="ev-link" href="events.html">候補登記 →</a>
+        </article>
       </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
 
-<!-- ===== Footer ===== -->
-<footer>
-  <div class="wrap ftr">
-    <div>
-      <div class="lg">Kóng台語 跳Swing<small>佇轉厝 ê 路頂面跳舞 ₍ᐢ..ᐢ₎</small></div>
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">04 / 大家定定問 · FAQ</div>
+          <h2 class="title">想欲問淡薄仔代誌<span class="hand">ask us!</span></h2>
+        </div>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-side">
+          <div class="blockquote">
+            “想欲用台語分享 Swing dance 佮 Jazz 文化內底 ê 熱情、自由、美麗。”
+            <div class="att">— 阮 ê 第一條筆記，2023</div>
+          </div>
+        </div>
+        <div class="faq-list" id="faqlist"></div>
+      </div>
     </div>
-    <div class="lks">
-      <a href="vocabulary.html">詞彙庫</a>
-      <a href="events.html">課程</a>
-      <a href="https://www.instagram.com/kongswing/">IG</a>
-      <a href="#contact">聯絡</a>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="kicker">05 / 講予阮聽 · Say hi</div>
+          <h2 class="title">合作、贊助、招舞、講閒仔話<span class="hand">攏歡迎</span></h2>
+          <p class="lede">
+            欲招阮去你 ê 學校、咖啡廳、書店辦小型工作坊？
+            抑是想欲贊助阮做更多免費內容？
+            填底下 ê 表單，抑是寄一張 e-mail 來嘛會使。
+          </p>
+
+          <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='送出囉 ✦ 多謝!'; this.querySelector('.form-status').textContent='表單已送出，阮會盡快回覆。'">
+            <div class="row2">
+              <div class="field"><label for="n">名 · Name</label><input id="n" name="name" autocomplete="name" required placeholder="Lí ê miâ"></div>
+              <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
+            </div>
+            <div class="field">
+              <label for="t">主題 · Topic</label>
+              <select id="t" name="topic">
+                <option>合作 · Collaboration</option>
+                <option>贊助 · Sponsorship</option>
+                <option>邀請工作坊 · Workshop invite</option>
+                <option>媒體訪問 · Press</option>
+                <option>其他 · Other</option>
+              </select>
+            </div>
+            <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" placeholder="講予阮聽..."></textarea></div>
+            <button class="submit" type="submit">送出 · Send →</button>
+            <p class="form-status" role="status" aria-live="polite" style="margin:0;color:var(--ink-soft);font-size:13px"></p>
+          </form>
+        </div>
+
+        <div class="channels">
+          <a class="ch" href="https://www.instagram.com/kongswing/" target="_blank" rel="noreferrer">
+            <span class="ic">IG</span>
+            <div>
+              <div class="name">@kongswing</div>
+              <div class="meta">逐禮拜更新 / weekly posts · 6.4k</div>
+            </div>
+          </a>
+          <a class="ch" href="mailto:hello@kongswing.tw">
+            <span class="ic" style="background:var(--navy);color:var(--mustard)">@</span>
+            <div>
+              <div class="name">hello@kongswing.tw</div>
+              <div class="meta">合作 · 媒體 · 工作坊邀請</div>
+            </div>
+          </a>
+          <a class="ch" href="https://www.facebook.com/search/top?q=K%C3%B3ng%E5%8F%B0%E8%AA%9E%20%E8%B7%B3Swing" target="_blank" rel="noreferrer">
+            <span class="ic">FB</span>
+            <div>
+              <div class="name">Kóng台語 跳Swing</div>
+              <div class="meta">活動公告 / event announcements</div>
+            </div>
+          </a>
+          <a class="ch" href="mailto:hello@kongswing.tw?subject=%E8%B4%8A%E5%8A%A9%E5%90%88%E4%BD%9C%20Sponsor">
+            <span class="ic" style="background:var(--rust);color:#fff">★</span>
+            <div>
+              <div class="name">贊助 · Sponsor</div>
+              <div class="meta">買一杯珍奶請阮 / buy us bubble tea</div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="crd">© 2026 Kóng台語 跳Swing · Made w/ 🐇 in TW</div>
+  </section>
+
+  <div slot="afterFooter" class="scroll-rabbit" id="srab" style="opacity:0">
+    <div class="speech" id="srab-say">咱來跳舞！</div>
+    <img src="/logo.png" alt="" width="370" height="370">
   </div>
-</footer>
 
-<!-- ===== Scrolling rabbit ===== -->
-<div class="scroll-rabbit" id="srab" style="opacity:0">
-  <div class="speech" id="srab-say">咱來跳舞！</div>
-  <img src="/logo.png" alt="" width="370" height="370">
-</div>
+  <script is:inline slot="afterBody">
+    // Ticker
+    const tickerWords = [
+      "thiàu-bú · 跳舞 · to dance",
+      "iô-pái · 搖擺 · swing",
+      "im-ga̍k · 音樂 · music",
+      "chò-hóe · 做伙 · together",
+      "tńg-chhù · 轉厝 · go home",
+      "thò͘-á · 兔仔 · rabbit",
+      "chū-iû · 自由 · freedom",
+      "jia̍t-chêng · 熱情 · passion"
+    ];
+    const t = document.getElementById('ticker');
+    const tHTML = tickerWords.map(w=>`<span>${w}</span>`).join('');
+    t.innerHTML = tHTML + tHTML;
 
-<script is:inline>
-  (function(){
-    const target = sessionStorage.getItem('kts-smooth-target');
-    if (!target) return;
-    sessionStorage.removeItem('kts-smooth-target');
-    const el = document.getElementById(target);
-    if (!el) return;
-    requestAnimationFrame(()=>{
-      el.scrollIntoView({ behavior:'smooth', block:'start' });
+    // Vocab card
+    const words = [
+      { n:1, han:'跳舞', poj:'thiàu-bú', cat:'動作 · verb',
+        sen_han:'咱來開始跳舞。', sen_poj:'Lán lâi khai-sí thiàu-bú.',
+        en:'to dance', zh:'跳舞', ex_en:"Let's start dancing.",
+        note:'「跳舞」(thiàu-bú) 嘛會使講做「跳舞蹈」(thiàu bú-tō)。佇 Swing 內底定定講「kā 我跳一條」── 跟我跳一首。' },
+      { n:2, han:'搖擺', poj:'iô-pái', cat:'形容 · adj.',
+        sen_han:'這條歌真搖擺！', sen_poj:'Chit tiâu koa chin iô-pái!',
+        en:'swingy, with swing feel', zh:'搖擺、有 swing 味',
+        ex_en:"This tune really swings!",
+        note:'iô-pái 字面是「搖搖擺擺」，佮英文 swing 真有契合 ê 意思。' },
+      { n:3, han:'邀舞', poj:'iau-bú', cat:'社交 · social',
+        sen_han:'我會使邀你跳一條無？', sen_poj:'Góa ē-sái iau lí thiàu chi̍t tiâu bô?',
+        en:'to ask for a dance', zh:'邀請別人跳舞',
+        ex_en:"May I have this dance?",
+        note:'佇社交舞 (social) 內底，邀舞是基本禮數。對方會使應「好啊 (hó--ah)」抑「歹勢 (pháiⁿ-sè)」。' },
+      { n:4, han:'多謝', poj:'to-siā', cat:'禮數 · etiquette',
+        sen_han:'多謝你 ê 舞！', sen_poj:'To-siā lí ê bú!',
+        en:'thank you (esp. after a dance)', zh:'謝謝（跳完一條尤其要說）',
+        ex_en:"Thanks for the dance!",
+        note:'跳完一條歌，記得行回伊 ê 邊講「多謝」。佮對方目睭看一下，誠重要。' },
+      { n:5, han:'做伙', poj:'chò-hóe', cat:'副 · adv.',
+        sen_han:'咱做伙來跳！', sen_poj:'Lán chò-hóe lâi thiàu!',
+        en:'together, with one another', zh:'一起',
+        ex_en:"Let's dance together!",
+        note:'阮 ê slogan：「招逐家做伙講台語、跳 Swing」。chò-hóe 嘛會寫做「做夥」。' }
+    ];
+
+    let idx = 0;
+    const card = document.getElementById('card');
+    const counter = document.getElementById('counter');
+    const dotsEl = document.getElementById('dots');
+
+    function renderDots(){
+      dotsEl.innerHTML = words.map((_,i)=>`<span class="${i===idx?'on':''}"></span>`).join('');
+    }
+    function setWord(i){
+      idx = (i + words.length) % words.length;
+      const w = words[idx];
+      document.getElementById('w-han').textContent = w.han;
+      document.getElementById('w-poj').textContent = w.poj;
+      document.getElementById('w-sen-han').textContent = w.sen_han;
+      document.getElementById('w-sen-poj').textContent = w.sen_poj;
+      document.getElementById('b-han').textContent = w.han;
+      document.getElementById('b-poj').textContent = w.poj + ' · ' + w.cat.split(' ')[0];
+      document.getElementById('b-num').textContent = '№ ' + String(w.n).padStart(3,'0') + ' / 128';
+      document.getElementById('b-en').textContent = w.en;
+      document.getElementById('b-zh').textContent = w.zh;
+      document.getElementById('b-cat').textContent = w.cat;
+      document.getElementById('b-ex-poj').textContent = w.sen_poj;
+      document.getElementById('b-ex-han').textContent = w.sen_han;
+      document.getElementById('b-ex-en').textContent = w.ex_en;
+      document.getElementById('b-note').textContent = w.note;
+      counter.textContent = String(w.n).padStart(3,'0') + ' / ' + String(words.length).padStart(3,'0');
+      renderDots();
+    }
+
+    function setCardFlipped(flipped){
+      card.classList.toggle('flipped', flipped);
+      card.setAttribute('aria-pressed', String(flipped));
+      card.setAttribute('aria-label', flipped ? '翻回今仔日詞卡正面' : '翻面查看今仔日詞的解釋');
+    }
+    function toggleCard(){
+      setCardFlipped(!card.classList.contains('flipped'));
+    }
+    document.getElementById('btn-flip').addEventListener('click', toggleCard);
+    card.addEventListener('click', (e)=>{
+      if(e.target.closest('.pad-btn')) return;
+      toggleCard();
     });
-  })();
+    card.addEventListener('keydown', (e)=>{
+      if(e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      toggleCard();
+    });
+    document.getElementById('next').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx+1) });
+    document.getElementById('prev').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx-1) });
 
-  // ---- Ticker ----
-  const tickerWords = [
-    "thiàu-bú · 跳舞 · to dance",
-    "iô-pái · 搖擺 · swing",
-    "im-ga̍k · 音樂 · music",
-    "chò-hóe · 做伙 · together",
-    "tńg-chhù · 轉厝 · go home",
-    "thò͘-á · 兔仔 · rabbit",
-    "chū-iû · 自由 · freedom",
-    "jia̍t-chêng · 熱情 · passion"
-  ];
-  const t = document.getElementById('ticker');
-  const tHTML = tickerWords.map(w=>`<span>${w}</span>`).join('');
-  t.innerHTML = tHTML + tHTML;
+    document.getElementById('btn-save').addEventListener('click', (e)=>{
+      e.currentTarget.innerHTML = '<span class="ico">★</span> 已收藏';
+      e.currentTarget.style.background = 'var(--mustard)';
+      e.currentTarget.style.color = 'var(--navy)';
+      setTimeout(()=>{
+        e.currentTarget.innerHTML = '<span class="ico"><svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg></span> 收藏';
+        e.currentTarget.style.background = '';
+        e.currentTarget.style.color = '';
+      }, 1800);
+    });
 
-  // ---- Vocab data ----
-  const words = [
-    { n:1, han:'跳舞', poj:'thiàu-bú', cat:'動作 · verb',
-      sen_han:'咱來開始跳舞。', sen_poj:'Lán lâi khai-sí thiàu-bú.',
-      en:'to dance', zh:'跳舞', ex_en:"Let's start dancing.",
-      note:'「跳舞」(thiàu-bú) 嘛會使講做「跳舞蹈」(thiàu bú-tō)。佇 Swing 內底定定講「kā 我跳一條」── 跟我跳一首。' },
-    { n:2, han:'搖擺', poj:'iô-pái', cat:'形容 · adj.',
-      sen_han:'這條歌真搖擺！', sen_poj:'Chit tiâu koa chin iô-pái!',
-      en:'swingy, with swing feel', zh:'搖擺、有 swing 味',
-      ex_en:"This tune really swings!",
-      note:'iô-pái 字面是「搖搖擺擺」，佮英文 swing 真有契合 ê 意思。' },
-    { n:3, han:'邀舞', poj:'iau-bú', cat:'社交 · social',
-      sen_han:'我會使邀你跳一條無？', sen_poj:'Góa ē-sái iau lí thiàu chi̍t tiâu bô?',
-      en:'to ask for a dance', zh:'邀請別人跳舞',
-      ex_en:"May I have this dance?",
-      note:'佇社交舞 (social) 內底，邀舞是基本禮數。對方會使應「好啊 (hó--ah)」抑「歹勢 (pháiⁿ-sè)」。' },
-    { n:4, han:'多謝', poj:'to-siā', cat:'禮數 · etiquette',
-      sen_han:'多謝你 ê 舞！', sen_poj:'To-siā lí ê bú!',
-      en:'thank you (esp. after a dance)', zh:'謝謝（跳完一條尤其要說）',
-      ex_en:"Thanks for the dance!",
-      note:'跳完一條歌，記得行回伊 ê 邊講「多謝」。佮對方目睭看一下，誠重要。' },
-    { n:5, han:'做伙', poj:'chò-hóe', cat:'副 · adv.',
-      sen_han:'咱做伙來跳！', sen_poj:'Lán chò-hóe lâi thiàu!',
-      en:'together, with one another', zh:'一起',
-      ex_en:"Let's dance together!",
-      note:'阮 ê slogan：「招逐家做伙講台語、跳 Swing」。chò-hóe 嘛會寫做「做夥」。' }
-  ];
+    document.getElementById('btn-play').addEventListener('click', ()=>{
+      const w = words[idx];
+      const btn = document.getElementById('btn-play');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span class="ico">♪</span> 播音中...';
+      try {
+        const u = new SpeechSynthesisUtterance(w.sen_han);
+        u.lang = 'zh-TW';
+        u.rate = 0.9;
+        const voices = speechSynthesis.getVoices();
+        const v = voices.find(v=>/min-nan|nan|tâi|hokkien/i.test(v.name+v.lang)) || voices.find(v=>/zh-TW|zh_TW|cmn-Hant/i.test(v.lang));
+        if (v) u.voice = v;
+        u.onend = ()=>{ btn.innerHTML = original };
+        speechSynthesis.speak(u);
+        setTimeout(()=>{ btn.innerHTML = original }, 3500);
+      } catch(e){ btn.innerHTML = original }
+    });
 
-  let idx = 0;
-  const card = document.getElementById('card');
-  const counter = document.getElementById('counter');
-  const dotsEl = document.getElementById('dots');
+    setWord(0);
 
-  function renderDots(){
-    dotsEl.innerHTML = words.map((_,i)=>`<span class="${i===idx?'on':''}"></span>`).join('');
-  }
-  function setWord(i){
-    idx = (i + words.length) % words.length;
-    const w = words[idx];
-    document.getElementById('w-han').textContent = w.han;
-    document.getElementById('w-poj').textContent = w.poj;
-    document.getElementById('w-sen-han').textContent = w.sen_han;
-    document.getElementById('w-sen-poj').textContent = w.sen_poj;
-    document.getElementById('b-han').textContent = w.han;
-    document.getElementById('b-poj').textContent = w.poj + ' · ' + w.cat.split(' ')[0];
-    document.getElementById('b-num').textContent = '№ ' + String(w.n).padStart(3,'0') + ' / 128';
-    document.getElementById('b-en').textContent = w.en;
-    document.getElementById('b-zh').textContent = w.zh;
-    document.getElementById('b-cat').textContent = w.cat;
-    document.getElementById('b-ex-poj').textContent = w.sen_poj;
-    document.getElementById('b-ex-han').textContent = w.sen_han;
-    document.getElementById('b-ex-en').textContent = w.ex_en;
-    document.getElementById('b-note').textContent = w.note;
-    counter.textContent = String(w.n).padStart(3,'0') + ' / ' + String(words.length).padStart(3,'0');
-    renderDots();
-  }
+    // FAQ
+    const faqs = [
+      { q:'毋捌台語會使來上課無？ / Don’t speak Tâi-gí?',
+        a:'會使，逐家攏會使。阮上課用台語＋華語（雙聲道），新手嘛免緊張。網站每週「今仔日詞」嘛是攏附華語、英文。' },
+      { q:'我從來毋捌跳過 swing，敢有問題？',
+        a:'完全無問題。Lindy Hop 初級班是 8 週課，從聽節拍 → 基本步 → social etiquette 一步一步來。第一堂課送一張兔仔貼紙。' },
+      { q:'課程／工作坊敢有 ê 個人折扣？',
+        a:'學生、無業、原住民族友 ê、新住民朋友憑證件有 8 折。多人報名嘛有揀組優惠 ── 寫信來阮。' },
+      { q:'我是台語老師／文化機構，會使合作無？',
+        a:'歡迎！阮做過國小、社大、書店、咖啡廳 ê 工作坊，從 30 分鐘到 3 點鐘 ê 形式攏會使。寫信講你欲做啥款 ê 場。' },
+      { q:'兔仔有名字無？',
+        a:'伊號做「sūn-sòa」（順續）。意思是「順紲」做一寡代誌──佇路頂順紲跳一下舞。' }
+    ];
+    document.getElementById('faqlist').innerHTML = faqs.map((f,i)=>`
+      <article class="qa${i===0?' open':''}">
+        <button class="qa-q" type="button" aria-expanded="${i===0?'true':'false'}" aria-controls="faq-a-${i}">
+          <span>${f.q}</span><span class="toggle" aria-hidden="true">+</span>
+        </button>
+        <div class="qa-a" id="faq-a-${i}" role="region" aria-hidden="${i===0?'false':'true'}">${f.a}</div>
+      </article>`).join('');
+    document.querySelectorAll('.qa').forEach(el=>{
+      const btn = el.querySelector('.qa-q');
+      const panel = el.querySelector('.qa-a');
+      btn.addEventListener('click',()=>{
+        const open = !el.classList.contains('open');
+        el.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        panel.setAttribute('aria-hidden', String(!open));
+      });
+    });
 
-	  function setCardFlipped(flipped){
-	    card.classList.toggle('flipped', flipped);
-	    card.setAttribute('aria-pressed', String(flipped));
-	    card.setAttribute('aria-label', flipped ? '翻回今仔日詞卡正面' : '翻面查看今仔日詞的解釋');
-	  }
-	  function toggleCard(){
-	    setCardFlipped(!card.classList.contains('flipped'));
-	  }
-	  document.getElementById('btn-flip').addEventListener('click', toggleCard);
-	  card.addEventListener('click', (e)=>{
-	    if(e.target.closest('.pad-btn')) return;
-	    toggleCard();
-	  });
-	  card.addEventListener('keydown', (e)=>{
-	    if(e.key !== 'Enter' && e.key !== ' ') return;
-	    e.preventDefault();
-	    toggleCard();
-	  });
-	  document.getElementById('next').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx+1) });
-	  document.getElementById('prev').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx-1) });
-
-  // Save bookmark
-  document.getElementById('btn-save').addEventListener('click', (e)=>{
-    e.currentTarget.innerHTML = '<span class="ico">★</span> 已收藏';
-    e.currentTarget.style.background = 'var(--mustard)';
-    e.currentTarget.style.color = 'var(--navy)';
-    setTimeout(()=>{
-      e.currentTarget.innerHTML = '<span class="ico"><svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg></span> 收藏';
-      e.currentTarget.style.background = '';
-      e.currentTarget.style.color = '';
-    }, 1800);
-  });
-
-  // Play (TTS) — try Web Speech, fall back to a friendly note
-  document.getElementById('btn-play').addEventListener('click', ()=>{
-    const w = words[idx];
-    const btn = document.getElementById('btn-play');
-    const original = btn.innerHTML;
-    btn.innerHTML = '<span class="ico">♪</span> 播音中...';
-    try {
-      // try a Min-Nan / zh-TW voice if available; otherwise read POJ
-      const u = new SpeechSynthesisUtterance(w.sen_han);
-      u.lang = 'zh-TW';
-      u.rate = 0.9;
-      const voices = speechSynthesis.getVoices();
-      const v = voices.find(v=>/min-nan|nan|tâi|hokkien/i.test(v.name+v.lang)) || voices.find(v=>/zh-TW|zh_TW|cmn-Hant/i.test(v.lang));
-      if (v) u.voice = v;
-      u.onend = ()=>{ btn.innerHTML = original };
-      speechSynthesis.speak(u);
-      setTimeout(()=>{ btn.innerHTML = original }, 3500);
-    } catch(e){ btn.innerHTML = original }
-  });
-
-  setWord(0);
-
-  // ---- FAQ ----
-  const faqs = [
-    { q:'毋捌台語會使來上課無？ / Don\u2019t speak Tâi-gí?',
-      a:'會使，逐家攏會使。阮上課用台語＋華語（雙聲道），新手嘛免緊張。網站每週「今仔日詞」嘛是攏附華語、英文。' },
-    { q:'我從來毋捌跳過 swing，敢有問題？',
-      a:'完全無問題。Lindy Hop 初級班是 8 週課，從聽節拍 → 基本步 → social etiquette 一步一步來。第一堂課送一張兔仔貼紙。' },
-    { q:'課程／工作坊敢有 ê 個人折扣？',
-      a:'學生、無業、原住民族友 ê、新住民朋友憑證件有 8 折。多人報名嘛有揀組優惠 ── 寫信來阮。' },
-    { q:'我是台語老師／文化機構，會使合作無？',
-      a:'歡迎！阮做過國小、社大、書店、咖啡廳 ê 工作坊，從 30 分鐘到 3 點鐘 ê 形式攏會使。寫信講你欲做啥款 ê 場。' },
-    { q:'兔仔有名字無？',
-      a:'伊號做「sūn-sòa」（順續）。意思是「順紲」做一寡代誌──佇路頂順紲跳一下舞。' }
-  ];
-	  document.getElementById('faqlist').innerHTML = faqs.map((f,i)=>`
-	    <article class="qa${i===0?' open':''}">
-	      <button class="qa-q" type="button" aria-expanded="${i===0?'true':'false'}" aria-controls="faq-a-${i}">
-	        <span>${f.q}</span><span class="toggle" aria-hidden="true">+</span>
-	      </button>
-	      <div class="qa-a" id="faq-a-${i}" role="region" aria-hidden="${i===0?'false':'true'}">${f.a}</div>
-	    </article>`).join('');
-	  document.querySelectorAll('.qa').forEach(el=>{
-	    const btn = el.querySelector('.qa-q');
-	    const panel = el.querySelector('.qa-a');
-	    btn.addEventListener('click',()=>{
-	      const open = !el.classList.contains('open');
-	      el.classList.toggle('open', open);
-	      btn.setAttribute('aria-expanded', String(open));
-	      panel.setAttribute('aria-hidden', String(!open));
-	    });
-	  });
-
-  // ---- Scrolling rabbit ----
-  const sr = document.getElementById('srab');
-  const srSay = document.getElementById('srab-say');
-  const sayings = [
-    "咱來跳舞！", "Lán lâi thiàu-bú!", "iô-pái ~", "tâi-gí!", "swing!",
-    "做伙來 →", "tńg-chhù ê lō͘", "✦ jazz ✦", "thò͘-á 跟綴中"
-  ];
-  let lastY = 0, ticking=false, hide;
-  let pos = { left: 24, top: window.innerHeight*0.55, vy:0 };
-  function step(){
-    sr.style.left = pos.left + 'px';
-    sr.style.top  = pos.top  + 'px';
-  }
-  step();
-  window.addEventListener('scroll', ()=>{
-    const y = window.scrollY;
-    const dy = y - lastY;
-    lastY = y;
-    if (Math.abs(dy) > 4) {
-      sr.style.opacity = '1';
-      sr.style.transform = `rotate(${dy * 0.4}deg) scaleY(${1 - Math.min(0.18, Math.abs(dy)*0.005)})`;
-      pos.top = Math.max(80, Math.min(window.innerHeight - 200, pos.top + dy * 0.3));
-      if (Math.random() < 0.04) {
-        srSay.textContent = sayings[Math.floor(Math.random()*sayings.length)];
+    // Scrolling rabbit
+    const sr = document.getElementById('srab');
+    const srSay = document.getElementById('srab-say');
+    const sayings = [
+      "咱來跳舞！", "Lán lâi thiàu-bú!", "iô-pái ~", "tâi-gí!", "swing!",
+      "做伙來 →", "tńg-chhù ê lō͘", "✦ jazz ✦", "thò͘-á 跟綴中"
+    ];
+    let lastY = 0, hide;
+    let pos = { left: 24, top: window.innerHeight*0.55, vy:0 };
+    function step(){
+      sr.style.left = pos.left + 'px';
+      sr.style.top  = pos.top  + 'px';
+    }
+    step();
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      if (Math.abs(dy) > 4) {
+        sr.style.opacity = '1';
+        sr.style.transform = `rotate(${dy * 0.4}deg) scaleY(${1 - Math.min(0.18, Math.abs(dy)*0.005)})`;
+        pos.top = Math.max(80, Math.min(window.innerHeight - 200, pos.top + dy * 0.3));
+        if (Math.random() < 0.04) {
+          srSay.textContent = sayings[Math.floor(Math.random()*sayings.length)];
+        }
+        step();
+        clearTimeout(hide);
+        hide = setTimeout(()=>{
+          sr.style.transform = 'rotate(0)';
+        }, 200);
+        clearTimeout(window.__sr_h);
+        window.__sr_h = setTimeout(()=>{ sr.style.opacity = '0' }, 1400);
       }
-      step();
-      clearTimeout(hide);
-      hide = setTimeout(()=>{
-        sr.style.transform = 'rotate(0)';
-      }, 200);
-      // hide after stop
-      clearTimeout(window.__sr_h);
-      window.__sr_h = setTimeout(()=>{ sr.style.opacity = '0' }, 1400);
-    }
-  }, { passive:true });
+    }, { passive:true });
 
-  // ====== language switcher ======
-  (function(){
-    const root = document.documentElement;
-	    let saved = localStorage.getItem('kts-lang') || 'zh';
-	    if (saved === 'all') saved = 'zh';
-	    const langMap = { zh:'zh-Hant', tw:'nan-Hant-TW', poj:'nan-Latn', en:'en' };
-	    function setLang(l){
-	      root.setAttribute('data-lang', l);
-	      root.setAttribute('lang', langMap[l] || 'zh-Hant');
-	      document.querySelectorAll('#lang-sw button').forEach(b=>{
-        b.classList.toggle('on', b.dataset.lang === l);
+    // Language switcher
+    (function(){
+      const root = document.documentElement;
+      let saved = localStorage.getItem('kts-lang') || 'zh';
+      if (saved === 'all') saved = 'zh';
+      const langMap = { zh:'zh-Hant', tw:'nan-Hant-TW', poj:'nan-Latn', en:'en' };
+      function setLang(l){
+        root.setAttribute('data-lang', l);
+        root.setAttribute('lang', langMap[l] || 'zh-Hant');
+        document.querySelectorAll('#lang-sw button').forEach(b=>{
+          b.classList.toggle('on', b.dataset.lang === l);
+        });
+        try{ localStorage.setItem('kts-lang', l); }catch(e){}
+      }
+      setLang(saved);
+      const sw = document.getElementById('lang-sw');
+      if (sw){
+        sw.addEventListener('click', e=>{
+          const b = e.target.closest('button[data-lang]');
+          if (b) setLang(b.dataset.lang);
+        });
+      }
+    })();
+
+    // Active nav highlight on scroll
+    const sectionsList = ['about','vocab','events','faq','contact'];
+    const navLinks = document.querySelectorAll('.nav-links > a');
+    function activate(){
+      let cur = 'about';
+      for (const id of sectionsList){
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight*0.4) cur = id;
+      }
+      navLinks.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#'+cur);
       });
-      try{ localStorage.setItem('kts-lang', l); }catch(e){}
     }
-    setLang(saved);
-    const sw = document.getElementById('lang-sw');
-    if (sw){
-      sw.addEventListener('click', e=>{
-        const b = e.target.closest('button[data-lang]');
-        if (b) setLang(b.dataset.lang);
-      });
-    }
-  })();
-
-  // ====== mobile nav toggle ======
-  (function(){
-    const tog = document.getElementById('nav-toggle');
-    const body = document.body;
-    if (!tog) return;
-    function close(){ body.classList.remove('nav-open'); tog.setAttribute('aria-expanded','false') }
-    function open(){ body.classList.add('nav-open'); tog.setAttribute('aria-expanded','true') }
-    tog.addEventListener('click', ()=>{
-      if (body.classList.contains('nav-open')) close(); else open();
-    });
-    document.querySelectorAll('.nav-links > a').forEach(a=>{
-      a.addEventListener('click', close);
-    });
-    // close when resizing back to desktop
-    window.addEventListener('resize', ()=>{
-      if (window.innerWidth > 820) close();
-    });
-    // close on Esc
-    window.addEventListener('keydown', e=>{ if (e.key === 'Escape') close(); });
-  })();
-
-  // active nav highlight
-  const sectionsList = ['about','vocab','events','faq','contact'];
-  const navLinks = document.querySelectorAll('.nav-links > a');
-  function activate(){
-    let cur = 'about';
-    for (const id of sectionsList){
-      const el = document.getElementById(id);
-      if (!el) continue;
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight*0.4) cur = id;
-    }
-    navLinks.forEach(a=>{
-      a.classList.toggle('active', a.getAttribute('href') === '#'+cur);
-    });
-  }
-  window.addEventListener('scroll', activate, { passive:true });
-</script>
-
-</body>
-</html>
+    window.addEventListener('scroll', activate, { passive:true });
+  </script>
+</BaseLayout>

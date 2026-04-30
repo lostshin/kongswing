@@ -1,300 +1,163 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="description" content="Kóng台語 跳Swing 課程與活動排程：Lindy Hop 課程、台語社交舞會、工作坊與表演。" />
-<meta property="og:title" content="課程・活動 · Kóng台語 跳Swing" />
-<meta property="og:description" content="查看 Kóng台語 跳Swing 的 Lindy Hop 課程、台語社交舞會與工作坊。" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="課程・活動 · Kóng台語 跳Swing" />
-<meta name="twitter:description" content="Lindy Hop 課程、台語社交舞會與工作坊排程。" />
-<title>課程・活動 · Kóng台語 跳Swing</title>
-<link rel="icon" href="/logo.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="prefetch" href="index.html" />
-<link rel="prefetch" href="vocabulary.html" />
-<style is:inline>
-	  @font-face{
-	    font-family:'IansuiLocal';
-	    src:url('/fonts/iansui/Iansui-Regular.ttf') format('truetype');
-	    font-weight:400;
-	    font-style:normal;
-	    font-display:swap;
-	  }
-	  @font-face{
-	    font-family:'GochiHandPOJ';
-	    src:url('/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf') format('truetype');
-	    font-weight:400;
-	    font-style:normal;
-	    font-display:swap;
-	  }
-	  @view-transition{navigation:auto}
-	  :root{
-	    --content-max:1280px;
-    --paper:#f1ebda; --paper-2:#e8e0c9;
-    --ink:#1a1612; --ink-soft:#3a342a;
-    --navy:#1c3a8e; --navy-deep:#142a6b;
-    --mustard:#f4c84b; --line: rgba(26,22,18,.18);
-	    --serif:'Noto Serif TC','IansuiLocal',serif; --sans:'Noto Sans TC','IansuiLocal',sans-serif;
-	    --hand:'Caveat',cursive; --mono:'DM Mono',monospace;
-	    --tai:'IansuiLocal','Noto Serif TC',serif; --poj:'IansuiLocal','Noto Serif TC',serif;
-	    --en:'GochiHandPOJ','Noto Sans TC',sans-serif;
-	  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}
-  body{background:radial-gradient(900px 600px at 0 0,rgba(28,58,142,.10),transparent 60%),var(--paper);background-attachment:fixed}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.06  0 0 0 0.32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");mix-blend-mode:multiply;opacity:.55}
-	  a{color:inherit}
-	  .skip-link{position:absolute;left:16px;top:10px;z-index:1000;transform:translateY(-160%);background:var(--navy);color:var(--paper);padding:12px 16px;border-radius:999px;text-decoration:none;font-weight:700}
-	  .skip-link:focus{transform:translateY(0);outline:3px solid var(--mustard);outline-offset:3px}
-	  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 32px;position:relative;z-index:2}
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="課程・活動 · Kóng台語 跳Swing"
+  description="Kóng台語 跳Swing 課程與活動排程：Lindy Hop 課程、台語社交舞會、工作坊與表演。"
+  ogTitle="課程・活動 · Kóng台語 跳Swing"
+  ogDescription="查看 Kóng台語 跳Swing 的 Lindy Hop 課程、台語社交舞會與工作坊。"
+  twitterTitle="課程・活動 · Kóng台語 跳Swing"
+  twitterDescription="Lindy Hop 課程、台語社交舞會與工作坊排程。"
+  prefetch={["index.html", "vocabulary.html"]}
+  variant="sub"
+  activeNav="events"
+>
+  <style is:inline slot="head" set:html={`
+    body{background:radial-gradient(900px 600px at 0 0,rgba(28,58,142,.10),transparent 60%),var(--paper);background-attachment:fixed}
 
-  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(241,235,218,.72);border-bottom:.5px solid var(--line)}
-	  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 32px;max-width:var(--content-max);margin:0 auto}
-	  .brand{display:flex;align-items:center;gap:12px;min-width:0;text-decoration:none;color:var(--ink)}
-  .brand-mark{width:42px;height:42px;border-radius:50%;border:1.5px solid #b3a98a;display:grid;place-items:center;overflow:hidden}
-  .brand-mark img{width:120%}
-  .brand-name{font-family:var(--serif);font-weight:700;font-size:18px;line-height:1}
-  .brand-name small{display:block;font-family:var(--hand);color:var(--navy);font-size:14px;margin-top:2px}
-	  .nav-menu{display:flex;gap:28px;align-items:center}
-	  .nav-links{display:flex;gap:28px;align-items:center}
-	  .nav-links a{font-size:14px;text-decoration:none;color:var(--ink-soft)}
-	  .nav-links a.active{color:var(--navy);font-weight:500}
-	  .nav-links a.nav-cta{background:var(--navy);color:var(--paper);padding:9px 16px;border-radius:999px;font-size:13px;letter-spacing:.04em}
-	  .nav-links a.nav-cta:hover{background:var(--navy-deep);color:var(--paper)}
-	  .lang-en{font-family:var(--en)}
-	  .nav-toggle{display:none;appearance:none;border:1.5px solid var(--ink);background:var(--paper);width:44px;height:44px;border-radius:50%;cursor:pointer;position:relative;z-index:120;flex:0 0 44px;margin-left:auto;align-items:center;justify-content:center;padding:0}
-	  .nav-toggle .bars{display:block;width:18px;height:14px;position:relative}
-	  .nav-toggle .bars::before,.nav-toggle .bars::after,.nav-toggle .bars span{content:"";position:absolute;left:0;right:0;height:2px;background:var(--ink);border-radius:1px;transition:transform .25s ease,opacity .2s ease,top .25s ease}
-	  .nav-toggle .bars::before{top:0}
-	  .nav-toggle .bars span{top:6px;display:block}
-	  .nav-toggle .bars::after{top:12px}
-	  body.nav-open .nav-toggle .bars::before{top:6px;transform:rotate(45deg)}
-	  body.nav-open .nav-toggle .bars span{opacity:0}
-	  body.nav-open .nav-toggle .bars::after{top:6px;transform:rotate(-45deg)}
+    .hd{padding:64px 0 32px}
+    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+    h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
+    h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
+    .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
 
-  .hd{padding:64px 0 32px}
-  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
-  h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
-  h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
-  .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px;padding:18px 0}
+    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;touch-action:manipulation}
+    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+    .chip:hover{border-color:var(--navy);color:var(--navy)}
+    .chip.on:hover{color:var(--paper)}
 
-  .filters{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px;padding:18px 0}
-	  .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;touch-action:manipulation}
-  .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
-  .chip:hover{border-color:var(--navy);color:var(--navy)}
-  .chip.on:hover{color:var(--paper)}
+    .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:32px 0 64px}
+    .ev{background:#fdfaf1;padding:32px;border:1px solid var(--line);position:relative;display:grid;grid-template-columns:120px 1fr;gap:24px}
+    .ev:hover{border-color:var(--navy)}
+    .badge{position:absolute;top:-12px;right:18px;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 10px;text-transform:uppercase;font-weight:600}
+    .badge.full{background:var(--ink);color:var(--paper)}
+    .ev .date{text-align:center;border-right:1px dashed var(--line);padding-right:24px}
+    .ev .date .d{font-family:var(--serif);font-size:64px;font-weight:700;color:var(--navy);line-height:1}
+    .ev .date .m{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+    .ev .date .yr{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:2px}
+    .ev h3{font-family:var(--tai);font-size:24px;font-weight:700;margin:0 0 6px;line-height:1.3}
+    .ev .sub{font-family:var(--hand);color:var(--navy);font-size:18px;margin-bottom:10px}
+    .ev .meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+    .ev .meta span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft);background:var(--paper-2);padding:4px 8px;border-radius:999px;text-transform:uppercase}
+    .ev p{font-size:14px;line-height:1.65;color:var(--ink-soft);margin:0 0 14px}
+    .ev .row{display:flex;align-items:center;gap:14px;margin-top:8px}
+    .ev .price{font-family:var(--serif);font-weight:700;color:var(--navy);font-size:20px}
+    .ev .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;background:var(--navy);color:var(--paper);text-decoration:none;font-size:13px;border-radius:999px;border:0;cursor:pointer;touch-action:manipulation}
+    .ev .btn:hover{background:var(--navy-deep)}
+    .ev .btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
 
-  .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:32px 0 64px}
-  .ev{background:#fdfaf1;padding:32px;border:1px solid var(--line);position:relative;display:grid;grid-template-columns:120px 1fr;gap:24px}
-  .ev:hover{border-color:var(--navy)}
-  .badge{position:absolute;top:-12px;right:18px;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 10px;text-transform:uppercase;font-weight:600}
-  .badge.full{background:var(--ink);color:var(--paper)}
-  .ev .date{text-align:center;border-right:1px dashed var(--line);padding-right:24px}
-  .ev .date .d{font-family:var(--serif);font-size:64px;font-weight:700;color:var(--navy);line-height:1}
-  .ev .date .m{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
-  .ev .date .yr{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:2px}
-	  .ev h3{font-family:var(--tai);font-size:24px;font-weight:700;margin:0 0 6px;line-height:1.3}
-  .ev .sub{font-family:var(--hand);color:var(--navy);font-size:18px;margin-bottom:10px}
-  .ev .meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
-  .ev .meta span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft);background:var(--paper-2);padding:4px 8px;border-radius:999px;text-transform:uppercase}
-  .ev p{font-size:14px;line-height:1.65;color:var(--ink-soft);margin:0 0 14px}
-  .ev .row{display:flex;align-items:center;gap:14px;margin-top:8px}
-  .ev .price{font-family:var(--serif);font-weight:700;color:var(--navy);font-size:20px}
-	  .ev .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;background:var(--navy);color:var(--paper);text-decoration:none;font-size:13px;border-radius:999px;border:0;cursor:pointer;touch-action:manipulation}
-  .ev .btn:hover{background:var(--navy-deep)}
-  .ev .btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+    .calendar{margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
+    .calendar h2{font-family:var(--serif);font-size:28px;font-weight:700;margin:0 0 18px}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+    .cal-grid div{aspect-ratio:1.4/1;background:#fdfaf1;border:1px solid var(--line);padding:8px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);position:relative}
+    .cal-grid .head{background:transparent;border:0;padding:6px 8px;color:var(--navy);font-weight:600;text-transform:uppercase}
+    .cal-grid .has{background:var(--navy);color:var(--paper)}
+    .cal-grid .has::after{content:attr(data-tag);position:absolute;left:8px;bottom:6px;font-family:var(--sans);font-size:11px;color:var(--mustard)}
+    .cal-grid .other{opacity:.35}
 
-  .calendar{margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
-  .calendar h2{font-family:var(--serif);font-size:28px;font-weight:700;margin:0 0 18px}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-  .cal-grid div{aspect-ratio:1.4/1;background:#fdfaf1;border:1px solid var(--line);padding:8px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);position:relative}
-  .cal-grid .head{background:transparent;border:0;padding:6px 8px;color:var(--navy);font-weight:600;text-transform:uppercase}
-  .cal-grid .has{background:var(--navy);color:var(--paper)}
-  .cal-grid .has::after{content:attr(data-tag);position:absolute;left:8px;bottom:6px;font-family:var(--sans);font-size:11px;color:var(--mustard)}
-  .cal-grid .other{opacity:.35}
+    footer{margin-top:48px}
 
-  footer{padding:32px 0 64px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft);margin-top:48px}
-  .ftr{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  .lg{font-family:var(--serif);font-size:18px;color:var(--navy);font-weight:700}
+    @media (max-width:920px){.ev-grid{grid-template-columns:1fr}}
+  `}></style>
 
-	  @media (max-width:920px){.ev-grid{grid-template-columns:1fr}}
-	  @media (max-width:820px){
-	    .wrap{padding:0 20px}
-	    .nav-inner{padding:10px 20px}
-	    .nav-toggle{display:inline-flex}
-	    .nav-menu{position:absolute;left:0;right:0;top:100%;background:var(--paper);flex-direction:column;align-items:flex-start;gap:0;padding:18px 24px 28px;z-index:90;transform:translateY(-12px);opacity:0;visibility:hidden;pointer-events:none;transition:transform .22s ease,opacity .18s ease,visibility .18s ease;border-bottom:1px solid var(--line);box-shadow:0 24px 40px -20px rgba(20,42,107,.18);max-height:calc(100dvh - 64px);overflow-y:auto}
-	    body.nav-open .nav-menu{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
-	    body.nav-open{overflow:hidden}
-	    .nav-links{width:100%;flex-direction:column;align-items:flex-start;gap:0}
-	    .nav-links > a{width:100%;padding:18px 4px;border-bottom:1px dashed var(--line);font-family:var(--serif);font-size:22px;color:var(--ink)}
-	    .nav-links > a.active{color:var(--navy);background:linear-gradient(transparent 60%, var(--mustard) 60%);padding-left:8px}
-	    .nav-links > a.nav-cta{align-self:stretch;text-align:center;margin-top:18px;padding:14px 22px;border-bottom:0;border-radius:999px;font-family:var(--sans);font-size:15px;color:var(--paper)}
-	  }
-	  @media (prefers-reduced-motion: reduce){
-	    html{scroll-behavior:auto}
-	  }
-</style>
-</head>
-<body>
-<a class="skip-link" href="#main">跳到主要內容</a>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-mark"><img src="/logo.png" alt="Kóng台語 跳Swing logo" width="370" height="370"></span>
-      <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
-    </a>
-	    <div class="nav-menu" id="nav-menu">
-	      <div class="nav-links">
-	        <a href="index.html#about">關於</a>
-	        <a href="index.html#vocab">每日台語</a>
-	        <a href="vocabulary.html">詞彙庫</a>
-	        <a href="index.html#events">活動</a>
-	        <a href="events.html" class="active">課程</a>
-	        <a href="index.html#faq">FAQ</a>
-	        <a class="nav-cta" href="index.html#contact">聯絡我們 →</a>
-	      </div>
-	    </div>
-	    <button class="nav-toggle" id="nav-toggle" aria-label="menu" aria-expanded="false" aria-controls="nav-menu"><span class="bars"><span></span></span></button>
-	  </div>
-	</nav>
-
-<main id="main" tabindex="-1">
-<section class="hd">
-  <div class="wrap">
-    <div class="kicker">Classes · Socials · Workshops</div>
-    <h1>課程 ê 排程<span class="hand"> see you there!</span></h1>
-    <p class="lede">
-      初級 Lindy Hop、社交舞會、線上工作坊──逐個禮拜攏有代誌做。
-      課程攏會用台語＋華語雙聲道，新手歡迎。
-    </p>
-    <div class="filters" id="filt">
-      <button class="chip on" data-k="全部">全部</button>
-      <button class="chip" data-k="課程">課程 · Class</button>
-      <button class="chip" data-k="社交">社交舞會 · Social</button>
-      <button class="chip" data-k="工作坊">工作坊 · Workshop</button>
-      <button class="chip" data-k="表演">表演 · Show</button>
+  <section class="hd">
+    <div class="wrap">
+      <div class="kicker">Classes · Socials · Workshops</div>
+      <h1>課程 ê 排程<span class="hand"> see you there!</span></h1>
+      <p class="lede">
+        初級 Lindy Hop、社交舞會、線上工作坊──逐個禮拜攏有代誌做。
+        課程攏會用台語＋華語雙聲道，新手歡迎。
+      </p>
+      <div class="filters" id="filt">
+        <button class="chip on" data-k="全部">全部</button>
+        <button class="chip" data-k="課程">課程 · Class</button>
+        <button class="chip" data-k="社交">社交舞會 · Social</button>
+        <button class="chip" data-k="工作坊">工作坊 · Workshop</button>
+        <button class="chip" data-k="表演">表演 · Show</button>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="ev-grid" id="evs"></div>
+  <section>
+    <div class="wrap">
+      <div class="ev-grid" id="evs"></div>
 
-    <div class="calendar">
-      <h2>05 月行事曆 · May 2026</h2>
-      <div class="cal-grid" id="cal"></div>
+      <div class="calendar">
+        <h2>05 月行事曆 · May 2026</h2>
+        <div class="cal-grid" id="cal"></div>
+      </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
 
-<footer>
-  <div class="wrap ftr">
-    <div class="lg">Kóng台語 跳Swing</div>
-    <div>© 2026 · <a href="index.html" style="text-decoration:none;color:var(--navy)">回首頁</a></div>
-  </div>
-</footer>
+  <script is:inline slot="afterBody">
+    const events = [
+      {k:'課程', d:'05', m:'05 / MON', yr:'2026', t:'初級 Lindy Hop · 第 36 期', sub:'8 weeks · beginners welcome',
+        meta:['8 週','逐禮拜一 19:30','大同大學旁'],
+        desc:'從聽節拍 → swingout → social etiquette，一步一步來。課程中阮會用台語教步法，第一堂送一張兔仔貼紙。',
+        price:'NT$ 4,800', cta:'我欲報名 · Sign up', badge:'招生中'},
+      {k:'社交', d:'17', m:'05 / SAT', yr:'2026', t:'Tâi-gí Social · 講台語社交舞會', sub:'iô-pái night feat. The Sūn-sòa Trio',
+        meta:['19:30 – 23:00','嘉義老屋','現場樂隊'],
+        desc:'一暗時間，阮鼓勵逐家用台語邀舞、講話、交朋友。附 ìn 台羅小卡，新手有專人陪跳。',
+        price:'NT$ 350', cta:'RSVP 預約 →', badge:'本月'},
+      {k:'工作坊', d:'25', m:'05 / SUN', yr:'2026', t:'兔仔工作坊：跳舞 ê 台語 50 句', sub:'online · 3 hours',
+        meta:['3 hrs','線上 Zoom','英文／華語授課'],
+        desc:'為非台語 native ê 舞者設計：邀舞、感謝、稱呼、笑詼共 50 句。錄影提供。',
+        price:'NT$ 800', cta:'候補登記 →', badge:'已額滿', full:true},
+      {k:'課程', d:'08', m:'06 / MON', yr:'2026', t:'中級 Lindy Hop · 第 12 期', sub:'8 weeks · intermediate',
+        meta:['8 週','swingout 熟練','逐禮拜一 21:00'],
+        desc:'進入 swingout 變奏、connection、跟隨／引導 ê 對話、turn 系列。',
+        price:'NT$ 5,200', cta:'我欲報名 →', badge:'即將開課'},
+      {k:'表演', d:'14', m:'06 / SAT', yr:'2026', t:'夏夜搖擺 · 台中文化中心', sub:'free outdoor show',
+        meta:['19:00','戶外免費','邀舞時段'],
+        desc:'30 分鐘演出 + 30 分鐘 social 邀舞時段。逐家會使穿日常衣服來。',
+        price:'免費', cta:'查看地點 →', badge:'免費'},
+      {k:'工作坊', d:'29', m:'06 / SUN', yr:'2026', t:'兔仔小書工作坊 · 詞卡製作', sub:'paper craft + Tâi-gí',
+        meta:['2 hrs','實體 · 台北','含材料'],
+        desc:'阮會教你做一本屬於你 ê「搖擺舞 ê 言詞」小卡冊，配水彩兔仔貼紙。',
+        price:'NT$ 1,200', cta:'我欲報名 →', badge:'限量 12 位'}
+    ];
 
-<script is:inline>
-  (function(){
-    const tog = document.getElementById('nav-toggle');
-    const body = document.body;
-    if (!tog) return;
-    function close(){ body.classList.remove('nav-open'); tog.setAttribute('aria-expanded','false') }
-    function open(){ body.classList.add('nav-open'); tog.setAttribute('aria-expanded','true') }
-    tog.addEventListener('click', ()=>{ body.classList.contains('nav-open') ? close() : open(); });
-    document.querySelectorAll('.nav-links > a').forEach(a=>a.addEventListener('click', close));
-    document.querySelectorAll('a[href="index.html#contact"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-        e.preventDefault();
-        sessionStorage.setItem('kts-smooth-target', 'contact');
-        window.location.href = 'index.html';
-      });
-    });
-    window.addEventListener('resize', ()=>{ if (window.innerWidth > 820) close(); });
-    window.addEventListener('keydown', e=>{ if (e.key === 'Escape') close(); });
-  })();
-
-  const events = [
-    {k:'課程', d:'05', m:'05 / MON', yr:'2026', t:'初級 Lindy Hop · 第 36 期', sub:'8 weeks · beginners welcome',
-      meta:['8 週','逐禮拜一 19:30','大同大學旁'],
-      desc:'從聽節拍 → swingout → social etiquette，一步一步來。課程中阮會用台語教步法，第一堂送一張兔仔貼紙。',
-      price:'NT$ 4,800', cta:'我欲報名 · Sign up', badge:'招生中'},
-    {k:'社交', d:'17', m:'05 / SAT', yr:'2026', t:'Tâi-gí Social · 講台語社交舞會', sub:'iô-pái night feat. The Sūn-sòa Trio',
-      meta:['19:30 – 23:00','嘉義老屋','現場樂隊'],
-      desc:'一暗時間，阮鼓勵逐家用台語邀舞、講話、交朋友。附 ìn 台羅小卡，新手有專人陪跳。',
-      price:'NT$ 350', cta:'RSVP 預約 →', badge:'本月'},
-    {k:'工作坊', d:'25', m:'05 / SUN', yr:'2026', t:'兔仔工作坊：跳舞 ê 台語 50 句', sub:'online · 3 hours',
-      meta:['3 hrs','線上 Zoom','英文／華語授課'],
-      desc:'為非台語 native ê 舞者設計：邀舞、感謝、稱呼、笑詼共 50 句。錄影提供。',
-      price:'NT$ 800', cta:'候補登記 →', badge:'已額滿', full:true},
-    {k:'課程', d:'08', m:'06 / MON', yr:'2026', t:'中級 Lindy Hop · 第 12 期', sub:'8 weeks · intermediate',
-      meta:['8 週','swingout 熟練','逐禮拜一 21:00'],
-      desc:'進入 swingout 變奏、connection、跟隨／引導 ê 對話、turn 系列。',
-      price:'NT$ 5,200', cta:'我欲報名 →', badge:'即將開課'},
-    {k:'表演', d:'14', m:'06 / SAT', yr:'2026', t:'夏夜搖擺 · 台中文化中心', sub:'free outdoor show',
-      meta:['19:00','戶外免費','邀舞時段'],
-      desc:'30 分鐘演出 + 30 分鐘 social 邀舞時段。逐家會使穿日常衣服來。',
-      price:'免費', cta:'查看地點 →', badge:'免費'},
-    {k:'工作坊', d:'29', m:'06 / SUN', yr:'2026', t:'兔仔小書工作坊 · 詞卡製作', sub:'paper craft + Tâi-gí',
-      meta:['2 hrs','實體 · 台北','含材料'],
-      desc:'阮會教你做一本屬於你 ê「搖擺舞 ê 言詞」小卡冊，配水彩兔仔貼紙。',
-      price:'NT$ 1,200', cta:'我欲報名 →', badge:'限量 12 位'}
-  ];
-
-  function render(k){
-    const list = k==='全部' ? events : events.filter(e=>e.k===k);
-    document.getElementById('evs').innerHTML = list.map(e=>`
-      <article class="ev">
-        <span class="badge${e.full?' full':''}">${e.badge}</span>
-        <div class="date">
-          <div class="d">${e.d}</div>
-          <div class="m">${e.m}</div>
-          <div class="yr">${e.yr}</div>
-        </div>
-        <div>
-          <h3>${e.t}</h3>
-          <div class="sub">${e.sub}</div>
-          <div class="meta">${e.meta.map(m=>`<span>${m}</span>`).join('')}</div>
-          <p>${e.desc}</p>
-          <div class="row">
-            <div class="price">${e.price}</div>
-            <button class="btn${e.full?' ghost':''}">${e.cta}</button>
+    function render(k){
+      const list = k==='全部' ? events : events.filter(e=>e.k===k);
+      document.getElementById('evs').innerHTML = list.map(e=>`
+        <article class="ev">
+          <span class="badge${e.full?' full':''}">${e.badge}</span>
+          <div class="date">
+            <div class="d">${e.d}</div>
+            <div class="m">${e.m}</div>
+            <div class="yr">${e.yr}</div>
           </div>
-        </div>
-      </article>`).join('');
-  }
-  document.getElementById('filt').addEventListener('click',e=>{
-    const b = e.target.closest('.chip'); if(!b) return;
-    document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
-    render(b.dataset.k);
-  });
-  render('全部');
+          <div>
+            <h3>${e.t}</h3>
+            <div class="sub">${e.sub}</div>
+            <div class="meta">${e.meta.map(m=>`<span>${m}</span>`).join('')}</div>
+            <p>${e.desc}</p>
+            <div class="row">
+              <div class="price">${e.price}</div>
+              <button class="btn${e.full?' ghost':''}">${e.cta}</button>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+    document.getElementById('filt').addEventListener('click',e=>{
+      const b = e.target.closest('.chip'); if(!b) return;
+      document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+      render(b.dataset.k);
+    });
+    render('全部');
 
-  // calendar (May 2026 starts on Friday)
-  const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  const has = {5:'課程',8:'',12:'',15:'課程',17:'Social',19:'',22:'',25:'工作坊',29:''};
-  const cal = document.getElementById('cal');
-  let html = days.map(d=>`<div class="head">${d}</div>`).join('');
-  // May 1 2026 = Friday, so 5 leading blanks (Sun=0)
-  for (let i=0;i<5;i++) html += `<div class="other">${30-4+i}</div>`;
-  for (let i=1;i<=31;i++) {
-    const tag = has[i];
-    html += `<div${tag?' class="has" data-tag="'+tag+'"':''}>${i}</div>`;
-  }
-  // pad trailing — May 31 = Sun, so 6 trailing (Mon-Sat)
-  for (let i=1;i<=6;i++) html += `<div class="other">${i}</div>`;
-  cal.innerHTML = html;
-</script>
-</body>
-</html>
+    // calendar (May 2026 starts on Friday)
+    const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+    const has = {5:'課程',8:'',12:'',15:'課程',17:'Social',19:'',22:'',25:'工作坊',29:''};
+    const cal = document.getElementById('cal');
+    let html = days.map(d=>`<div class="head">${d}</div>`).join('');
+    for (let i=0;i<5;i++) html += `<div class="other">${30-4+i}</div>`;
+    for (let i=1;i<=31;i++) {
+      const tag = has[i];
+      html += `<div${tag?' class="has" data-tag="'+tag+'"':''}>${i}</div>`;
+    }
+    for (let i=1;i<=6;i++) html += `<div class="other">${i}</div>`;
+    cal.innerHTML = html;
+  </script>
+</BaseLayout>

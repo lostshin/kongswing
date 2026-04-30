@@ -1,0 +1,102 @@
+---
+import globalCss from '../styles/global.css?raw';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  twitterTitle: string;
+  twitterDescription: string;
+  prefetch: string[];
+  variant: 'home' | 'sub';
+  activeNav?: 'vocabulary' | 'events';
+}
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  twitterTitle,
+  twitterDescription,
+  prefetch,
+  variant,
+  activeNav,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content={description} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={twitterTitle} />
+<meta name="twitter:description" content={twitterDescription} />
+<title>{title}</title>
+<link rel="icon" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=Caveat:wght@600;700&family=Shadows+Into+Light&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+{prefetch.map((href) => <link rel="prefetch" href={href} />)}
+<style is:inline set:html={globalCss}></style>
+<slot name="head" />
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要內容</a>
+<Nav variant={variant} activeNav={activeNav} />
+{variant === 'home' && <a id="top"></a>}
+<main id="main" tabindex="-1">
+  <slot />
+</main>
+<Footer variant={variant} />
+<slot name="afterFooter" />
+
+<script is:inline>
+  // shared smooth-scroll consumer (home consumes target queued by sub-pages)
+  (function(){
+    const target = sessionStorage.getItem('kts-smooth-target');
+    if (!target) return;
+    sessionStorage.removeItem('kts-smooth-target');
+    const el = document.getElementById(target);
+    if (!el) return;
+    requestAnimationFrame(()=>{
+      el.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  })();
+
+  // shared smooth-scroll producer (sub-pages queue contact target before returning home)
+  (function(){
+    document.querySelectorAll('a[href="index.html#contact"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+        e.preventDefault();
+        sessionStorage.setItem('kts-smooth-target', 'contact');
+        window.location.href = 'index.html';
+      });
+    });
+  })();
+
+  // shared mobile nav toggle
+  (function(){
+    const tog = document.getElementById('nav-toggle');
+    const body = document.body;
+    if (!tog) return;
+    function close(){ body.classList.remove('nav-open'); tog.setAttribute('aria-expanded','false') }
+    function open(){ body.classList.add('nav-open'); tog.setAttribute('aria-expanded','true') }
+    tog.addEventListener('click', ()=>{ body.classList.contains('nav-open') ? close() : open(); });
+    document.querySelectorAll('.nav-links > a').forEach(a=>a.addEventListener('click', close));
+    window.addEventListener('resize', ()=>{ if (window.innerWidth > 820) close(); });
+    window.addEventListener('keydown', e=>{ if (e.key === 'Escape') close(); });
+  })();
+</script>
+
+<slot name="afterBody" />
+</body>
+</html>
