@@ -17,7 +17,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         radial-gradient(1200px 800px at 12% -10%, rgba(244,200,75,.18), transparent 60%),
         radial-gradient(900px 700px at 110% 30%, rgba(28,58,142,.10), transparent 60%),
         var(--paper);
-      background-attachment:fixed;
+    }
+    @media (min-width:821px){
+      body{background-attachment:fixed}
     }
 
     section{position:relative;z-index:2;scroll-margin-top:92px}
@@ -31,7 +33,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,6.4vw,92px);line-height:.98;letter-spacing:-.01em;margin:18px 0 8px;color:var(--ink)}
     .hero h1 .navy{color:var(--navy)}
     .hero h1 .hl{background:linear-gradient(180deg,transparent 55%,var(--mustard) 55%,var(--mustard) 92%,transparent 92%);padding:0 .15em}
-    .hero h1 .title-line{white-space:nowrap}
+    .hero h1 .title-line{display:block;margin-top:.08em;white-space:nowrap}
     .hero h1 .hand{font-family:'Shadows Into Light',var(--hand);font-weight:400;color:var(--navy);font-style:normal;display:inline-block;transform:rotate(-3deg) translateY(-4px)}
 
     .lede{max-width:520px;margin-top:18px;font-size:17px;line-height:1.7;color:var(--ink-soft)}
@@ -181,7 +183,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .contact-form{display:grid;gap:14px;background:#fdfaf1;padding:32px;border:1px solid var(--line)}
     .field{display:grid;gap:6px}
     .field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
-    .field input,.field select,.field textarea{padding:12px 14px;border:1px solid var(--line);background:var(--paper);font:inherit;font-size:15px;color:var(--ink);outline:none;border-radius:0}
+    .field input,.field select,.field textarea{padding:12px 14px;border:1px solid var(--line);background:var(--paper);font:inherit;font-size:16px;color:var(--ink);outline:none;border-radius:0}
     .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy);background:#fff}
     .field textarea{resize:vertical;min-height:110px}
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -228,9 +230,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     @media (max-width:820px){
       .hero{padding:24px 0 56px}
-      .hero-grid{grid-template-columns:1fr;gap:36px}
+      .hero-grid{grid-template-columns:1fr;gap:24px}
       .hero h1{font-size:clamp(44px,11vw,72px)}
-      .hero-art{order:-1;max-width:340px;margin:0 auto}
+      .hero-art{display:none}
       .lede{font-size:16px}
 
       .about{padding:64px 0}
@@ -269,6 +271,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     @media (max-width:420px){
       .hero h1{font-size:44px;line-height:1.05}
+      .hero h1 .title-line{white-space:normal}
+      .hero h1 .hand{display:block;margin-bottom:6px}
       .hero-cta{flex-direction:column;align-items:stretch}
       .hero-cta .btn{justify-content:center}
       .stats{grid-template-columns:1fr 1fr}
@@ -567,7 +571,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='送出囉 ✦ 多謝!'; this.querySelector('.form-status').textContent='表單已送出，阮會盡快回覆。'">
             <div class="row2">
-              <div class="field"><label for="n">名 · Name</label><input id="n" name="name" autocomplete="name" required placeholder="Lí ê miâ"></div>
+              <div class="field"><label for="n">名 · Name</label><input id="n" name="name" type="text" autocapitalize="words" autocomplete="name" required placeholder="Lí ê miâ"></div>
               <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
             </div>
             <div class="field">
@@ -784,6 +788,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // Scrolling rabbit
     const sr = document.getElementById('srab');
     const srSay = document.getElementById('srab-say');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const sayings = [
       "咱來跳舞！", "Lán lâi thiàu-bú!", "iô-pái ~", "tâi-gí!", "swing!",
       "做伙來 →", "tńg-chhù ê lō͘", "✦ jazz ✦", "thò͘-á 跟綴中"
@@ -795,26 +800,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       sr.style.top  = pos.top  + 'px';
     }
     step();
-    window.addEventListener('scroll', ()=>{
-      const y = window.scrollY;
-      const dy = y - lastY;
-      lastY = y;
-      if (Math.abs(dy) > 4) {
-        sr.style.opacity = '1';
-        sr.style.transform = `rotate(${dy * 0.4}deg) scaleY(${1 - Math.min(0.18, Math.abs(dy)*0.005)})`;
-        pos.top = Math.max(80, Math.min(window.innerHeight - 200, pos.top + dy * 0.3));
-        if (Math.random() < 0.04) {
-          srSay.textContent = sayings[Math.floor(Math.random()*sayings.length)];
+    if (reduceMotion) {
+      sr.style.display = 'none';
+    } else {
+      window.addEventListener('scroll', ()=>{
+        const y = window.scrollY;
+        const dy = y - lastY;
+        lastY = y;
+        if (Math.abs(dy) > 4) {
+          sr.style.opacity = '1';
+          sr.style.transform = `rotate(${dy * 0.4}deg) scaleY(${1 - Math.min(0.18, Math.abs(dy)*0.005)})`;
+          pos.top = Math.max(80, Math.min(window.innerHeight - 200, pos.top + dy * 0.3));
+          if (Math.random() < 0.04) {
+            srSay.textContent = sayings[Math.floor(Math.random()*sayings.length)];
+          }
+          step();
+          clearTimeout(hide);
+          hide = setTimeout(()=>{
+            sr.style.transform = 'rotate(0)';
+          }, 200);
+          clearTimeout(window.__sr_h);
+          window.__sr_h = setTimeout(()=>{ sr.style.opacity = '0' }, 1400);
         }
-        step();
-        clearTimeout(hide);
-        hide = setTimeout(()=>{
-          sr.style.transform = 'rotate(0)';
-        }, 200);
-        clearTimeout(window.__sr_h);
-        window.__sr_h = setTimeout(()=>{ sr.style.opacity = '0' }, 1400);
-      }
-    }, { passive:true });
+      }, { passive:true });
+    }
 
     // Language switcher
     (function(){

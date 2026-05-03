@@ -31,7 +31,7 @@ const prefix = isHome ? '' : 'index.html';
             <a href="#events"><span class="lang-zh">活動</span><span class="lang-tw">活動</span><span class="lang-poj">O̍h-tōng</span><span class="lang-en">Events</span></a>
             <a href="events.html"><span class="lang-zh">課程</span><span class="lang-tw">課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">Classes</span></a>
             <a href="#faq">FAQ</a>
-            <a class="nav-cta" href="#contact"><span class="lang-zh" style="color: rgb(241, 235, 218)">聯絡我們 →</span><span class="lang-tw" style="color: rgb(241, 235, 218)">講予阮聽 →</span><span class="lang-poj" style="color: rgb(241, 235, 218)">Kóng hō góan thiaⁿ →</span><span class="lang-en" style="color: rgb(241, 235, 218)">Say hi →</span></a>
+            <a class="nav-cta" href="#contact"><span class="lang-zh">聯絡我們 →</span><span class="lang-tw">講予阮聽 →</span><span class="lang-poj">Kóng hō góan thiaⁿ →</span><span class="lang-en">Say hi →</span></a>
           </>
         ) : (
           <>
@@ -60,8 +60,9 @@ const prefix = isHome ? '' : 'index.html';
     .nav-links a.active::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:6px;background:var(--mustard);z-index:-1;border-radius:2px}
 
     .lang-sw{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;padding:3px;background:var(--paper);gap:2px;margin-right:8px}
-    .lang-sw button{appearance:none;border:0;background:transparent;cursor:pointer;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--ink-soft);padding:5px 9px;border-radius:999px;line-height:1;transition:all .18s ease}
+    .lang-sw button{appearance:none;border:0;background:transparent;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.05em;color:var(--ink-soft);min-width:44px;min-height:44px;padding:0 14px;border-radius:999px;line-height:1;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;transition:transform .12s ease, background .15s ease, color .18s ease}
     .lang-sw button:hover{color:var(--navy)}
+    .lang-sw button:active{transform:scale(.97)}
     .lang-sw button.on{background:var(--navy);color:var(--paper)}
     html[data-lang="zh"] .lang-tw,html[data-lang="zh"] .lang-poj,html[data-lang="zh"] .lang-en{display:none}
     html[data-lang="tw"] .lang-zh,html[data-lang="tw"] .lang-poj,html[data-lang="tw"] .lang-en{display:none}

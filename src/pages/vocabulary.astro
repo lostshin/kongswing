@@ -13,7 +13,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   activeNav="vocabulary"
 >
   <style is:inline slot="head" set:html={`
-    body{background:radial-gradient(900px 600px at 100% 0,rgba(244,200,75,.18),transparent 60%),var(--paper);background-attachment:fixed}
+    body{background:radial-gradient(900px 600px at 100% 0,rgba(244,200,75,.18),transparent 60%),var(--paper)}
+    @media (min-width:821px){
+      body{background-attachment:fixed}
+    }
     .hd{padding:64px 0 32px}
     .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
     h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
@@ -22,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px}
     .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:#fdfaf1;border:1px solid var(--line);padding:10px 14px}
-    .search input{border:0;background:transparent;font:inherit;font-size:15px;width:100%;outline:none}
+    .search input{border:0;background:transparent;font:inherit;font-size:16px;width:100%;outline:none}
     .filt{display:flex;gap:6px;flex-wrap:wrap}
     .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation}
     .chip:hover{border-color:var(--navy);color:var(--navy)}
@@ -54,7 +57,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="toolbar">
         <div class="search">
           <span style="color:var(--ink-soft);font-family:var(--mono);font-size:12px">⌕</span>
-          <input id="q" placeholder="揣字 / search hàn-jī, POJ, English...">
+          <input id="q" type="search" inputmode="search" autocomplete="off" placeholder="揣字 / search...">
         </div>
         <div class="filt" id="filters"></div>
         <div class="count" id="count"></div>

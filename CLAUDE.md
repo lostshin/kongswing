@@ -67,6 +67,10 @@ If wrangler fails to find `@cloudflare/workerd-darwin-arm64`, run `npm install -
 - Each page prefetches its sibling pages with `rel="prefetch"`.
 - vocabulary and events pages write `sessionStorage.setItem('kts-smooth-target', 'contact')` before returning home; the home page reads this to trigger smooth-scroll.
 
+**Navigation press feedback**:
+- `.nav-links a` now uses `display:inline-flex` with a 44px tap target, so button-like nav elements such as `.nav-cta` and the home language switcher may use `transform: scale(.97)` for press feedback.
+- Pure text-style inline links should still prefer background or color changes instead of transform-based press feedback.
+
 ## Regression Tests
 
 `tests/site-regression.test.mjs` runs against the built `dist/` directory. It asserts:
