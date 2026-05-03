@@ -65,7 +65,7 @@ assert.deepEqual(
 
 assert.match(cssBlock(index, 'html'), /scroll-behavior:\s*smooth/, 'home page should smooth-scroll same-page anchor jumps');
 assert.match(cssBlock(index, '.hero h1 .title-line'), /white-space:\s*nowrap/, 'home hero should keep jump, 跳, and Swing on the same line');
-assert.match(cssBlock(index, '.hero h1 .title-line'), /margin-top:\s*\.08em/, 'home hero should keep a little air between Kóng 台語 and 跳 Swing');
+assert.match(cssBlock(index, '.hero h1 .title-line'), /margin-top:\s*\.16em/, 'home hero should keep a little air between Kóng 台語 and 跳 Swing');
 assert.match(index, /@media \(max-width:820px\)\{[\s\S]*?\.hero-art\{display:none\}/, 'mobile home hero should hide the desktop artwork so stickers cannot overlap the CTA or ticker');
 assert.match(index, /@media \(max-width:420px\)\{[\s\S]*?\.hero h1 \.title-line\{white-space:normal\}/, 'very narrow phones should allow the hero title line to wrap');
 assert.match(index, /sessionStorage\.getItem\('kts-smooth-target'\)/, 'home page should consume queued smooth-scroll targets from subpages');
