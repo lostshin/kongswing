@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="每日台語 · Word of the day｜Kóng台語 跳Swing"
+  description="Kóng台語 跳Swing 每日台語：搖擺舞中常用的台語詞句、POJ、例句與英文說明。"
+  ogTitle="每日台語 · Word of the day｜Kóng台語 跳Swing"
+  ogDescription="逐禮拜一字台語，一隻兔仔陪你練搖擺舞常用詞句。"
+  twitterTitle="每日台語 · Kóng台語 跳Swing"
+  twitterDescription="逐禮拜一字台語，一隻兔仔陪你練搖擺舞常用詞句。"
+  prefetch={["index.html", "vocabulary.html", "events.html", "about.html", "faq.html", "contact.html"]}
+  variant="sub"
+  activeNav="daily"
+>
+  <style is:inline slot="head" set:html={`
+    body{background:radial-gradient(900px 640px at 100% 0,rgba(244,200,75,.18),transparent 62%),var(--paper)}
+    @media (min-width:821px){body{background-attachment:fixed}}
+    .vocab{padding:64px 0 88px;background:linear-gradient(180deg,transparent,rgba(28,58,142,.04) 34%,rgba(28,58,142,.04) 76%,transparent)}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px;flex-wrap:wrap}
+    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+    h1.title{font-family:var(--serif);font-size:clamp(36px,5vw,68px);font-weight:700;margin:6px 0 0;line-height:1.05;letter-spacing:-.005em}
+    h1.title .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.58em;display:inline-block;transform:rotate(-2deg);margin-left:.2em}
+    .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:13px;letter-spacing:.02em;font-weight:500;border:1.5px solid var(--navy);background:transparent;color:var(--navy)}
+    .btn:hover{background:var(--paper-2)}
+    .vocab-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
+    .card-stage{perspective:1600px}
+    .card{position:relative;aspect-ratio:1/1;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.6,0,.25,1);cursor:pointer}
+    .card:focus-visible{outline:3px solid var(--mustard);outline-offset:6px}
+    .card.flipped{transform:rotateY(180deg)}
+    .card-face{position:absolute;inset:0;backface-visibility:hidden;background:#fbf5e3;border:1px solid rgba(26,22,18,.12);box-shadow:0 30px 70px rgba(20,42,107,.18),0 1px 0 rgba(26,22,18,.04);overflow:hidden}
+    .card-back{transform:rotateY(180deg)}
+    .card-front{display:grid;grid-template-columns:1fr 1fr;background:radial-gradient(circle at 20% 90%,rgba(244,200,75,.2),transparent 50%),#faf3e0}
+    .card-left{padding:48px 32px;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .word-tag{background:var(--mustard);padding:14px 18px;align-self:flex-start;box-shadow:4px 4px 0 rgba(26,22,18,.1);margin-bottom:18px}
+    .word-tag .han{font-family:var(--tai);font-size:48px;font-weight:900;color:var(--navy);line-height:1}
+    .word-tag .poj{font-family:var(--poj);font-style:italic;font-weight:600;color:var(--navy);font-size:18px;margin-top:6px;letter-spacing:.02em}
+    .word-sentence .han{font-family:var(--tai);font-size:18px;color:var(--ink);line-height:1.6;margin-bottom:6px}
+    .word-sentence .poj{font-family:var(--poj);font-style:italic;font-size:18px;color:var(--navy);line-height:1.6}
+    .card-foot{position:absolute;left:32px;right:32px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase}
+    .card-foot .logo-mini{font-family:var(--serif);font-style:normal;color:var(--navy);font-size:12px;letter-spacing:0;text-transform:none;text-align:right;line-height:1.2}
+    .card-right{position:relative;display:grid;place-items:center;overflow:hidden}
+    .card-right .blue{position:absolute;inset:8% 6% 8% 0;background:var(--navy);clip-path:polygon(20% 4%,80% 0%,96% 26%,92% 50%,100% 74%,78% 96%,44% 100%,16% 88%,4% 60%,0 28%,10% 14%)}
+    .card-right .bunny{position:relative;z-index:2;width:74%;height:auto;filter:grayscale(.55) contrast(1.05)}
+    .card-back{padding:36px;display:flex;flex-direction:column;background:var(--paper)}
+    .back-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+    .back-head .han{font-family:var(--tai);font-size:32px;font-weight:700;color:var(--navy)}
+    .back-head .poj{font-family:var(--poj);font-style:italic;color:var(--ink-soft);font-size:16px}
+    .back-row{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px;align-items:start}
+    .back-row .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);padding-top:3px}
+    .back-row .val{color:var(--ink)}
+    .back-row .val em{font-family:var(--poj);font-style:italic;color:var(--navy);font-weight:500}
+    .vocab-side h2{font-family:var(--serif);font-size:32px;font-weight:700;line-height:1.2;margin:0 0 12px}
+    .vocab-side p{font-size:16px;line-height:1.7;color:var(--ink-soft);margin:0 0 20px}
+    .pad-controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+    .pad-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line);min-height:44px;font-size:14px;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+    .pad-btn:hover{background:var(--paper);border-color:var(--navy);color:var(--navy)}
+    .pad-btn.play{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+    .pad-btn.play:hover{background:var(--navy-deep)}
+    .pad-btn.flip{background:var(--mustard);border-color:var(--mustard);color:var(--navy)}
+    .pad-btn .ico{width:14px;height:14px;display:inline-block}
+    .pager{display:flex;align-items:center;gap:14px;margin-top:24px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink-soft)}
+    .pager .pgbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center;cursor:pointer}
+    .pager .pgbtn:hover{background:var(--paper-2);border-color:var(--navy);color:var(--navy)}
+    .dots{display:flex;gap:6px;margin-top:14px}
+    .dots span{width:6px;height:6px;border-radius:50%;background:var(--line)}
+    .dots span.on{background:var(--navy);transform:scale(1.4)}
+    @media (prefers-reduced-motion:reduce){.card{transition:none}}
+    @media (max-width:820px){
+      .vocab{padding:48px 0 64px}
+      .section-head{margin-bottom:32px}
+      .vocab-grid{grid-template-columns:1fr;gap:24px}
+      .word-tag .han{font-size:38px}
+      .card-left,.card-back{padding:24px}
+      .card-foot{left:24px;right:24px;bottom:18px}
+    }
+    @media (max-width:520px){
+      .card-front{grid-template-columns:1fr}
+      .card-right{display:none}
+      .card{aspect-ratio:4/5}
+      .back-row{grid-template-columns:1fr;gap:4px}
+    }
+  `}></style>
+
+  <section class="vocab" id="vocab">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">今仔日 ê 詞 · word of the day</div>
+          <h1 class="title">搖擺舞中定定用 ê 言詞 <span class="hand">flip me!</span></h1>
+        </div>
+        <a href="vocabulary.html" class="btn">看完整詞彙庫 &nbsp;→</a>
+      </div>
+
+      <div class="vocab-grid">
+        <div class="card-stage">
+          <div class="card" id="card" role="button" tabindex="0" aria-pressed="false" aria-label="翻面查看今仔日詞的解釋">
+            <div class="card-face card-front">
+              <div class="card-left">
+                <div class="word-tag">
+                  <div class="han" id="w-han">跳舞</div>
+                  <div class="poj" id="w-poj">thiàu-bú</div>
+                </div>
+                <div class="word-sentence">
+                  <div class="han" id="w-sen-han">咱來開始跳舞。</div>
+                  <div class="poj" id="w-sen-poj">Lán lâi khai-sí thiàu-bú.</div>
+                </div>
+                <div class="card-foot">
+                  <div>搖擺舞中定定用 ê 言詞</div>
+                  <div class="logo-mini">Kóng台語<br/>跳Swing</div>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="blue"></div>
+                <img src="/logo.png" alt="" class="bunny" width="370" height="370">
+              </div>
+            </div>
+
+            <div class="card-face card-back">
+              <div class="back-head">
+                <div>
+                  <div class="han" id="b-han">跳舞</div>
+                  <div class="poj" id="b-poj">thiàu-bú · v.</div>
+                </div>
+                <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase" id="b-num">No. 001 / 128</div>
+              </div>
+              <div class="back-row"><div class="lbl">English</div><div class="val" id="b-en">to dance</div></div>
+              <div class="back-row"><div class="lbl">華語</div><div class="val" id="b-zh">跳舞</div></div>
+              <div class="back-row"><div class="lbl">類別</div><div class="val" id="b-cat">基本動作 · basic move</div></div>
+              <div class="back-row"><div class="lbl">例句</div><div class="val">
+                <em id="b-ex-poj">Lán lâi khai-sí thiàu-bú.</em><br/>
+                <span id="b-ex-han">咱來開始跳舞。</span><br/>
+                <small style="color:var(--ink-soft)" id="b-ex-en">Let's start dancing.</small>
+              </div></div>
+              <div class="back-row"><div class="lbl">Note</div><div class="val" id="b-note">
+                「跳舞」(thiàu-bú) 嘛會使講做「跳舞蹈」(thiàu bú-tō)。佇 Swing 內底，定定講「kā 我跳一條」-- 跟我跳一首。
+              </div></div>
+              <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase">
+                <div>tap card to flip back</div>
+                <div style="color:var(--navy);font-family:var(--serif);text-transform:none;font-size:13px;letter-spacing:0">Kóng台語 跳Swing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vocab-side">
+          <h2>逐禮拜一字台語<br/>一隻兔仔陪你練 ê.</h2>
+          <p>
+            每禮拜阮會揀一句搖擺舞中定定用 ê 台語，配一張兔仔 ê 紙片。
+            試看覓 -- 點 <strong>Play</strong> 聽發音、點 <strong>Flip</strong> 看詳細解說。
+          </p>
+
+          <div class="pad-controls">
+            <button class="pad-btn play" id="btn-play">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg>
+              </span>
+              播音 · Play
+            </button>
+            <button class="pad-btn flip" id="btn-flip">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M2 5a5 5 0 0 1 9-2M12 9a5 5 0 0 1-9 2M11 1v3.4H7.6M3 13V9.6h3.4"/></svg>
+              </span>
+              翻面 · Flip
+            </button>
+            <button class="pad-btn" id="btn-save">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg>
+              </span>
+              收藏
+            </button>
+          </div>
+
+          <div class="pager">
+            <button class="pgbtn" id="prev" aria-label="prev">‹</button>
+            <span id="counter">001 / 005</span>
+            <button class="pgbtn" id="next" aria-label="next">›</button>
+          </div>
+          <div class="dots" id="dots"></div>
+
+          <p style="margin-top:24px;font-size:13px;color:var(--ink-soft)">
+            ※ 發音以白話字 (POJ) 表記。完整 128 字 ê 詞彙庫
+            佇 <a href="vocabulary.html" style="color:var(--navy);border-bottom:1px solid var(--navy)">詞彙庫頁面</a>。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline slot="afterBody">
+    const words = [
+      { n:1, han:'跳舞', poj:'thiàu-bú', cat:'動作 · verb',
+        sen_han:'咱來開始跳舞。', sen_poj:'Lán lâi khai-sí thiàu-bú.',
+        en:'to dance', zh:'跳舞', ex_en:"Let's start dancing.",
+        note:'「跳舞」(thiàu-bú) 嘛會使講做「跳舞蹈」(thiàu bú-tō)。佇 Swing 內底定定講「kā 我跳一條」-- 跟我跳一首。' },
+      { n:2, han:'搖擺', poj:'iô-pái', cat:'形容 · adj.',
+        sen_han:'這條歌真搖擺！', sen_poj:'Chit tiâu koa chin iô-pái!',
+        en:'swingy, with swing feel', zh:'搖擺、有 swing 味',
+        ex_en:"This tune really swings!",
+        note:'iô-pái 字面是「搖搖擺擺」，佮英文 swing 真有契合 ê 意思。' },
+      { n:3, han:'邀舞', poj:'iau-bú', cat:'社交 · social',
+        sen_han:'我會使邀你跳一條無？', sen_poj:'Góa ē-sái iau lí thiàu chi̍t tiâu bô?',
+        en:'to ask for a dance', zh:'邀請別人跳舞',
+        ex_en:"May I have this dance?",
+        note:'佇社交舞 (social) 內底，邀舞是基本禮數。對方會使應「好啊 (hó--ah)」抑「歹勢 (pháiⁿ-sè)」。' },
+      { n:4, han:'多謝', poj:'to-siā', cat:'禮數 · etiquette',
+        sen_han:'多謝你 ê 舞！', sen_poj:'To-siā lí ê bú!',
+        en:'thank you (esp. after a dance)', zh:'謝謝（跳完一條尤其要說）',
+        ex_en:"Thanks for the dance!",
+        note:'跳完一條歌，記得行回伊 ê 邊講「多謝」。佮對方目睭看一下，誠重要。' },
+      { n:5, han:'做伙', poj:'chò-hóe', cat:'副 · adv.',
+        sen_han:'咱做伙來跳！', sen_poj:'Lán chò-hóe lâi thiàu!',
+        en:'together, with one another', zh:'一起',
+        ex_en:"Let's dance together!",
+        note:'阮 ê slogan：「招逐家做伙講台語、跳 Swing」。chò-hóe 嘛會寫做「做夥」。' }
+    ];
+
+    let idx = 0;
+    const card = document.getElementById('card');
+    const counter = document.getElementById('counter');
+    const dotsEl = document.getElementById('dots');
+    const saved = new Set((function(){
+      try { return JSON.parse(localStorage.getItem('kts-saved') || '[]'); }
+      catch (e) { return []; }
+    })());
+    function persistSaved(){
+      try { localStorage.setItem('kts-saved', JSON.stringify([...saved])); } catch (e) {}
+    }
+    function updateSaveBtn(){
+      const btn = document.getElementById('btn-save');
+      if (!btn) return;
+      const w = words[idx];
+      const isSaved = saved.has(w.n);
+      btn.setAttribute('aria-pressed', String(isSaved));
+      btn.style.background = isSaved ? 'var(--mustard)' : '';
+      btn.style.color = isSaved ? 'var(--navy)' : '';
+      btn.innerHTML = isSaved
+        ? '<span class="ico">★</span> 已收藏'
+        : '<span class="ico"><svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg></span> 收藏';
+    }
+
+    function renderDots(){
+      dotsEl.innerHTML = words.map((_,i)=>`<span class="${i===idx?'on':''}"></span>`).join('');
+    }
+    function setWord(i){
+      idx = (i + words.length) % words.length;
+      const w = words[idx];
+      document.getElementById('w-han').textContent = w.han;
+      document.getElementById('w-poj').textContent = w.poj;
+      document.getElementById('w-sen-han').textContent = w.sen_han;
+      document.getElementById('w-sen-poj').textContent = w.sen_poj;
+      document.getElementById('b-han').textContent = w.han;
+      document.getElementById('b-poj').textContent = w.poj + ' · ' + w.cat.split(' ')[0];
+      document.getElementById('b-num').textContent = 'No. ' + String(w.n).padStart(3,'0') + ' / 128';
+      document.getElementById('b-en').textContent = w.en;
+      document.getElementById('b-zh').textContent = w.zh;
+      document.getElementById('b-cat').textContent = w.cat;
+      document.getElementById('b-ex-poj').textContent = w.sen_poj;
+      document.getElementById('b-ex-han').textContent = w.sen_han;
+      document.getElementById('b-ex-en').textContent = w.ex_en;
+      document.getElementById('b-note').textContent = w.note;
+      counter.textContent = String(w.n).padStart(3,'0') + ' / ' + String(words.length).padStart(3,'0');
+      renderDots();
+      updateSaveBtn();
+    }
+
+    function setCardFlipped(flipped){
+      card.classList.toggle('flipped', flipped);
+      card.setAttribute('aria-pressed', String(flipped));
+      card.setAttribute('aria-label', flipped ? '翻回今仔日詞卡正面' : '翻面查看今仔日詞的解釋');
+    }
+    function toggleCard(){
+      setCardFlipped(!card.classList.contains('flipped'));
+    }
+    document.getElementById('btn-flip').addEventListener('click', toggleCard);
+    card.addEventListener('click', toggleCard);
+    card.addEventListener('keydown', (e)=>{
+      if(e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      toggleCard();
+    });
+    document.getElementById('next').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx+1) });
+    document.getElementById('prev').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx-1) });
+    document.getElementById('btn-save').addEventListener('click', ()=>{
+      const id = words[idx].n;
+      saved.has(id) ? saved.delete(id) : saved.add(id);
+      persistSaved();
+      updateSaveBtn();
+    });
+    document.getElementById('btn-play').addEventListener('click', async ()=>{
+      const w = words[idx];
+      const btn = document.getElementById('btn-play');
+      if (btn.disabled) return;
+      const original = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="ico">♪</span> 播音中...';
+      await (window.ktsSpeak ? window.ktsSpeak(w.sen_han) : Promise.resolve(false));
+      btn.innerHTML = original;
+      btn.disabled = false;
+    });
+
+    setWord(0);
+  </script>
+</BaseLayout>

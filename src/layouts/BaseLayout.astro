@@ -12,7 +12,7 @@ interface Props {
   twitterDescription: string;
   prefetch: string[];
   variant: 'home' | 'sub';
-  activeNav?: 'about' | 'vocabulary' | 'events' | 'faq' | 'contact';
+  activeNav?: 'home' | 'about' | 'daily' | 'vocabulary' | 'events' | 'faq' | 'contact';
 }
 const {
   title,
@@ -59,26 +59,35 @@ const {
 <slot name="afterFooter" />
 
 <script is:inline>
-  // shared smooth-scroll consumer (home consumes target queued by sub-pages)
+  // shared smooth-scroll consumer (pages consume target queued before cross-page nav)
   (function(){
-    const target = sessionStorage.getItem('kts-smooth-target');
+    let reduceMotion = false;
+    const mq = window.matchMedia?.('(prefers-reduced-motion:reduce)');
+    function syncMotionPreference(){
+      reduceMotion = !!mq?.matches;
+    }
+    syncMotionPreference();
+    mq?.addEventListener?.('change', syncMotionPreference);
+    let target = null;
+    try { target = sessionStorage.getItem('kts-smooth-target'); } catch (_) {}
     if (!target) return;
-    sessionStorage.removeItem('kts-smooth-target');
+    try { sessionStorage.removeItem('kts-smooth-target'); } catch (_) {}
     const el = document.getElementById(target);
     if (!el) return;
     requestAnimationFrame(()=>{
-      el.scrollIntoView({ behavior:'smooth', block:'start' });
+      el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block:'start' });
     });
   })();
 
-  // shared smooth-scroll producer (sub-pages queue contact target before returning home)
+  // shared smooth-scroll producer (queue target before cross-page nav)
   (function(){
-    document.querySelectorAll('a[href="index.html#contact"]').forEach(a=>{
+    document.querySelectorAll('.nav-links a[href$=".html"]').forEach(a=>{
       a.addEventListener('click', e=>{
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-        e.preventDefault();
-        sessionStorage.setItem('kts-smooth-target', 'contact');
-        window.location.href = 'index.html';
+        const url = new URL(a.getAttribute('href'), location.href);
+        if (url.pathname === location.pathname) return;
+        const target = a.dataset.scrollTo || 'main';
+        try { sessionStorage.setItem('kts-smooth-target', target); } catch (_) {}
       });
     });
   })();

@@ -1,14 +1,13 @@
 ---
 interface Props {
   variant: 'home' | 'sub';
-  activeNav?: 'about' | 'vocabulary' | 'events' | 'faq' | 'contact';
+  activeNav?: 'home' | 'about' | 'daily' | 'vocabulary' | 'events' | 'faq' | 'contact';
 }
 const { variant, activeNav } = Astro.props;
-const isHome = variant === 'home';
 ---
 <nav class="nav">
   <div class="nav-inner">
-    <a class="brand" href={isHome ? '#top' : 'index.html'}>
+    <a class="brand" href="index.html">
       <span class="brand-mark"><img src="/logo.png" alt="Kóng台語 跳Swing logo" width="370" height="370"></span>
       <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
     </a>
@@ -20,39 +19,15 @@ const isHome = variant === 'home';
         <button data-lang="en">EN</button>
       </div>
       <div class="nav-links">
-        {isHome ? (
-          <>
-            <a href="#about" class="active"><span class="lang-zh">關於</span><span class="lang-tw">關於</span><span class="lang-poj">Lán</span><span class="lang-en">About</span></a>
-            <a href="#vocab"><span class="lang-zh">每日台語</span><span class="lang-tw">今仔日詞</span><span class="lang-poj">Kin-á-ji̍t</span><span class="lang-en">Word</span></a>
-            <a href="vocabulary.html"><span class="lang-zh">詞彙庫</span><span class="lang-tw">詞彙庫</span><span class="lang-poj">Sú-iû</span><span class="lang-en">Library</span></a>
-            <a href="#events"><span class="lang-zh">活動</span><span class="lang-tw">活動</span><span class="lang-poj">O̍h-tōng</span><span class="lang-en">Events</span></a>
-            <a href="events.html"><span class="lang-zh">課程</span><span class="lang-tw">課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">Classes</span></a>
-            <a href="#faq">FAQ</a>
-            <a class="nav-cta" href="#contact"><span class="lang-zh">聯絡我們 →</span><span class="lang-tw">講予阮聽 →</span><span class="lang-poj">Kóng hō góan thiaⁿ →</span><span class="lang-en">Say hi →</span></a>
-          </>
-        ) : (
-          <>
-            <a href="index.html">首頁</a>
-            <a href="about.html" class:list={[activeNav === 'about' && 'active']}>關於</a>
-            <a href="vocabulary.html" class:list={[activeNav === 'vocabulary' && 'active']}>詞彙庫</a>
-            <a href="events.html" class:list={[activeNav === 'events' && 'active']}>課程</a>
-            <a href="faq.html" class:list={[activeNav === 'faq' && 'active']}>FAQ</a>
-            <a class="nav-cta" href="contact.html" class:list={[activeNav === 'contact' && 'active']}>聯絡我們 →</a>
-          </>
-        )}
+        <a href="index.html" class:list={[activeNav === 'home' && 'active']}>首頁</a>
+        <a href="about.html" class:list={[activeNav === 'about' && 'active']}>關於</a>
+        <a href="daily.html" class:list={[activeNav === 'daily' && 'active']}>每日台語</a>
+        <a href="vocabulary.html" class:list={[activeNav === 'vocabulary' && 'active']}>詞彙庫</a>
+        <a href="events.html" class:list={[activeNav === 'events' && 'active']}>課程</a>
+        <a href="faq.html" class:list={[activeNav === 'faq' && 'active']}>FAQ</a>
+        <a class="nav-cta" href="contact.html" class:list={[activeNav === 'contact' && 'active']}>聯絡我們 →</a>
       </div>
     </div>
     <button class="nav-toggle" id="nav-toggle" aria-label="menu" aria-expanded="false" aria-controls="nav-menu"><span class="bars"><span></span></span></button>
   </div>
 </nav>
-
-{isHome && (
-  <style is:inline set:html={`
-    /* home variant overrides */
-    .nav .brand-mark{width:48px;height:48px;border:0;border-radius:0;background:transparent;display:grid;place-items:center;overflow:visible}
-    .nav .brand-mark img{width:100%;height:auto;display:block}
-    .nav-links a{position:relative}
-    .nav-links a:hover{color:var(--navy)}
-    .nav-links a.active::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:6px;background:var(--mustard);z-index:-1;border-radius:2px}
-  `}></style>
-)}

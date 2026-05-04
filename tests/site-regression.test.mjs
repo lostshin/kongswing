@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 const pages = {
   index: readFileSync('dist/index.html', 'utf8'),
   about: readFileSync('dist/about.html', 'utf8'),
+  daily: readFileSync('dist/daily.html', 'utf8'),
   vocabulary: readFileSync('dist/vocabulary.html', 'utf8'),
   events: readFileSync('dist/events.html', 'utf8'),
   faq: readFileSync('dist/faq.html', 'utf8'),
@@ -53,14 +54,9 @@ for (const [name, source] of Object.entries(pages)) {
   assert.match(source, /id="lang-sw"/, `${name} should expose the language switcher`);
 }
 
-assert.deepEqual(
-  navHrefs(pages.index),
-  ['#about', '#vocab', 'vocabulary.html', '#events', 'events.html', '#faq', '#contact'],
-  'home top menu should expose all core destinations',
-);
-const subExpected = ['index.html', 'about.html', 'vocabulary.html', 'events.html', 'faq.html', 'contact.html'];
-for (const name of ['about', 'vocabulary', 'events', 'faq', 'contact']) {
-  assert.deepEqual(navHrefs(pages[name]), subExpected, `${name} sub-nav should be pure page-level`);
+const expectedNav = ['index.html', 'about.html', 'daily.html', 'vocabulary.html', 'events.html', 'faq.html', 'contact.html'];
+for (const name of Object.keys(pages)) {
+  assert.deepEqual(navHrefs(pages[name]), expectedNav, `${name} nav should match unified order`);
 }
 
 assert.match(cssBlock(pages.index, 'html'), /scroll-behavior:\s*smooth/, 'home page should smooth-scroll same-page anchor jumps');
@@ -69,5 +65,6 @@ assert.match(cssBlock(pages.index, '.hero h1 .title-line'), /margin-top:\s*\.16e
 assert.match(pages.index, /@media \(max-width:820px\)\{[\s\S]*?\.hero-art\{display:none\}/, 'mobile home hero should hide the desktop artwork so stickers cannot overlap the CTA or ticker');
 assert.match(pages.index, /@media \(max-width:420px\)\{[\s\S]*?\.hero h1 \.title-line\{white-space:normal\}/, 'very narrow phones should allow the hero title line to wrap');
 assert.match(pages.index, /sessionStorage\.getItem\('kts-smooth-target'\)/, 'home page should consume queued smooth-scroll targets from subpages');
+assert.match(pages.index, /querySelectorAll\('\.nav-links a\[href\$="\.html"\]'\)/, 'nav links should queue a smooth-scroll target before cross-page navigation');
 
 console.log('site regression checks passed');
