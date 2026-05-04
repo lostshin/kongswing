@@ -82,12 +82,14 @@ If wrangler fails to find `@cloudflare/workerd-darwin-arm64`, run `npm install -
 - `src/pages/api/contact.ts` is SSR (`prerender = false`), POSTs JSON `{name,email,topic,message}`, sends mail via `cloudflare:email` using the `SEB` binding.
 - Env reads come from `locals.runtime.env` (Cloudflare Pages convention): `CONTACT_SENDER`, `CONTACT_RECIPIENT`, `SEB`. If any is missing, return 503 `mail_not_configured` — do not throw, the form's error state expects a JSON `{ok:false,error}` shape.
 - Topic validation uses an `ALLOWED_TOPICS` Set keyed on the literal Chinese form labels (`'合作 · Collaboration'` etc.). If you change the form `<option>` text, update the Set in lockstep.
-- `wrangler.toml` declares `[[send_email]] name="SEB" destination_address="luljidjemeli@gmail.com"`. The `destination_address` is the **only** address `send_email` may target — Email Routing's free tier requires the destination be a verified address on the zone. Do not switch to an unverified recipient without re-verifying first.
+- The `SEB` send_email binding **must NOT** be declared in `wrangler.toml` — Pages' wrangler config validator rejects `[[send_email]]` blocks and fails the build with `Configuration file for Pages projects does not support "send_email"`. The Pages REST API also does not expose this binding type (silently accepts but does not persist). The binding can only be created via the Cloudflare dashboard.
+- The binding's `destination_address` is the **only** address `send_email` may target — Email Routing's free tier requires the destination be a verified address on the zone. Do not switch to an unverified recipient without re-verifying first.
 - Sender (`CONTACT_SENDER`) must be on the same Cloudflare-managed zone (`kongswing.cc`); arbitrary external From addresses will be rejected.
 - Manual Cloudflare setup (one-time, not in code):
   1. `kongswing.cc` zone → Email → Email Routing → Enable
   2. Verify destination mailbox (e.g. luljidjemeli@gmail.com)
-  3. Pages project → Settings → Variables: set `CONTACT_SENDER` and `CONTACT_RECIPIENT`
+  3. Pages project → Settings → Functions → Email bindings → add `SEB` with the verified destination address
+  4. Pages project → Settings → Variables: set `CONTACT_SENDER` and `CONTACT_RECIPIENT`
 - Form UX contract (in `index.astro` `#contact-form` handler): four states — idle / loading (`aria-busy`) / success (`status[role=status]`) / error (`status[role=alert]`). Do not collapse to fewer states; the form previously fake-succeeded without sending and that was the bug being fixed.
 
 ## Regression Tests
