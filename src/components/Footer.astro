@@ -7,13 +7,23 @@ const { variant } = Astro.props;
 {variant === 'home' ? (
   <footer>
     <div class="wrap ftr">
-      <div>
+      <div class="ftr-brand">
         <div class="lg">Kóng台語 跳Swing<small>佇轉厝 ê 路頂面跳舞 ₍ᐢ..ᐢ₎</small></div>
+        <ul class="social" aria-label="社群連結">
+          <li><a href="https://www.instagram.com/kongswing/" rel="noopener" target="_blank" aria-label="Instagram @kongswing">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92C8.42 2.17 8.8 2.16 12 2.16zm0-2.16C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm6.41-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg>
+          </a></li>
+          <li><a href="https://www.threads.com/@kongswing" rel="noopener" target="_blank" aria-label="Threads @kongswing">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M12.19 24h-.02c-3.58-.02-6.33-1.21-8.18-3.51C2.35 18.44 1.5 15.59 1.47 12.01v-.02c.03-3.58.88-6.43 2.53-8.48C5.85 1.21 8.6.02 12.18 0h.02c2.75.02 5.04.73 6.83 2.1 1.68 1.29 2.86 3.13 3.5 5.47l-2.04.57c-1.1-3.96-3.9-5.98-8.31-6.02-2.91.02-5.11.94-6.54 2.72C4.31 6.5 3.62 8.91 3.59 12c.03 3.09.72 5.5 2.06 7.16 1.43 1.78 3.63 2.7 6.54 2.72 2.62-.02 4.36-.63 5.8-2.05 1.65-1.61 1.62-3.59 1.09-4.8-.31-.71-.87-1.3-1.63-1.75-.19 1.35-.62 2.45-1.28 3.27-.89 1.1-2.14 1.7-3.73 1.79-1.2.07-2.36-.22-3.26-.8-1.06-.69-1.69-1.74-1.75-2.97-.07-1.19.41-2.29 1.33-3.08.88-.76 2.12-1.21 3.58-1.29 1.06-.06 2.06.05 2.97.3 0-.71-.19-1.27-.56-1.66-.51-.55-1.3-.83-2.34-.84h-.03c-.84 0-1.97.23-2.7 1.31l-1.78-1.2c.97-1.43 2.55-2.22 4.5-2.22h.04c3.26.02 5.2 2.02 5.4 5.5.11.05.23.1.34.15 1.6.75 2.77 1.9 3.39 3.32.86 1.97.94 5.18-1.66 7.78C17.95 22.95 15.42 23.97 12.21 24h-.02zm.03-12.07c-.24 0-.48 0-.73.02-1.83.1-2.97.94-2.87 2.13.1 1.25 1.47 1.83 2.79 1.76 1.21-.07 2.79-.54 3.06-3.7-.66-.14-1.39-.21-2.25-.21z"/></svg>
+          </a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61580067494495" rel="noopener" target="_blank" aria-label="Facebook 粉絲專頁">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M9.1 23.69v-7.98H6.63v-3.67H9.1v-1.58c0-4.08 1.85-5.98 5.86-5.98.4 0 .96.04 1.47.1.43.05.85.13 1.14.2v3.32a8.62 8.62 0 0 0-.65-.04c-.27 0-.52-.01-.73-.01-.71 0-1.26.1-1.68.31a1.69 1.69 0 0 0-.68.62c-.26.42-.37 1-.37 1.75v1.3h3.47l-.4 2.22-.18.86h-2.89v8.25A12 12 0 0 0 12 0a12 12 0 0 0-2.9 23.69z"/></svg>
+          </a></li>
+        </ul>
       </div>
       <div class="lks">
         <a href="vocabulary.html">詞彙庫</a>
         <a href="events.html">課程</a>
-        <a href="https://www.instagram.com/kongswing/">IG</a>
         <a href="#contact">聯絡</a>
       </div>
       <div class="crd">© 2026 Kóng台語 跳Swing · Made w/ 🐇 in TW</div>
@@ -30,11 +40,18 @@ const { variant } = Astro.props;
 
 {variant === 'home' && (
   <style is:inline set:html={`
+    footer .ftr-brand{display:flex;flex-direction:column;gap:14px}
     footer .lg small{display:block;font-family:var(--hand);font-weight:600;color:var(--ink-soft);font-size:14px;margin-top:4px}
     footer .lks{display:flex;gap:18px;flex-wrap:wrap}
     footer .lks a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--navy);text-decoration:none;font-weight:500;touch-action:manipulation}
     footer .lks a:hover{text-decoration:underline}
+    footer .lks a:focus-visible{outline:2px solid var(--mustard);outline-offset:4px;border-radius:6px}
     footer .crd{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+    footer .social{list-style:none;margin:0;padding:0;display:flex;gap:8px}
+    footer .social a{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;color:var(--ink-soft);background:transparent;text-decoration:none;transition:background .15s ease, color .15s ease, transform .15s ease;touch-action:manipulation}
+    footer .social a:hover{background:var(--navy);color:var(--paper)}
+    footer .social a:active{transform:scale(.94)}
+    footer .social a:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
   `}></style>
 )}
 

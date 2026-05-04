@@ -27,9 +27,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:#fdfaf1;border:1px solid var(--line);padding:10px 14px}
     .search input{border:0;background:transparent;font:inherit;font-size:16px;width:100%;outline:none}
     .filt{display:flex;gap:6px;flex-wrap:wrap}
-    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation}
+    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation;transition:background .15s ease, color .15s ease, border-color .15s ease}
     .chip:hover{border-color:var(--navy);color:var(--navy)}
-    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+    .chip:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
+    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy);font-weight:600}
+    .chip.on:hover{color:var(--paper)}
     .count{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.06em}
 
     .voc-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:18px;padding:32px 0 80px}
@@ -41,8 +43,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .voc .poj{font-family:var(--poj);font-style:italic;color:var(--ink-soft);font-size:16px;margin-top:4px}
     .voc .en{font-size:14px;color:var(--ink);margin-top:14px}
     .voc .cat{margin-top:14px;display:inline-block;background:var(--mustard);color:var(--navy);font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase}
-    .voc .play{position:absolute;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--paper);border:0;display:grid;place-items:center;cursor:pointer}
+    .voc .play{position:absolute;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--paper);border:0;display:grid;place-items:center;cursor:pointer;transition:transform .2s ease}
     .voc .play:hover{background:var(--navy-deep)}
+    .voc.is-playing .play{background:var(--mustard);color:var(--navy);animation:vocPulse 1.1s ease-in-out infinite}
+    @keyframes vocPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+    @media (prefers-reduced-motion: reduce){.voc.is-playing .play{animation:none}}
   `}></style>
 
   <section class="hd">
@@ -89,10 +94,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     ];
 
     const filtersEl = document.getElementById('filters');
-    filtersEl.innerHTML = cats.map((c,i)=>`<button class="chip${i===0?' on':''}" data-cat="${c}">${c}</button>`).join('');
+    filtersEl.innerHTML = cats.map((c,i)=>`<button class="chip${i===0?' on':''}" type="button" aria-pressed="${i===0?'true':'false'}" data-cat="${c}">${c}</button>`).join('');
     filtersEl.addEventListener('click',e=>{
       const b = e.target.closest('.chip'); if(!b) return;
-      document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+      document.querySelectorAll('.chip').forEach(c=>{
+        const on = c===b;
+        c.classList.toggle('on', on);
+        c.setAttribute('aria-pressed', String(on));
+      });
       render();
     });
 
@@ -118,12 +127,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="play" aria-hidden="true"><svg viewBox="0 0 14 14" width="12" height="12"><path fill="currentColor" d="M3 1.5v11l9-5.5z"/></svg></span>
         </article>`).join('');
       document.querySelectorAll('.voc').forEach(el=>{
-        const speak = ()=>{
-          try{
-            const u = new SpeechSynthesisUtterance(el.dataset.sen);
-            u.lang='zh-TW';u.rate=.9;
-            speechSynthesis.speak(u);
-          }catch(e){}
+        const speak = async ()=>{
+          if (el.classList.contains('is-playing')) return;
+          el.classList.add('is-playing');
+          el.setAttribute('aria-busy', 'true');
+          await (window.ktsSpeak ? window.ktsSpeak(el.dataset.sen) : Promise.resolve(false));
+          el.classList.remove('is-playing');
+          el.removeAttribute('aria-busy');
         };
         el.addEventListener('click', speak);
         el.addEventListener('keydown',e=>{

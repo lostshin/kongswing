@@ -83,6 +83,36 @@ const {
     });
   })();
 
+  // shared Taiwanese speech synthesis. nan-Hant-TW 是正確的 BCP47，但實際裝置多半只有 zh-TW（國語），
+  // 所以先嘗試任何 min-nan / hokkien / holo 標記的 voice，找不到才回退 zh-TW（會以國語腔讀漢字）。
+  (function(){
+    if (!('speechSynthesis' in window)) return;
+    function pickVoice(){
+      const voices = speechSynthesis.getVoices();
+      return voices.find(v => /min-nan|^nan|t[âa]i|hokkien|holo/i.test(v.name + ' ' + v.lang))
+          || voices.find(v => /zh-TW|zh_TW|cmn-Hant/i.test(v.lang))
+          || null;
+    }
+    // prime voice list (Chrome/Safari load voices async on first call)
+    speechSynthesis.getVoices();
+    speechSynthesis.addEventListener?.('voiceschanged', () => speechSynthesis.getVoices());
+    window.ktsSpeak = function(text){
+      return new Promise(resolve => {
+        try {
+          speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = 'nan-Hant-TW';
+          u.rate = 0.9;
+          const v = pickVoice();
+          if (v) u.voice = v;
+          u.onend = () => resolve(true);
+          u.onerror = () => resolve(false);
+          speechSynthesis.speak(u);
+        } catch (e) { resolve(false); }
+      });
+    };
+  })();
+
   // shared mobile nav toggle
   (function(){
     const tog = document.getElementById('nav-toggle');

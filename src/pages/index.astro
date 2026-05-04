@@ -569,7 +569,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             填底下 ê 表單，抑是寄一張 e-mail 來嘛會使。
           </p>
 
-          <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.submit').textContent='送出囉 ✦ 多謝!'; this.querySelector('.form-status').textContent='表單已送出，阮會盡快回覆。'">
+          <form class="contact-form" id="contact-form" novalidate>
             <div class="row2">
               <div class="field"><label for="n">名 · Name</label><input id="n" name="name" type="text" autocapitalize="words" autocomplete="name" required placeholder="Lí ê miâ"></div>
               <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
@@ -584,7 +584,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <option>其他 · Other</option>
               </select>
             </div>
-            <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" placeholder="講予阮聽..."></textarea></div>
+            <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" required placeholder="講予阮聽..."></textarea></div>
             <button class="submit" type="submit">送出 · Send →</button>
             <p class="form-status" role="status" aria-live="polite" style="margin:0;color:var(--ink-soft);font-size:13px"></p>
           </form>
@@ -598,10 +598,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="meta">逐禮拜更新 / weekly posts · 6.4k</div>
             </div>
           </a>
-          <a class="ch" href="mailto:hello@kongswing.tw">
+          <a class="ch" href="mailto:hello@kongswing.cc">
             <span class="ic" style="background:var(--navy);color:var(--mustard)">@</span>
             <div>
-              <div class="name">hello@kongswing.tw</div>
+              <div class="name">hello@kongswing.cc</div>
               <div class="meta">合作 · 媒體 · 工作坊邀請</div>
             </div>
           </a>
@@ -612,7 +612,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="meta">活動公告 / event announcements</div>
             </div>
           </a>
-          <a class="ch" href="mailto:hello@kongswing.tw?subject=%E8%B4%8A%E5%8A%A9%E5%90%88%E4%BD%9C%20Sponsor">
+          <a class="ch" href="mailto:hello@kongswing.cc?subject=%E8%B4%8A%E5%8A%A9%E5%90%88%E4%BD%9C%20Sponsor">
             <span class="ic" style="background:var(--rust);color:#fff">★</span>
             <div>
               <div class="name">贊助 · Sponsor</div>
@@ -677,6 +677,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const card = document.getElementById('card');
     const counter = document.getElementById('counter');
     const dotsEl = document.getElementById('dots');
+    const saved = new Set((function(){
+      try { return JSON.parse(localStorage.getItem('kts-saved') || '[]'); }
+      catch (e) { return []; }
+    })());
+    function persistSaved(){
+      try { localStorage.setItem('kts-saved', JSON.stringify([...saved])); } catch (e) {}
+    }
+    function updateSaveBtn(){
+      const btn = document.getElementById('btn-save');
+      if (!btn) return;
+      const w = words[idx];
+      const isSaved = saved.has(w.n);
+      btn.setAttribute('aria-pressed', String(isSaved));
+      btn.style.background = isSaved ? 'var(--mustard)' : '';
+      btn.style.color = isSaved ? 'var(--navy)' : '';
+      btn.innerHTML = isSaved
+        ? '<span class="ico">★</span> 已收藏'
+        : '<span class="ico"><svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg></span> 收藏';
+    }
 
     function renderDots(){
       dotsEl.innerHTML = words.map((_,i)=>`<span class="${i===idx?'on':''}"></span>`).join('');
@@ -700,6 +719,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       document.getElementById('b-note').textContent = w.note;
       counter.textContent = String(w.n).padStart(3,'0') + ' / ' + String(words.length).padStart(3,'0');
       renderDots();
+      updateSaveBtn();
     }
 
     function setCardFlipped(flipped){
@@ -723,33 +743,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     document.getElementById('next').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx+1) });
     document.getElementById('prev').addEventListener('click', ()=>{ setCardFlipped(false); setWord(idx-1) });
 
-    document.getElementById('btn-save').addEventListener('click', (e)=>{
-      e.currentTarget.innerHTML = '<span class="ico">★</span> 已收藏';
-      e.currentTarget.style.background = 'var(--mustard)';
-      e.currentTarget.style.color = 'var(--navy)';
-      setTimeout(()=>{
-        e.currentTarget.innerHTML = '<span class="ico"><svg viewBox="0 0 14 14" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 2h8v10l-4-2.5L3 12V2z"/></svg></span> 收藏';
-        e.currentTarget.style.background = '';
-        e.currentTarget.style.color = '';
-      }, 1800);
+    document.getElementById('btn-save').addEventListener('click', ()=>{
+      const id = words[idx].n;
+      saved.has(id) ? saved.delete(id) : saved.add(id);
+      persistSaved();
+      updateSaveBtn();
     });
 
-    document.getElementById('btn-play').addEventListener('click', ()=>{
+    document.getElementById('btn-play').addEventListener('click', async ()=>{
       const w = words[idx];
       const btn = document.getElementById('btn-play');
+      if (btn.disabled) return;
       const original = btn.innerHTML;
+      btn.disabled = true;
       btn.innerHTML = '<span class="ico">♪</span> 播音中...';
-      try {
-        const u = new SpeechSynthesisUtterance(w.sen_han);
-        u.lang = 'zh-TW';
-        u.rate = 0.9;
-        const voices = speechSynthesis.getVoices();
-        const v = voices.find(v=>/min-nan|nan|tâi|hokkien/i.test(v.name+v.lang)) || voices.find(v=>/zh-TW|zh_TW|cmn-Hant/i.test(v.lang));
-        if (v) u.voice = v;
-        u.onend = ()=>{ btn.innerHTML = original };
-        speechSynthesis.speak(u);
-        setTimeout(()=>{ btn.innerHTML = original }, 3500);
-      } catch(e){ btn.innerHTML = original }
+      await (window.ktsSpeak ? window.ktsSpeak(w.sen_han) : Promise.resolve(false));
+      btn.innerHTML = original;
+      btn.disabled = false;
     });
 
     setWord(0);
@@ -788,7 +798,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // Scrolling rabbit
     const sr = document.getElementById('srab');
     const srSay = document.getElementById('srab-say');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motionMql = window.matchMedia('(prefers-reduced-motion: reduce)');
     const sayings = [
       "咱來跳舞！", "Lán lâi thiàu-bú!", "iô-pái ~", "tâi-gí!", "swing!",
       "做伙來 →", "tńg-chhù ê lō͘", "✦ jazz ✦", "thò͘-á 跟綴中"
@@ -800,30 +810,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       sr.style.top  = pos.top  + 'px';
     }
     step();
-    if (reduceMotion) {
-      sr.style.display = 'none';
-    } else {
-      window.addEventListener('scroll', ()=>{
-        const y = window.scrollY;
-        const dy = y - lastY;
-        lastY = y;
-        if (Math.abs(dy) > 4) {
-          sr.style.opacity = '1';
-          sr.style.transform = `rotate(${dy * 0.4}deg) scaleY(${1 - Math.min(0.18, Math.abs(dy)*0.005)})`;
-          pos.top = Math.max(80, Math.min(window.innerHeight - 200, pos.top + dy * 0.3));
-          if (Math.random() < 0.04) {
-            srSay.textContent = sayings[Math.floor(Math.random()*sayings.length)];
-          }
-          step();
-          clearTimeout(hide);
-          hide = setTimeout(()=>{
-            sr.style.transform = 'rotate(0)';
-          }, 200);
-          clearTimeout(window.__sr_h);
-          window.__sr_h = setTimeout(()=>{ sr.style.opacity = '0' }, 1400);
-        }
-      }, { passive:true });
+    function applyRabbitMotion(){
+      sr.style.display = motionMql.matches ? 'none' : '';
     }
+    applyRabbitMotion();
+    motionMql.addEventListener?.('change', applyRabbitMotion);
+    window.addEventListener('scroll', ()=>{
+      if (motionMql.matches) return;
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      if (Math.abs(dy) > 4) {
+        sr.style.opacity = '1';
+        sr.style.transform = `rotate(${dy * 0.4}deg) scaleY(${1 - Math.min(0.18, Math.abs(dy)*0.005)})`;
+        pos.top = Math.max(80, Math.min(window.innerHeight - 200, pos.top + dy * 0.3));
+        if (Math.random() < 0.04) {
+          srSay.textContent = sayings[Math.floor(Math.random()*sayings.length)];
+        }
+        step();
+        clearTimeout(hide);
+        hide = setTimeout(()=>{
+          sr.style.transform = 'rotate(0)';
+        }, 200);
+        clearTimeout(window.__sr_h);
+        window.__sr_h = setTimeout(()=>{ sr.style.opacity = '0' }, 1400);
+      }
+    }, { passive:true });
 
     // Language switcher
     (function(){
@@ -865,5 +877,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     }
     window.addEventListener('scroll', activate, { passive:true });
+
+    // Contact form submit
+    (function(){
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+      const submit = form.querySelector('.submit');
+      const status = form.querySelector('.form-status');
+      const submitOriginal = submit.textContent;
+      const COLOR_OK = 'var(--moss)';
+      const COLOR_ERR = 'var(--rust)';
+      const COLOR_DEFAULT = 'var(--ink-soft)';
+
+      function setStatus(text, color){
+        status.style.color = color;
+        status.textContent = text;
+      }
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        const fd = new FormData(form);
+        const data = {
+          name: fd.get('name'),
+          email: fd.get('email'),
+          topic: fd.get('topic'),
+          message: fd.get('message'),
+        };
+        submit.disabled = true;
+        submit.textContent = '送出中…';
+        setStatus('傳送中，請稍等。', COLOR_DEFAULT);
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const body = await res.json().catch(()=>({ ok:false }));
+          if (res.ok && body.ok) {
+            submit.textContent = '送出囉 ✦ 多謝!';
+            setStatus('表單已送出，阮會盡快回覆 lí。', COLOR_OK);
+            form.reset();
+            setTimeout(()=>{ submit.textContent = submitOriginal; submit.disabled = false; }, 4000);
+          } else {
+            submit.textContent = submitOriginal;
+            submit.disabled = false;
+            const msg = body.error === 'bad_email' ? 'Email 格式有誤，請再確認。'
+                       : body.error === 'missing_fields' ? '請填寫姓名、Email 與訊息。'
+                       : body.error === 'mail_not_configured' ? '寄信服務尚未上線，請改寄 IG 私訊予阮。'
+                       : '送出失敗，請過一下再試，或改寄 IG 私訊予阮。';
+            setStatus(msg, COLOR_ERR);
+          }
+        } catch (err) {
+          submit.textContent = submitOriginal;
+          submit.disabled = false;
+          setStatus('連線異常，請過一下再試。', COLOR_ERR);
+        }
+      });
+    })();
   </script>
 </BaseLayout>

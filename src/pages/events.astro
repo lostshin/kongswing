@@ -25,9 +25,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
 
     .filters{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px;padding:18px 0}
-    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;touch-action:manipulation}
-    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;touch-action:manipulation;transition:background .15s ease, color .15s ease, border-color .15s ease}
+    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy);font-weight:600}
     .chip:hover{border-color:var(--navy);color:var(--navy)}
+    .chip:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
     .chip.on:hover{color:var(--paper)}
 
     .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:32px 0 64px}
@@ -53,11 +54,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .calendar{margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
     .calendar h2{font-family:var(--serif);font-size:28px;font-weight:700;margin:0 0 18px}
     .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-    .cal-grid div{aspect-ratio:1.4/1;background:#fdfaf1;border:1px solid var(--line);padding:8px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);position:relative}
+    .cal-grid > *{aspect-ratio:1.4/1;background:#fdfaf1;border:1px solid var(--line);padding:8px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);position:relative}
     .cal-grid .head{background:transparent;border:0;padding:6px 8px;color:var(--navy);font-weight:600;text-transform:uppercase}
-    .cal-grid .has{background:var(--navy);color:var(--paper)}
-    .cal-grid .has::after{content:attr(data-tag);position:absolute;left:8px;bottom:6px;font-family:var(--sans);font-size:11px;color:var(--mustard)}
+    .cal-grid a.has{background:var(--navy);color:var(--paper);text-decoration:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
+    .cal-grid a.has:hover,.cal-grid a.has:focus-visible{transform:translateY(-2px);box-shadow:0 8px 18px rgba(20,42,107,.22)}
+    .cal-grid a.has:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+    .cal-grid a.has::after{content:attr(data-tag);position:absolute;left:8px;bottom:6px;font-family:var(--sans);font-size:11px;color:var(--mustard)}
     .cal-grid .other{opacity:.35}
+    .ev.is-target{box-shadow:0 0 0 3px var(--mustard);transition:box-shadow .3s ease}
 
     footer{margin-top:48px}
 
@@ -72,12 +76,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         初級 Lindy Hop、社交舞會、線上工作坊──逐個禮拜攏有代誌做。
         課程攏會用台語＋華語雙聲道，新手歡迎。
       </p>
-      <div class="filters" id="filt">
-        <button class="chip on" data-k="全部">全部</button>
-        <button class="chip" data-k="課程">課程 · Class</button>
-        <button class="chip" data-k="社交">社交舞會 · Social</button>
-        <button class="chip" data-k="工作坊">工作坊 · Workshop</button>
-        <button class="chip" data-k="表演">表演 · Show</button>
+      <div class="filters" id="filt" role="group" aria-label="活動類別篩選">
+        <button type="button" class="chip on" aria-pressed="true" data-k="全部">全部</button>
+        <button type="button" class="chip" aria-pressed="false" data-k="課程">課程 · Class</button>
+        <button type="button" class="chip" aria-pressed="false" data-k="社交">社交舞會 · Social</button>
+        <button type="button" class="chip" aria-pressed="false" data-k="工作坊">工作坊 · Workshop</button>
+        <button type="button" class="chip" aria-pressed="false" data-k="表演">表演 · Show</button>
       </div>
     </div>
   </section>
@@ -124,7 +128,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function render(k){
       const list = k==='全部' ? events : events.filter(e=>e.k===k);
       document.getElementById('evs').innerHTML = list.map(e=>`
-        <article class="ev">
+        <article class="ev" id="ev-${e.d}-${e.m.split(' ')[0].replace('/','')}">
           <span class="badge${e.full?' full':''}">${e.badge}</span>
           <div class="date">
             <div class="d">${e.d}</div>
@@ -145,22 +149,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     document.getElementById('filt').addEventListener('click',e=>{
       const b = e.target.closest('.chip'); if(!b) return;
-      document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on', c===b));
+      document.querySelectorAll('.chip').forEach(c=>{
+        const on = c===b;
+        c.classList.toggle('on', on);
+        c.setAttribute('aria-pressed', String(on));
+      });
       render(b.dataset.k);
     });
     render('全部');
 
     // calendar (May 2026 starts on Friday)
     const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-    const has = {5:'課程',8:'',12:'',15:'課程',17:'Social',19:'',22:'',25:'工作坊',29:''};
+    const calMonth = '05';
+    // 從 events 陣列計算 5 月活動，不寫死避免假連結
+    const mayEvents = Object.fromEntries(
+      events
+        .filter(e => e.m.startsWith(calMonth + ' '))
+        .map(e => [parseInt(e.d, 10), { tag: e.k, id: `ev-${e.d}-${calMonth}` }])
+    );
     const cal = document.getElementById('cal');
     let html = days.map(d=>`<div class="head">${d}</div>`).join('');
     for (let i=0;i<5;i++) html += `<div class="other">${30-4+i}</div>`;
     for (let i=1;i<=31;i++) {
-      const tag = has[i];
-      html += `<div${tag?' class="has" data-tag="'+tag+'"':''}>${i}</div>`;
+      const ev = mayEvents[i];
+      html += ev
+        ? `<a class="has" data-tag="${ev.tag}" href="#${ev.id}" data-target="${ev.id}" aria-label="${i} 日 · ${ev.tag}，跳到對應活動卡片">${i}</a>`
+        : `<div>${i}</div>`;
     }
     for (let i=1;i<=6;i++) html += `<div class="other">${i}</div>`;
     cal.innerHTML = html;
+
+    cal.addEventListener('click', e => {
+      const a = e.target.closest('a.has');
+      if (!a) return;
+      let target = document.getElementById(a.dataset.target);
+      if (!target) {
+        // filter 不在「全部」時 target 不在 DOM，先切回全部再 scroll
+        const all = document.querySelector('.chip[data-k="全部"]');
+        if (all) {
+          document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === all));
+          render('全部');
+          target = document.getElementById(a.dataset.target);
+        }
+      }
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('is-target');
+      setTimeout(() => target.classList.remove('is-target'), 1800);
+    });
   </script>
 </BaseLayout>

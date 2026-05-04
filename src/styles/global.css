@@ -72,6 +72,9 @@ button{font-family:inherit}
 .nav-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-size:14px;text-decoration:none;color:var(--ink-soft);touch-action:manipulation}
 .nav-links a.active{color:var(--navy);font-weight:500}
 .nav-links a:not(.nav-cta):active{background:rgba(28,58,142,.08);transition:background .15s ease}
+.nav-links a:focus-visible{outline:2px solid var(--mustard);outline-offset:4px;border-radius:6px}
+.nav-toggle:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
+.brand:focus-visible{outline:2px solid var(--mustard);outline-offset:4px;border-radius:6px}
 .nav-cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--navy);color:var(--paper);padding:11px 18px;border-radius:999px;font-size:13px;text-decoration:none;letter-spacing:.04em;touch-action:manipulation}
 .nav-cta:hover{background:var(--navy-deep);color:var(--paper)}
 .nav-cta:active{transform:scale(.97);transition:transform .12s ease, background .15s ease}

@@ -2,3 +2,11 @@ name = "kongswing"
 compatibility_date = "2026-01-14"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"
+
+# 聯絡表單 → Email Routing 寄信（必須在 Cloudflare 端先：
+# 1. 於 kongswing.cc zone 開啟 Email Routing
+# 2. 驗證一個目的信箱（例如 luljidjemeli@gmail.com）
+# 3. 在 Pages 專案的 Settings → Variables 設定 CONTACT_SENDER 與 CONTACT_RECIPIENT 兩個環境變數）
+[[send_email]]
+name = "SEB"
+destination_address = "luljidjemeli@gmail.com"
