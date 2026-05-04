@@ -1,0 +1,21 @@
+---
+---
+<form class="contact-form" id="contact-form" novalidate>
+  <div class="row2">
+    <div class="field"><label for="n">名 · Name</label><input id="n" name="name" type="text" autocapitalize="words" autocomplete="name" required placeholder="Lí ê miâ"></div>
+    <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
+  </div>
+  <div class="field">
+    <label for="t">主題 · Topic</label>
+    <select id="t" name="topic">
+      <option>合作 · Collaboration</option>
+      <option>贊助 · Sponsorship</option>
+      <option>邀請工作坊 · Workshop invite</option>
+      <option>媒體訪問 · Press</option>
+      <option>其他 · Other</option>
+    </select>
+  </div>
+  <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" required placeholder="講予阮聽..."></textarea></div>
+  <button class="submit" type="submit">送出 · Send →</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>

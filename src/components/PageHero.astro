@@ -1,0 +1,22 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  hand?: string;
+  lede?: string;
+  tone?: 'paper' | 'navy';
+  class?: string;
+}
+
+const { kicker, title, hand, lede, tone = 'paper', class: className } = Astro.props;
+---
+<section class:list={['page-hero', tone === 'navy' && 'page-hero-navy', className]}>
+  <div class="wrap">
+    <div class="kicker">{kicker}</div>
+    <h1 class="page-title">
+      {title}{hand && <span class="hand"> {hand}</span>}
+    </h1>
+    {lede && <p class="lede">{lede}</p>}
+    <slot />
+  </div>
+</section>

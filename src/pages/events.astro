@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 <BaseLayout
   title="課程・活動 · Kóng台語 跳Swing"
@@ -18,18 +19,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       body{background-attachment:fixed}
     }
 
-    .hd{padding:64px 0 32px}
-    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
-    h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
-    h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
-    .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
-
+    .events-hero{padding-bottom:32px}
     .filters{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px;padding:18px 0}
-    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;touch-action:manipulation;transition:background .15s ease, color .15s ease, border-color .15s ease}
-    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy);font-weight:600}
-    .chip:hover{border-color:var(--navy);color:var(--navy)}
-    .chip:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
-    .chip.on:hover{color:var(--paper)}
 
     .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:32px 0 64px}
     .ev{background:#fdfaf1;padding:32px;border:1px solid var(--line);position:relative;display:grid;grid-template-columns:120px 1fr;gap:24px}
@@ -68,14 +59,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     @media (max-width:920px){.ev-grid{grid-template-columns:1fr}}
   `}></style>
 
-  <section class="hd">
-    <div class="wrap">
-      <div class="kicker">Classes · Socials · Workshops</div>
-      <h1>課程 ê 排程<span class="hand"> see you there!</span></h1>
-      <p class="lede">
-        初級 Lindy Hop、社交舞會、線上工作坊──逐個禮拜攏有代誌做。
-        課程攏會用台語＋華語雙聲道，新手歡迎。
-      </p>
+  <PageHero
+    class="events-hero"
+    kicker="Classes · Socials · Workshops"
+    title="課程 ê 排程"
+    hand="see you there!"
+    lede="初級 Lindy Hop、社交舞會、線上工作坊──逐個禮拜攏有代誌做。課程攏會用台語＋華語雙聲道，新手歡迎。"
+  >
       <div class="filters" id="filt" role="group" aria-label="活動類別篩選">
         <button type="button" class="chip on" aria-pressed="true" data-k="全部">全部</button>
         <button type="button" class="chip" aria-pressed="false" data-k="課程">課程 · Class</button>
@@ -83,8 +73,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <button type="button" class="chip" aria-pressed="false" data-k="工作坊">工作坊 · Workshop</button>
         <button type="button" class="chip" aria-pressed="false" data-k="表演">表演 · Show</button>
       </div>
-    </div>
-  </section>
+  </PageHero>
 
   <section>
     <div class="wrap">

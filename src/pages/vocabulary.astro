@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 <BaseLayout
   title="詞彙庫 · Kóng台語 跳Swing"
@@ -17,21 +18,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     @media (min-width:821px){
       body{background-attachment:fixed}
     }
-    .hd{padding:64px 0 32px}
-    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
-    h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
-    h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
-    .lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:18px}
-
+    .vocab-hero{padding-bottom:32px}
     .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:32px}
     .search{flex:1;min-width:240px;display:flex;align-items:center;gap:10px;background:#fdfaf1;border:1px solid var(--line);padding:10px 14px}
     .search input{border:0;background:transparent;font:inherit;font-size:16px;width:100%;outline:none}
     .filt{display:flex;gap:6px;flex-wrap:wrap}
-    .chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-family:inherit;color:var(--ink);cursor:pointer;touch-action:manipulation;transition:background .15s ease, color .15s ease, border-color .15s ease}
-    .chip:hover{border-color:var(--navy);color:var(--navy)}
-    .chip:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
-    .chip.on{background:var(--navy);color:var(--paper);border-color:var(--navy);font-weight:600}
-    .chip.on:hover{color:var(--paper)}
     .count{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.06em}
 
     .voc-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:18px;padding:32px 0 80px}
@@ -50,14 +41,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     @media (prefers-reduced-motion: reduce){.voc.is-playing .play{animation:none}}
   `}></style>
 
-  <section class="hd">
-    <div class="wrap">
-      <div class="kicker">Vocabulary · 完整詞彙庫</div>
-      <h1>搖擺舞 ê 台語<span class="hand"> word library</span></h1>
-      <p class="lede">
-        逐一字攏配一句例句、英文翻譯佮笑詼小註。本頁列出 12 字示範；完整 128 字 ê 詞庫
-        會逐禮拜更新。提示：點任何一張卡片會聽 e 著發音，點 ★ 會收藏。
-      </p>
+  <PageHero
+    class="vocab-hero"
+    kicker="Vocabulary · 完整詞彙庫"
+    title="搖擺舞 ê 台語"
+    hand="word library"
+    lede="逐一字攏配一句例句、英文翻譯佮笑詼小註。本頁列出 12 字示範；完整 128 字 ê 詞庫會逐禮拜更新。提示：點任何一張卡片會聽 e 著發音，點 ★ 會收藏。"
+  >
 
       <div class="toolbar">
         <div class="search">
@@ -67,8 +57,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="filt" id="filters"></div>
         <div class="count" id="count"></div>
       </div>
-    </div>
-  </section>
+  </PageHero>
 
   <section>
     <div class="wrap">

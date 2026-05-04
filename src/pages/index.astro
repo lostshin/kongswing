@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import StatGrid from '../components/StatGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ContactChannels from '../components/ContactChannels.astro';
+
+const aboutStats = [
+  { value: '128', label: '每週貼一字 · weekly words' },
+  { value: '36', label: '期 Lindy Hop 課程' },
+  { value: '6.4k', label: 'IG @kongswing 跟綴者' },
+];
 ---
 <BaseLayout
   title="Kóng台語 跳Swing — 講台語、跳搖擺"
@@ -41,13 +52,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .lede .poj{font-family:var(--serif);font-style:italic;color:var(--navy)}
 
     .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:14px 22px;border-radius:999px;text-decoration:none;font-size:15px;letter-spacing:.02em;font-weight:500;border:1.5px solid transparent;transition:transform .15s ease}
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{background:var(--navy);color:var(--paper)}
-    .btn.ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
-    .btn .arr{display:inline-block;transition:transform .2s ease}
-    .btn:hover .arr{transform:translateX(4px)}
-
     .hero-art{position:relative;aspect-ratio:1/1}
     .hero-art .blob{position:absolute;inset:0;background:var(--navy);clip-path:polygon(18% 6%,78% 0%,96% 22%,92% 56%,100% 78%,80% 96%,44% 100%,18% 92%,6% 70%,2% 38%,12% 18%);transform:rotate(-3deg)}
     .hero-art .stamp{position:absolute;left:-30px;top:6%;background:var(--mustard);padding:14px 20px;border-radius:4px;transform:rotate(-6deg);box-shadow:4px 4px 0 rgba(26,22,18,.12);z-index:3}
@@ -65,20 +69,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     /* ====== About ====== */
     .about{padding:96px 0}
-    .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px;flex-wrap:wrap}
-    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
-    h2.title{font-family:var(--serif);font-size:clamp(34px,4vw,56px);font-weight:700;margin:6px 0 0;line-height:1.05;letter-spacing:-.005em}
-    h2.title .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.6em;display:inline-block;transform:rotate(-2deg);margin-left:.2em}
-
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
     .about-text p{font-size:17px;line-height:1.85;margin:0 0 18px}
     .about-text p .poj{font-family:var(--serif);font-style:italic;color:var(--navy)}
     .about-text .pull{font-family:var(--serif);font-size:24px;line-height:1.5;color:var(--navy);border-left:4px solid var(--mustard);padding:6px 0 6px 18px;margin:24px 0}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
-    .stat{border-top:1px solid var(--line);padding-top:14px}
-    .stat .num{font-family:var(--serif);font-size:42px;font-weight:700;color:var(--navy);line-height:1}
-    .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:6px}
-
     .about-art{position:sticky;top:120px}
     .polaroid{background:#fdfaf1;padding:14px 14px 56px;box-shadow:0 14px 40px rgba(20,42,107,.15),0 2px 0 rgba(26,22,18,.04);transform:rotate(-2deg);position:relative}
     .polaroid .img-area{aspect-ratio:4/5;background:var(--navy);clip-path:polygon(8% 4%,88% 0%,96% 28%,100% 60%,90% 88%,60% 100%,22% 96%,4% 76%,0% 40%,6% 16%);display:grid;place-items:center;position:relative}
@@ -181,23 +175,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start}
     .contact h2.title{margin-bottom:18px}
     .contact .lede{font-size:18px;color:var(--ink-soft);max-width:520px;margin-bottom:32px;line-height:1.7}
-    .contact-form{display:grid;gap:14px;background:#fdfaf1;padding:32px;border:1px solid var(--line)}
-    .field{display:grid;gap:6px}
-    .field label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
-    .field input,.field select,.field textarea{padding:12px 14px;border:1px solid var(--line);background:var(--paper);font:inherit;font-size:16px;color:var(--ink);outline:none;border-radius:0}
-    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy);background:#fff}
-    .field textarea{resize:vertical;min-height:110px}
-    .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .submit{margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;background:var(--navy);color:var(--paper);border:0;padding:14px 22px;border-radius:999px;font-size:15px;font-family:inherit;letter-spacing:.04em;cursor:pointer}
-    .submit:hover{background:var(--navy-deep)}
-
-    .channels{display:grid;gap:14px}
-    .ch{display:flex;align-items:center;gap:18px;padding:18px;background:#fdfaf1;border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:transform .15s ease,border-color .15s ease}
-    .ch:hover{transform:translateY(-2px);border-color:var(--navy)}
-    .ch .ic{width:42px;height:42px;border-radius:50%;background:var(--mustard);display:grid;place-items:center;color:var(--navy);font-family:var(--serif);font-weight:900}
-    .ch .name{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1}
-    .ch .meta{font-size:13px;color:var(--ink-soft);margin-top:4px}
-
     /* scroll rabbit */
     .scroll-rabbit{position:fixed;pointer-events:none;z-index:30;width:120px;transition:opacity .3s ease}
     .scroll-rabbit img{width:100%;height:auto;filter:grayscale(.4) contrast(1.05) drop-shadow(0 12px 24px rgba(20,42,107,.25))}
@@ -235,9 +212,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .about{padding:64px 0}
       .about-grid{grid-template-columns:1fr;gap:40px}
       .about-art{position:static;max-width:380px;margin:0 auto}
-      .stats{grid-template-columns:repeat(3,1fr);gap:14px}
-      .stat .num{font-size:32px}
-      .stat .lbl{font-size:11px}
       .sticky-note{right:-10px;top:-12px;font-size:14px;padding:10px 12px;max-width:160px}
 
       .vocab{padding:64px 0}
@@ -257,9 +231,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .contact-grid{grid-template-columns:1fr;gap:32px}
       .contact-form{padding:24px}
 
-      .section-head{margin-bottom:32px}
-      h2.title{font-size:clamp(30px,8vw,44px)}
-
       .scroll-rabbit{display:none}
       .ticker span{font-size:15px}
       .ticker-track{gap:28px;padding-right:28px}
@@ -271,9 +242,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .hero h1 .title-line{white-space:normal}
       .hero h1 .hand{display:block;margin-bottom:6px}
       .hero-cta{flex-direction:column;align-items:stretch}
-      .hero-cta .btn{justify-content:center}
-      .stats{grid-template-columns:1fr 1fr}
-      .stats .stat:last-child{grid-column:1 / -1}
+      .hero-cta .ui-btn{justify-content:center}
     }
   `}></style>
 
@@ -298,8 +267,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="lang-en">We share the heat, freedom and tenderness of Swing dance &amp; Jazz culture — in Tâi-gí. Come join us — Kóng Tâi-gí, jump Swing 🥳</span>
           </p>
           <div class="hero-cta">
-            <a class="btn primary" href="#vocab"><span class="lang-zh">每日學一句</span><span class="lang-tw">今仔日學一句</span><span class="lang-poj">O̍h chi̍t kù</span><span class="lang-en">Today's word</span> <span class="arr">→</span></a>
-            <a class="btn ghost" href="events.html"><span class="lang-zh">查看課程</span><span class="lang-tw">看課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">See classes</span></a>
+            <ButtonLink href="#vocab" variant="primary"><span class="lang-zh">每日學一句</span><span class="lang-tw">今仔日學一句</span><span class="lang-poj">O̍h chi̍t kù</span><span class="lang-en">Today's word</span> <span class="arr">→</span></ButtonLink>
+            <ButtonLink href="events.html" variant="ghost"><span class="lang-zh">查看課程</span><span class="lang-tw">看課程</span><span class="lang-poj">Khò-thêng</span><span class="lang-en">See classes</span></ButtonLink>
           </div>
         </div>
 
@@ -324,15 +293,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="about" id="about">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="kicker">01 / 關於阮 · About us</div>
-          <h2 class="title">兩个人 + 一隻兔仔 <span class="hand">that's it.</span></h2>
-        </div>
-        <div style="font-family:var(--mono);font-size:12px;color:var(--ink-soft);max-width:280px;letter-spacing:.06em">
+      <SectionHeader kicker="01 / 關於阮 · About us" title="兩个人 + 一隻兔仔" hand="that's it.">
+        <div slot="aside" style="font-family:var(--mono);font-size:12px;color:var(--ink-soft);max-width:280px;letter-spacing:.06em">
           ↓ scroll to meet the<br/>tiny three-piece band.
         </div>
-      </div>
+      </SectionHeader>
 
       <div class="about-grid">
         <div class="about-text">
@@ -355,11 +320,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="lang-en">We're based in Taipei. Every week we teach beginner Lindy Hop, throw small socials, and post one "word commonly used while swinging" — one Tâi-gí phrase, one rabbit, one tiny journey looking for words.</span>
           </p>
 
-          <div class="stats">
-            <div class="stat"><div class="num">128</div><div class="lbl">每週貼一字 · weekly words</div></div>
-            <div class="stat"><div class="num">36</div><div class="lbl">期 Lindy Hop 課程</div></div>
-            <div class="stat"><div class="num">6.4k</div><div class="lbl">IG @kongswing 跟綴者</div></div>
-          </div>
+          <StatGrid items={aboutStats} />
         </div>
 
         <div class="about-art">
@@ -380,13 +341,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="vocab" id="vocab">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="kicker">02 / 今仔日 ê 詞 · word of the day</div>
-          <h2 class="title">搖擺舞中定定用 ê 言詞 <span class="hand">flip me!</span></h2>
-        </div>
-        <a href="vocabulary.html" class="btn ghost" style="padding:10px 18px;font-size:13px">看完整詞彙庫 &nbsp;→</a>
-      </div>
+      <SectionHeader kicker="02 / 今仔日 ê 詞 · word of the day" title="搖擺舞中定定用 ê 言詞" hand="flip me!">
+        <ButtonLink slot="aside" href="vocabulary.html" variant="ghost">看完整詞彙庫 &nbsp;→</ButtonLink>
+      </SectionHeader>
 
       <div class="vocab-grid">
         <div class="card-stage">
@@ -485,13 +442,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="events" id="events">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="kicker">03 / 近期活動 · Upcoming</div>
-          <h2 class="title">逐禮拜佮你做伙<span class="hand">pái-lā~</span></h2>
-        </div>
-        <a class="btn ghost" href="events.html" style="padding:10px 18px;font-size:13px">所有課程&amp;活動 →</a>
-      </div>
+      <SectionHeader kicker="03 / 近期活動 · Upcoming" title="逐禮拜佮你做伙" hand="pái-lā~">
+        <ButtonLink slot="aside" href="events.html" variant="ghost">所有課程&amp;活動 →</ButtonLink>
+      </SectionHeader>
 
       <div class="events-grid">
         <article class="ev">
@@ -535,12 +488,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="faq" id="faq">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="kicker">04 / 大家定定問 · FAQ</div>
-          <h2 class="title">想欲問淡薄仔代誌<span class="hand">ask us!</span></h2>
-        </div>
-      </div>
+      <SectionHeader kicker="04 / 大家定定問 · FAQ" title="想欲問淡薄仔代誌" hand="ask us!" />
 
       <div class="faq-grid">
         <div class="faq-side">
@@ -566,57 +514,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             填底下 ê 表單，抑是寄一張 e-mail 來嘛會使。
           </p>
 
-          <form class="contact-form" id="contact-form" novalidate>
-            <div class="row2">
-              <div class="field"><label for="n">名 · Name</label><input id="n" name="name" type="text" autocapitalize="words" autocomplete="name" required placeholder="Lí ê miâ"></div>
-              <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required placeholder="hello@..."></div>
-            </div>
-            <div class="field">
-              <label for="t">主題 · Topic</label>
-              <select id="t" name="topic">
-                <option>合作 · Collaboration</option>
-                <option>贊助 · Sponsorship</option>
-                <option>邀請工作坊 · Workshop invite</option>
-                <option>媒體訪問 · Press</option>
-                <option>其他 · Other</option>
-              </select>
-            </div>
-            <div class="field"><label for="m">訊息 · Message</label><textarea id="m" name="message" required placeholder="講予阮聽..."></textarea></div>
-            <button class="submit" type="submit">送出 · Send →</button>
-            <p class="form-status" role="status" aria-live="polite" style="margin:0;color:var(--ink-soft);font-size:13px"></p>
-          </form>
+          <ContactForm />
         </div>
 
-        <div class="channels">
-          <a class="ch" href="https://www.instagram.com/kongswing/" target="_blank" rel="noreferrer">
-            <span class="ic">IG</span>
-            <div>
-              <div class="name">@kongswing</div>
-              <div class="meta">逐禮拜更新 / weekly posts · 6.4k</div>
-            </div>
-          </a>
-          <a class="ch" href="mailto:hello@kongswing.cc">
-            <span class="ic" style="background:var(--navy);color:var(--mustard)">@</span>
-            <div>
-              <div class="name">hello@kongswing.cc</div>
-              <div class="meta">合作 · 媒體 · 工作坊邀請</div>
-            </div>
-          </a>
-          <a class="ch" href="https://www.facebook.com/search/top?q=K%C3%B3ng%E5%8F%B0%E8%AA%9E%20%E8%B7%B3Swing" target="_blank" rel="noreferrer">
-            <span class="ic">FB</span>
-            <div>
-              <div class="name">Kóng台語 跳Swing</div>
-              <div class="meta">活動公告 / event announcements</div>
-            </div>
-          </a>
-          <a class="ch" href="mailto:hello@kongswing.cc?subject=%E8%B4%8A%E5%8A%A9%E5%90%88%E4%BD%9C%20Sponsor">
-            <span class="ic" style="background:var(--rust);color:#fff">★</span>
-            <div>
-              <div class="name">贊助 · Sponsor</div>
-              <div class="meta">買一杯珍奶請阮 / buy us bubble tea</div>
-            </div>
-          </a>
-        </div>
+        <ContactChannels />
       </div>
     </div>
   </section>

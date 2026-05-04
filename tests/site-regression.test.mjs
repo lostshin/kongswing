@@ -11,6 +11,16 @@ const pages = {
   contact: readFileSync('dist/contact.html', 'utf8'),
 };
 
+const sharedUiComponents = [
+  'src/components/PageHero.astro',
+  'src/components/SectionHeader.astro',
+  'src/components/ButtonLink.astro',
+  'src/components/StatGrid.astro',
+  'src/components/InfoCardGrid.astro',
+  'src/components/ContactForm.astro',
+  'src/components/ContactChannels.astro',
+];
+
 function cssBlock(source, selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const match = source.match(new RegExp(`${escaped}\\s*\\{([^}]*)\\}`, 'm'));
@@ -30,6 +40,10 @@ assert.ok(
   existsSync('public/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf'),
   'GochiHandPOJ font file should be bundled locally for English language text',
 );
+
+for (const file of sharedUiComponents) {
+  assert.ok(existsSync(file), `${file} should exist so repeated page UI is shared instead of duplicated inline`);
+}
 
 for (const [name, source] of Object.entries(pages)) {
   assert.match(source, /@font-face\s*\{[^}]*font-family:\s*['"]IansuiLocal['"][^}]*Iansui-Regular\.ttf/s, `${name} should define local Iansui @font-face`);
@@ -52,6 +66,8 @@ for (const [name, source] of Object.entries(pages)) {
   assert.match(cssBlock(source, '.wrap'), /max-width:\s*var\(--content-max\)/, `${name} .wrap should use the desktop content token`);
   assert.match(cssBlock(source, '.nav-inner'), /max-width:\s*var\(--content-max\)/, `${name} nav should align to the same desktop content width`);
   assert.match(source, /id="lang-sw"/, `${name} should expose the language switcher`);
+  assert.match(source, /\.page-hero\b/, `${name} should include shared page hero styles from global.css`);
+  assert.match(source, /\.ui-btn\b/, `${name} should include shared button styles from global.css`);
 }
 
 const expectedNav = ['index.html', 'about.html', 'daily.html', 'vocabulary.html', 'events.html', 'faq.html', 'contact.html'];
@@ -66,5 +82,8 @@ assert.match(pages.index, /@media \(max-width:820px\)\{[\s\S]*?\.hero-art\{displ
 assert.match(pages.index, /@media \(max-width:420px\)\{[\s\S]*?\.hero h1 \.title-line\{white-space:normal\}/, 'very narrow phones should allow the hero title line to wrap');
 assert.match(pages.index, /sessionStorage\.getItem\('kts-smooth-target'\)/, 'home page should consume queued smooth-scroll targets from subpages');
 assert.match(pages.index, /querySelectorAll\('\.nav-links a\[href\$="\.html"\]'\)/, 'nav links should queue a smooth-scroll target before cross-page navigation');
+
+assert.match(pages.contact, /id="contact-form"/, 'contact page should preserve the contact form id used by the submit handler');
+assert.match(pages.contact, /class="contact-form"/, 'contact page should use the shared contact form shell');
 
 console.log('site regression checks passed');
