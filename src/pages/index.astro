@@ -58,8 +58,11 @@ const aboutStats = [
     .hero-art .stamp .big{font-family:var(--serif);font-weight:900;font-size:42px;color:var(--navy);line-height:1}
     .hero-art .stamp .poj{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--navy);font-size:15px;letter-spacing:.02em;margin-top:4px}
     .hero-art .rabbit-frame{position:absolute;inset:0;display:grid;place-items:center}
-    .hero-art .rabbit-frame img{width:88%;height:auto;filter:grayscale(.4) contrast(1.05);transform:translateY(2%)}
     .hero-art .tag{position:absolute;right:-14px;bottom:14%;background:var(--paper);padding:10px 14px;border:1px solid var(--ink);font-family:var(--hand);font-size:24px;color:var(--navy);transform:rotate(4deg);box-shadow:3px 3px 0 var(--ink)}
+    .rabbit-runner{--rabbit-frame-w:128px;width:var(--rabbit-frame-w);aspect-ratio:271.5/283;overflow:hidden;background:transparent;display:block}
+    .rabbit-runner::before{content:"";display:block;width:800%;height:100%;background:url('rabbit-run-sprite.png') 0 0/100% 100% no-repeat;animation:rabbitRun .72s steps(8) infinite;will-change:transform}
+    .hero-art .rabbit-runner{--rabbit-frame-w:min(88%,390px);filter:grayscale(.25) contrast(1.05);transform:translateY(2%)}
+    @keyframes rabbitRun{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 
     .ticker{margin-top:64px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:48px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
     .ticker-track{display:flex;gap:48px;animation:tickerMove 40s linear infinite;flex-shrink:0;padding-right:48px}
@@ -177,7 +180,7 @@ const aboutStats = [
     .contact .lede{font-size:18px;color:var(--ink-soft);max-width:520px;margin-bottom:32px;line-height:1.7}
     /* scroll rabbit */
     .scroll-rabbit{position:fixed;pointer-events:none;z-index:30;width:120px;transition:opacity .3s ease}
-    .scroll-rabbit img{width:100%;height:auto;filter:grayscale(.4) contrast(1.05) drop-shadow(0 12px 24px rgba(20,42,107,.25))}
+    .scroll-rabbit .rabbit-runner{--rabbit-frame-w:120px;filter:grayscale(.25) contrast(1.05) drop-shadow(0 12px 24px rgba(20,42,107,.25))}
     .scroll-rabbit .speech{position:absolute;left:-110px;top:8px;background:var(--mustard);padding:8px 12px;font-family:var(--hand);font-size:18px;color:var(--navy);border-radius:14px;white-space:nowrap;box-shadow:3px 3px 0 rgba(26,22,18,.12);transform-origin:right center}
     .scroll-rabbit .speech::after{content:"";position:absolute;right:-8px;top:14px;border:8px solid transparent;border-left-color:var(--mustard)}
 
@@ -244,6 +247,9 @@ const aboutStats = [
       .hero-cta{flex-direction:column;align-items:stretch}
       .hero-cta .ui-btn{justify-content:center}
     }
+    @media (prefers-reduced-motion: reduce){
+      .rabbit-runner::before{animation:none;transform:translateX(0)}
+    }
   `}></style>
 
   <section class="hero">
@@ -275,7 +281,7 @@ const aboutStats = [
         <div class="hero-art">
           <div class="blob"></div>
           <div class="rabbit-frame">
-            <img src="/logo.png" alt="Kóng台語 跳Swing 兔仔插畫" width="370" height="370">
+            <div class="rabbit-runner" role="img" aria-label="Kóng台語 跳Swing 兔仔跑步動畫"></div>
           </div>
           <div class="stamp">
             <div class="big">搖擺</div>
@@ -524,7 +530,7 @@ const aboutStats = [
 
   <div slot="afterFooter" class="scroll-rabbit" id="srab" style="opacity:0">
     <div class="speech" id="srab-say">咱來跳舞！</div>
-    <img src="/logo.png" alt="" width="370" height="370">
+    <div class="rabbit-runner" aria-hidden="true"></div>
   </div>
 
   <script is:inline slot="afterBody">

@@ -44,6 +44,10 @@ assert.ok(
   existsSync('public/logo.png'),
   'brand logo should exist at public/logo.png because Nav and metadata reference /logo.png',
 );
+assert.ok(
+  existsSync('public/rabbit-run-sprite.png'),
+  'running rabbit sprite should exist as a project asset for the home page animation',
+);
 
 for (const file of sharedUiComponents) {
   assert.ok(existsSync(file), `${file} should exist so repeated page UI is shared instead of duplicated inline`);
@@ -88,6 +92,9 @@ assert.match(cssBlock(pages.index, '.hero h1 .title-line'), /white-space:\s*nowr
 assert.match(cssBlock(pages.index, '.hero h1 .title-line'), /margin-top:\s*\.16em/, 'home hero should keep a little air between Kóng 台語 and 跳 Swing');
 assert.match(pages.index, /@media \(max-width:820px\)\{[\s\S]*?\.hero-art\{display:none\}/, 'mobile home hero should hide the desktop artwork so stickers cannot overlap the CTA or ticker');
 assert.match(pages.index, /@media \(max-width:420px\)\{[\s\S]*?\.hero h1 \.title-line\{white-space:normal\}/, 'very narrow phones should allow the hero title line to wrap');
+assert.match(pages.index, /rabbit-run-sprite\.png/, 'home page should render the generated running rabbit sprite');
+assert.match(pages.index, /animation:\s*rabbitRun\b[^;]*steps\(8\)/, 'running rabbit should use an eight-frame stepped sprite animation');
+assert.match(pages.index, /@keyframes rabbitRun\{from\{transform:translateX\(0\)\}to\{transform:translateX\(-100%\)\}\}/, 'running rabbit keyframes should traverse every sprite frame');
 assert.match(pages.index, /sessionStorage\.getItem\('kts-smooth-target'\)/, 'home page should consume queued smooth-scroll targets from subpages');
 assert.match(pages.index, /querySelectorAll\('\.nav-links a\[href\$="\.html"\]'\)/, 'nav links should queue a smooth-scroll target before cross-page navigation');
 
