@@ -41,6 +41,8 @@ Shared styles live in `src/styles/global.css`: `.page-hero`, `.section-head`, `.
 - Keep self-hosted fonts under `public/fonts/`; do not replace them with CDN-only fonts.
 - Keep tokens `--tai`, `--poj`, `--en`, and `--content-max`.
 - Keep nav href order exact: `index.html`, `about.html`, `daily.html`, `vocabulary.html`, `events.html`, `faq.html`, `contact.html`.
+- Keep the nav brand image path flat-file-safe as `logo.png`; avoid changing it back to `/logo.png` without checking direct `dist/*.html` usage.
+- Keep `main#main` visually separated from sticky nav with `--main-nav-gap` and `scroll-margin-top`; this prevents skip links and page starts from hiding under the nav.
 - Do not declare Cloudflare Email Routing `send_email` bindings in `wrangler.toml`; Pages rejects that shape.
 - `dist/` is generated output; do not commit it.
 
@@ -81,6 +83,8 @@ Confirm `/`, `/vocabulary.html`, `/events.html`, and any touched routes return 2
 - Local font files and CSS font token output.
 - Shared UI component files.
 - Shared `.page-hero` and `.ui-btn` styles in built pages.
+- Nav brand logo path and explicit circular image fitting.
+- `main#main` nav separation and scroll target offset.
 - Nav order and mobile nav structure.
 - View transitions, prefetch links, and `--content-max`.
 - Contact form shell and `id="contact-form"`.
@@ -115,6 +119,13 @@ The form UI contract is idle/loading/success/error. Do not fake success; send th
 - Moved repeated page hero, section header, button, chip, stats, info card, contact form, and channel styles into `src/styles/global.css`.
 - Refactored `index.astro`, `about.astro`, `daily.astro`, `vocabulary.astro`, `events.astro`, `faq.astro`, and `contact.astro` to use shared components where practical.
 - Added regression checks for the shared UI architecture.
+- Verification command run: `npm test` passed.
+
+2026-05-04 nav/main bugfix:
+
+- Nav brand logo now uses relative `logo.png` and explicit `width`, `height`, `object-fit`, and `object-position` CSS inside `.brand-mark`.
+- `main#main` now has `margin-top: var(--main-nav-gap)` and `scroll-margin-top: calc(var(--nav-height) + var(--main-nav-gap))`.
+- Regression checks now guard logo asset existence, flat-file-safe nav logo path, explicit logo fitting, and main/nav separation.
 - Verification command run: `npm test` passed.
 
 ## Avoid These Token Sinks

@@ -40,6 +40,10 @@ assert.ok(
   existsSync('public/fonts/gochi-hand-poj/GochiHandPOJ-Regular.ttf'),
   'GochiHandPOJ font file should be bundled locally for English language text',
 );
+assert.ok(
+  existsSync('public/logo.png'),
+  'brand logo should exist at public/logo.png because Nav and metadata reference /logo.png',
+);
 
 for (const file of sharedUiComponents) {
   assert.ok(existsSync(file), `${file} should exist so repeated page UI is shared instead of duplicated inline`);
@@ -68,6 +72,10 @@ for (const [name, source] of Object.entries(pages)) {
   assert.match(source, /id="lang-sw"/, `${name} should expose the language switcher`);
   assert.match(source, /\.page-hero\b/, `${name} should include shared page hero styles from global.css`);
   assert.match(source, /\.ui-btn\b/, `${name} should include shared button styles from global.css`);
+  assert.match(source, /class="brand-mark"[^>]*><img src="logo\.png"/, `${name} nav logo should use a flat-file-safe relative asset path`);
+  assert.match(cssBlock(source, 'main#main'), /margin-top:\s*var\(--main-nav-gap\)/, `${name} main content should be visually separated from sticky nav`);
+  assert.match(cssBlock(source, 'main#main'), /scroll-margin-top:\s*calc\(var\(--nav-height\) \+ var\(--main-nav-gap\)\)/, `${name} #main scroll target should not hide under sticky nav`);
+  assert.match(cssBlock(source, '.brand-mark img'), /object-fit:\s*cover/, `${name} nav logo should have explicit object-fit so it renders reliably inside the circular mark`);
 }
 
 const expectedNav = ['index.html', 'about.html', 'daily.html', 'vocabulary.html', 'events.html', 'faq.html', 'contact.html'];
