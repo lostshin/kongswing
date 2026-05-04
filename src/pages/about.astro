@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="關於 · Kóng台語 跳Swing"
+  description="Kóng台語 跳Swing 的緣起、創辦故事與團隊介紹。"
+  ogTitle="關於 · Kóng台語 跳Swing"
+  ogDescription="兩人一兔，把台語、Swing dance 與 Jazz 文化帶進生活。"
+  twitterTitle="關於 · Kóng台語 跳Swing"
+  twitterDescription="兩人一兔，把台語、Swing dance 與 Jazz 文化帶進生活。"
+  prefetch={["index.html", "vocabulary.html", "events.html", "faq.html", "contact.html"]}
+  variant="sub"
+  activeNav="about"
+>
+  <style is:inline slot="head" set:html={`
+    body{background:radial-gradient(900px 620px at 100% 0,rgba(244,200,75,.18),transparent 62%),var(--paper)}
+    @media (min-width:821px){body{background-attachment:fixed}}
+    .page-hero{padding:64px 0 28px}
+    .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+    h1{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:700;margin:8px 0 0;line-height:1.05}
+    h1 .hand{font-family:'Shadows Into Light';color:var(--navy);font-size:.55em;display:inline-block;transform:rotate(-2deg)}
+    .lede{font-size:17px;line-height:1.75;color:var(--ink-soft);max-width:720px;margin:18px 0 0}
+    .about{padding:36px 0 72px}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .about-text p{font-size:17px;line-height:1.85;margin:0 0 18px}
+    .about-text .pull{font-family:var(--serif);font-size:24px;line-height:1.5;color:var(--navy);border-left:4px solid var(--mustard);padding:6px 0 6px 18px;margin:24px 0}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+    .stat{border-top:1px solid var(--line);padding-top:14px}
+    .stat .num{font-family:var(--serif);font-size:42px;font-weight:700;color:var(--navy);line-height:1}
+    .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:6px}
+    .about-art{position:sticky;top:120px}
+    .polaroid{background:#fdfaf1;padding:14px 14px 56px;box-shadow:0 14px 40px rgba(20,42,107,.15),0 2px 0 rgba(26,22,18,.04);transform:rotate(-2deg);position:relative}
+    .polaroid .img-area{aspect-ratio:4/5;background:var(--navy);clip-path:polygon(8% 4%,88% 0%,96% 28%,100% 60%,90% 88%,60% 100%,22% 96%,4% 76%,0% 40%,6% 16%);display:grid;place-items:center;position:relative}
+    .polaroid .img-area img{width:80%;height:auto;filter:grayscale(.5) contrast(1.05)}
+    .polaroid .cap{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--hand);font-size:24px;color:var(--navy)}
+    .sticky-note{position:absolute;right:-30px;top:-24px;background:var(--mustard);padding:14px 16px;transform:rotate(6deg);box-shadow:4px 4px 0 rgba(26,22,18,.12);font-family:var(--hand);font-size:18px;color:var(--navy);max-width:200px;line-height:1.3;z-index:3}
+    .washi{position:absolute;left:50%;top:-14px;transform:translateX(-50%) rotate(-3deg);width:120px;height:24px;background:repeating-linear-gradient(45deg,var(--mustard) 0 6px,#e3b53d 6px 12px);opacity:.85}
+    .todo{padding:40px 0 84px;border-top:1px solid var(--line)}
+    .todo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .todo-card{background:#fdfaf1;border:1px solid var(--line);padding:22px}
+    .todo-card h2{font-family:var(--serif);font-size:24px;margin:0 0 10px;color:var(--navy)}
+    .todo-card p{margin:0;color:var(--ink-soft);line-height:1.7}
+    @media (max-width:820px){
+      .page-hero{padding:48px 0 20px}
+      .about{padding:28px 0 56px}
+      .about-grid{grid-template-columns:1fr;gap:40px}
+      .about-art{position:static;max-width:380px;margin:0 auto}
+      .stats{grid-template-columns:repeat(3,1fr);gap:14px}
+      .stat .num{font-size:32px}
+      .stat .lbl{font-size:11px}
+      .sticky-note{right:-10px;top:-12px;font-size:14px;padding:10px 12px;max-width:160px}
+      .todo-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:420px){
+      .stats{grid-template-columns:1fr 1fr}
+      .stats .stat:last-child{grid-column:1 / -1}
+    }
+  `}></style>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="kicker">About us · 關於阮</div>
+      <h1>兩个人 + 一隻兔仔 <span class="hand">that's it.</span></h1>
+      <p class="lede">
+        這頁會慢慢整理阮的創辦故事、團員介紹、合作緣起，以及為啥想用台語分享 Swing dance 與 Jazz 文化。
+      </p>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            <span class="lang-zh"><strong>Kóng台語 跳Swing</strong> 是一個將搖擺舞 (swing dance) 與台語帶進生活裡的計畫。我們想用台語分享 Jazz 音樂裡的熱情、自由與溫柔，邀大家一起跳舞、一起講話。</span>
+            <span class="lang-tw"><strong>Kóng台語 跳Swing</strong> 是一个搖擺舞 (swing dance) 佮台語做伙生活 ê 計畫。阮想欲用台語分享 Jazz 音樂內底 ê 熱情、自由佮溫柔，招逐家做伙跳舞、做伙講話。</span>
+            <span class="lang-poj"><strong>Kóng-Tâi-gí Thiàu-Swing</strong> sī chi̍t ê iô-pái-bú kap Tâi-gí chò-hóe seng-oa̍h ê kè-o̍h. Góan siūⁿ-beh ēng Tâi-gí pun-hióng Jazz im-ga̍k lāi-té ê jia̍t-chêng, chū-iû, un-jiû — chio ta̍k-ke chò-hóe thiàu-bú, kóng-ōe.</span>
+            <span class="lang-en"><strong>Kóng-Tâi-gí Thiàu-Swing</strong> is a project that brings swing dance and the Taiwanese language into everyday life. We use Tâi-gí to share the heat, freedom and tenderness inside Jazz — inviting everyone to dance and chat together.</span>
+          </p>
+          <div class="pull">
+            <span class="lang-zh bk">在回家的路上跳舞</span>
+            <span class="lang-tw bk">佇轉厝 ê 路頂面跳舞</span>
+            <span class="lang-poj bk">Tī tńg-chhù ê lō͘ téng-bīn thiàu-bú</span>
+            <span class="lang-en bk" style="font-style:italic">Dancing on the way home</span>
+          </div>
+          <p>
+            <span class="lang-zh">我們住在台北，每週固定教初級 Lindy Hop、辦小型社交舞會，每週也會貼一張「搖擺舞中常用的詞語」：一句台語、一隻兔子、一段找詞的路。</span>
+            <span class="lang-tw">阮蹛佇台北，逐禮拜固定教初級 Lindy Hop、辦小規模 ê 社交舞會，mā 固定每禮拜貼一張「搖擺舞中定定用 ê 言詞」：一句台語、一隻兔仔、一段揣詞 ê 路。</span>
+            <span class="lang-poj">Góan tòa tī Tâi-pak, ta̍k lé-pài kò͘-tēng kà chho͘-kip Lindy Hop, pān sió-kui-bô͘ ê siā-kau bú-hōe; mā ta̍k lé-pài tah chi̍t tiuⁿ iô-pái-bú ê giân-sû.</span>
+            <span class="lang-en">We're based in Taipei. Every week we teach beginner Lindy Hop, throw small socials, and post one word commonly used while swinging.</span>
+          </p>
+
+          <div class="stats">
+            <div class="stat"><div class="num">128</div><div class="lbl">每週貼一字 · weekly words</div></div>
+            <div class="stat"><div class="num">36</div><div class="lbl">期 Lindy Hop 課程</div></div>
+            <div class="stat"><div class="num">6.4k</div><div class="lbl">IG @kongswing 跟綴者</div></div>
+          </div>
+        </div>
+
+        <div class="about-art">
+          <div class="polaroid">
+            <div class="washi"></div>
+            <div class="img-area">
+              <img src="/logo.png" alt="" width="370" height="370">
+            </div>
+            <div class="cap">our tiny three-piece band</div>
+            <div class="sticky-note">阮 ê 第三个團員：一隻油彩畫 ê 兔仔</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="todo">
+    <div class="wrap">
+      <div class="todo-grid">
+        <article class="todo-card">
+          <h2>TODO · 團員介紹</h2>
+          <p>補上兩位創辦人的背景、教學分工、跳舞經歷與照片。</p>
+        </article>
+        <article class="todo-card">
+          <h2>TODO · 創立故事</h2>
+          <p>整理 2023 開始做台語 swing 內容的起點與轉折。</p>
+        </article>
+        <article class="todo-card">
+          <h2>TODO · 合作緣起</h2>
+          <p>補上文化機構、書店、學校與社群合作的代表案例。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

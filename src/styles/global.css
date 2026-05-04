@@ -81,7 +81,22 @@ button{font-family:inherit}
 .nav-links a.nav-cta{background:var(--navy);color:var(--paper);padding:11px 18px;border-radius:999px;font-size:13px;letter-spacing:.04em}
 .nav-links a.nav-cta:hover{background:var(--navy-deep);color:var(--paper)}
 
+.lang-sw{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;padding:3px;background:var(--paper);gap:2px;margin-right:8px}
+.lang-sw button{appearance:none;border:0;background:transparent;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.05em;color:var(--ink-soft);min-width:44px;min-height:44px;padding:0 14px;border-radius:999px;line-height:1;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;transition:transform .12s ease, background .15s ease, color .18s ease}
+.lang-sw button:hover{color:var(--navy)}
+.lang-sw button:active{transform:scale(.97)}
+.lang-sw button.on{background:var(--navy);color:var(--paper)}
+
+.lang-zh,.lang-poj,.lang-en,.lang-tw{display:inline}
+.lang-zh.bk,.lang-poj.bk,.lang-en.bk,.lang-tw.bk{display:block}
+html[data-lang="zh"] .lang-tw,html[data-lang="zh"] .lang-poj,html[data-lang="zh"] .lang-en{display:none}
+html[data-lang="tw"] .lang-zh,html[data-lang="tw"] .lang-poj,html[data-lang="tw"] .lang-en{display:none}
+html[data-lang="poj"] .lang-zh,html[data-lang="poj"] .lang-tw,html[data-lang="poj"] .lang-en{display:none}
+html[data-lang="en"] .lang-zh,html[data-lang="en"] .lang-tw,html[data-lang="en"] .lang-poj{display:none}
+
 .lang-en{font-family:var(--en)}
+.lang-tw,.lang-poj{font-family:var(--tai)}
+.bk{display:block}
 
 .nav-toggle{display:none;appearance:none;border:1.5px solid var(--ink);background:var(--paper);width:44px;height:44px;border-radius:50%;cursor:pointer;position:relative;z-index:120;flex:0 0 44px;margin-left:auto;align-items:center;justify-content:center;padding:0}
 .nav-toggle .bars{display:block;width:18px;height:14px;position:relative}
@@ -108,6 +123,7 @@ footer{padding:32px 0 64px;border-top:1px solid var(--line);font-size:13px;color
   .nav-links > a{width:100%;padding:18px 4px;border-bottom:1px dashed var(--line);font-family:var(--serif);font-size:22px;color:var(--ink)}
   .nav-links > a.active{color:var(--navy);background:linear-gradient(transparent 60%, var(--mustard) 60%);padding-left:8px}
   .nav-links > a.nav-cta{align-self:stretch;text-align:center;margin-top:18px;padding:14px 22px;border-bottom:0;border-radius:999px;font-family:var(--sans);font-size:15px;color:var(--paper)}
+  .lang-sw{order:-1;align-self:flex-start;margin:0 0 14px}
 }
 
 @media (prefers-reduced-motion: reduce){

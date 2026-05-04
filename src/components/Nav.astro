@@ -1,11 +1,10 @@
 ---
 interface Props {
   variant: 'home' | 'sub';
-  activeNav?: 'vocabulary' | 'events';
+  activeNav?: 'about' | 'vocabulary' | 'events' | 'faq' | 'contact';
 }
 const { variant, activeNav } = Astro.props;
 const isHome = variant === 'home';
-const prefix = isHome ? '' : 'index.html';
 ---
 <nav class="nav">
   <div class="nav-inner">
@@ -14,14 +13,12 @@ const prefix = isHome ? '' : 'index.html';
       <span class="brand-name">Kóng台語 跳Swing<small>講台語、跳搖擺</small></span>
     </a>
     <div class="nav-menu" id="nav-menu">
-      {isHome && (
-        <div class="lang-sw" id="lang-sw">
-          <button data-lang="zh" class="on">華</button>
-          <button data-lang="tw">台</button>
-          <button data-lang="poj">POJ</button>
-          <button data-lang="en">EN</button>
-        </div>
-      )}
+      <div class="lang-sw" id="lang-sw">
+        <button data-lang="zh" class="on">華</button>
+        <button data-lang="tw">台</button>
+        <button data-lang="poj">POJ</button>
+        <button data-lang="en">EN</button>
+      </div>
       <div class="nav-links">
         {isHome ? (
           <>
@@ -35,13 +32,12 @@ const prefix = isHome ? '' : 'index.html';
           </>
         ) : (
           <>
-            <a href={`${prefix}#about`}>關於</a>
-            <a href={`${prefix}#vocab`}>每日台語</a>
+            <a href="index.html">首頁</a>
+            <a href="about.html" class:list={[activeNav === 'about' && 'active']}>關於</a>
             <a href="vocabulary.html" class:list={[activeNav === 'vocabulary' && 'active']}>詞彙庫</a>
-            <a href={`${prefix}#events`}>活動</a>
             <a href="events.html" class:list={[activeNav === 'events' && 'active']}>課程</a>
-            <a href={`${prefix}#faq`}>FAQ</a>
-            <a class="nav-cta" href={`${prefix}#contact`}>聯絡我們 →</a>
+            <a href="faq.html" class:list={[activeNav === 'faq' && 'active']}>FAQ</a>
+            <a class="nav-cta" href="contact.html" class:list={[activeNav === 'contact' && 'active']}>聯絡我們 →</a>
           </>
         )}
       </div>
@@ -58,18 +54,5 @@ const prefix = isHome ? '' : 'index.html';
     .nav-links a{position:relative}
     .nav-links a:hover{color:var(--navy)}
     .nav-links a.active::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-6px;height:6px;background:var(--mustard);z-index:-1;border-radius:2px}
-
-    .lang-sw{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;padding:3px;background:var(--paper);gap:2px;margin-right:8px}
-    .lang-sw button{appearance:none;border:0;background:transparent;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.05em;color:var(--ink-soft);min-width:44px;min-height:44px;padding:0 14px;border-radius:999px;line-height:1;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;transition:transform .12s ease, background .15s ease, color .18s ease}
-    .lang-sw button:hover{color:var(--navy)}
-    .lang-sw button:active{transform:scale(.97)}
-    .lang-sw button.on{background:var(--navy);color:var(--paper)}
-    html[data-lang="zh"] .lang-tw,html[data-lang="zh"] .lang-poj,html[data-lang="zh"] .lang-en{display:none}
-    html[data-lang="tw"] .lang-zh,html[data-lang="tw"] .lang-poj,html[data-lang="tw"] .lang-en{display:none}
-    html[data-lang="poj"] .lang-zh,html[data-lang="poj"] .lang-tw,html[data-lang="poj"] .lang-en{display:none}
-    html[data-lang="en"] .lang-zh,html[data-lang="en"] .lang-tw,html[data-lang="en"] .lang-poj{display:none}
-    @media (max-width:820px){
-      .lang-sw{order:-1;align-self:flex-start;margin:0 0 14px}
-    }
   `}></style>
 )}
